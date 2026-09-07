@@ -1,0 +1,8 @@
+{
+  "name": "vasundhara-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
