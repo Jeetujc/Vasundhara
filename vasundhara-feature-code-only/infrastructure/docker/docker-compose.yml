@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: vasundhara-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: vasundhara
+      POSTGRES_PASSWORD: vasundhara_dev_password
+      POSTGRES_DB: vasundhara
+    ports:
+      - "5432:5432"
+    volumes:
+      - vasundhara_pgdata:/var/lib/postgresql/data
+
+volumes:
+  vasundhara_pgdata:
