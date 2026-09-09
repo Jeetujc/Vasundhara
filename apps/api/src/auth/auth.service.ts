@@ -9,6 +9,7 @@ import * as argon2 from 'argon2';
 import { PrismaService } from '../prisma/prisma.service.js';
 
 import { LoginDto } from './dto/login.dto.js';
+import { RefreshTokenDto } from './dto/refresh-token.dto.js';
 import { RegisterDto } from './dto/register.dto.js';
 interface TokenPayload {
   sub: string;
@@ -69,6 +70,26 @@ export class AuthService {
 
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
+    }
+
+    async refresh(dto: RefreshTokenDto) {
+      const payload = await this.jwtService.verifyAsync<TokenPayload>(dto.refreshToken, {
+        secret: this.configService.getOrThrow<string>('JWT_REFRESH_SECRET'),
+      });
+
+      const user = await this.prisma.user.findUnique({
+        where: { id: payload.sub },
+        select: { id: true, email: true, role: true, isActive: true },
+      });
+
+      if (!user || !user.isActive) {
+        throw new UnauthorizedException('Invalid refresh token');
+      }
+
+      const safeUser = { id: user.id, email: user.email, role: user.role };
+      const tokens = await this.generateTokens(safeUser);
+
+      return { user: safeUser, ...tokens };
     }
 
     const passwordValid = await argon2.verify(

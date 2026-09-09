@@ -1,3 +1,6 @@
+import { apiClient } from './api-client';
+
 export const gisService = {
-  // Map-related placeholders
-}
+  listProjectParcelsGeo: async (projectId: string) =>
+    apiClient.get(`/parcels?projectId=${encodeURIComponent(projectId)}`),
+};
