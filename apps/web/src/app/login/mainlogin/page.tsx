@@ -1,20 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
-
+import Header from '../../../components/layout/header'
 export default function LoginPage() {
   return (
+    <>
+    <Header/>
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center p-4">
       {/* Official Government Branding Header */}
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-[#1E3A8A] mb-2">
-          VASUNDHARA
-        </h1>
-        <h1 className="text-1xl font-bold text-[#1E3A8A] mb-2">
-          National Land Acquisition & Management System
-        </h1>
-        <p className="text-[#0F172A] text-lg">
+       
+        <h1 className="text-[#0F172A] text-lg">
           Secure Access Portal
-        </p>
+        </h1>
       </div>
 
       {/* Login Cards Container */}
@@ -54,5 +51,6 @@ export default function LoginPage() {
 
       </div>
     </div>
+    </>
   );
 }
