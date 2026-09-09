@@ -8,6 +8,9 @@ import { ParcelsModule } from './land-parcels/land-parcels.module.js';
 import { WorkflowModule } from './workflow/workflow.module.js';
 import { CompensationModule } from './compensation/compensation.module.js';
 import { NotificationsModule } from './notifications/notifications.module.js';
+import { PossessionModule } from './possession/possession.module.js';
+import { RrModule } from './rr/rr.module.js';
+import { AuditModule } from './audit/audit.module.js';
 
 @Module({
   imports: [
@@ -21,7 +24,10 @@ import { NotificationsModule } from './notifications/notifications.module.js';
     ParcelsModule,
     WorkflowModule,
     CompensationModule,
+    PossessionModule,
+    RrModule,
     NotificationsModule,
+    AuditModule,
   ],
 })
 export class AppModule {
