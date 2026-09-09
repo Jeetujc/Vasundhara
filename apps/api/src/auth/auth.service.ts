@@ -11,6 +11,7 @@ import { PrismaService } from '../prisma/prisma.service.js';
 import { LoginDto } from './dto/login.dto.js';
 import { RefreshTokenDto } from './dto/refresh-token.dto.js';
 import { RegisterDto } from './dto/register.dto.js';
+
 interface TokenPayload {
   sub: string;
   email: string;
@@ -42,9 +43,9 @@ export class AuthService {
     const user = await this.prisma.user.create({
       data: {
         email,
-        passwordHash: passwordHash,
-        name: dto.name, // Assuming dto has a name property
-        role: 'FIELD_OFFICER', // Assign a default role if not provided
+        passwordHash,
+        name: dto.name.trim(),
+        role: 'FIELD_OFFICER',
       },
       select: {
         id: true,
@@ -72,30 +73,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    async refresh(dto: RefreshTokenDto) {
-      const payload = await this.jwtService.verifyAsync<TokenPayload>(dto.refreshToken, {
-        secret: this.configService.getOrThrow<string>('JWT_REFRESH_SECRET'),
-      });
-
-      const user = await this.prisma.user.findUnique({
-        where: { id: payload.sub },
-        select: { id: true, email: true, role: true, isActive: true },
-      });
-
-      if (!user || !user.isActive) {
-        throw new UnauthorizedException('Invalid refresh token');
-      }
-
-      const safeUser = { id: user.id, email: user.email, role: user.role };
-      const tokens = await this.generateTokens(safeUser);
-
-      return { user: safeUser, ...tokens };
-    }
-
-    const passwordValid = await argon2.verify(
-      user.passwordHash,
-      dto.password,
-    );
+    const passwordValid = await argon2.verify(user.passwordHash, dto.password);
 
     if (!passwordValid) {
       throw new UnauthorizedException('Invalid credentials');
@@ -113,6 +91,32 @@ export class AuthService {
       user: safeUser,
       ...tokens,
     };
+  }
+
+  async refresh(dto: RefreshTokenDto) {
+    let payload: TokenPayload;
+
+    try {
+      payload = await this.jwtService.verifyAsync<TokenPayload>(dto.refreshToken, {
+        secret: this.configService.getOrThrow<string>('JWT_REFRESH_SECRET'),
+      });
+    } catch {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+
+    const user = await this.prisma.user.findUnique({
+      where: { id: payload.sub },
+      select: { id: true, email: true, role: true, isActive: true },
+    });
+
+    if (!user || !user.isActive) {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+
+    const safeUser = { id: user.id, email: user.email, role: user.role };
+    const tokens = await this.generateTokens(safeUser);
+
+    return { user: safeUser, ...tokens };
   }
 
   private async generateTokens(user: {
