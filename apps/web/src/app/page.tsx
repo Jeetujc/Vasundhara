@@ -47,7 +47,7 @@ export default function Page() {
           </span>
           <Link href="/login/mainlogin" className="w-full block">
             <button className="w-full bg-[#F59E0B] hover:bg-[#D97706] text-white font-bold py-3 px-4 rounded transition-colors">
-            Login
+              Login
             </button>
           </Link>
         </div>
@@ -56,29 +56,30 @@ export default function Page() {
       {/* Nav */}
       <nav className="bg-[#122C4A] flex flex-wrap items-center px-8 py-2 md:py-0">
         <ul className="flex flex-wrap flex-1 list-none m-0 p-0">
-          {['Home', 'About Us', 'Notification', 'Act', 'Projects', 'Important Links'].map((item) => (
-            <li key={item}>
-              <a href={`#${item.toLowerCase().replace(' ', '-')}`} className="block px-[18px] py-[14px] text-[#EAF0F7] text-[13px] font-semibold tracking-[0.02em] hover:bg-[#0B1F35] transition-colors">
-                {item}
-              </a>
+          {[
+            { name: 'Home', href: '/#home' },
+            { name: 'About Us', href: '/#about-us' },
+            { name: 'Notification', href: '/#notification' },
+            { name: 'Act', href: 'https://mwcc.org.in/knowledge%20center/LandAcqisition/landAcquisitionAct-2013-.pdf' }, // This now points to your Act page folder!
+            { name: 'Projects', href: '/#projects' },
+            { name: 'Important Links', href: '/#important-links' }
+          ].map((item) => (
+            <li key={item.name}>
+              <Link
+                href={item.href}
+                className="block px-[18px] py-[14px] text-[#EAF0F7] text-[13px] font-semibold tracking-[0.02em] hover:bg-[#0B1F35] transition-colors"
+              >
+                {item.name}
+              </Link>
             </li>
           ))}
         </ul>
-        <div className="flex items-center bg-white rounded-[3px] overflow-hidden my-2">
-          <input type="text" placeholder="Search..." className="border-none px-2.5 py-2 text-[13px] w-[220px] outline-none" />
-          <button type="button" className="bg-[#F2A71B] text-[#0B1F35] px-3 py-2 text-[13px] font-medium hover:opacity-90">
-            Search
-          </button>
-        </div>
-        <a href="#contact" className="text-[#EAF0F7] text-[12px] font-bold pl-[22px] tracking-[0.02em] hover:text-[#F2A71B]">
-          CONTACT US
-        </a>
       </nav>
 
       {/* Main layout */}
       <main className="max-w-[1280px] mx-auto px-8 pt-7 pb-[60px]">
         <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-[26px]">
-          
+
           <aside className="bg-[#FDF8E3] border border-[#E7DFB8] rounded py-4 px-4 h-fit">
             <h3 className="text-[13px] font-bold m-0 mb-3 pb-2 border-b-2 border-[#F2A71B] text-[#122C4A]">WHAT'S NEW</h3>
             <ul className="flex flex-col gap-2.5 m-0 p-0 list-none">
@@ -102,7 +103,7 @@ export default function Page() {
           </aside>
 
           <div className="flex flex-col gap-[34px]">
-            
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-white border border-[#DDD8C8] border-t-[3px] border-t-[#1D5FA8] rounded-[3px] py-4 px-3.5 text-center shadow-sm">
                 <strong className="block font-serif text-[24px] text-[#122C4A] mb-1.5">18,420 ha</strong>
@@ -158,73 +159,73 @@ export default function Page() {
               <h2 className="font-serif text-[22px] text-[#122C4A] m-0 mb-1">Important Links</h2>
               <div className="w-[56px] h-[3px] bg-[#F2A71B] mb-[18px]"></div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px]">
-                
+
                 <div className="bg-[#F3F1EA] rounded-[4px] py-[34px] px-6 text-center relative overflow-hidden min-h-[220px] flex flex-col items-center justify-center hover:bg-[#eceae2] transition">
                   <div className="w-[56px] h-[56px] mb-4">
                     <svg viewBox="0 0 48 48" className="w-full h-full stroke-[#B96E22] fill-transparent stroke-[1.4px]">
-                      <path d="M8 34 L26 16 L32 22 L14 40 L6 42 Z"/><path d="M23 19 L29 25"/><path d="M6 42 L8 34"/><path d="M28 12 L36 4 L44 12 L36 20 Z"/>
+                      <path d="M8 34 L26 16 L32 22 L14 40 L6 42 Z" /><path d="M23 19 L29 25" /><path d="M6 42 L8 34" /><path d="M28 12 L36 4 L44 12 L36 20 Z" />
                     </svg>
                   </div>
                   <h4 className="font-serif text-[19px] text-[#1B2430] m-0 mb-3">LA Target Monitoring</h4>
-                  <p className="text-[13px] text-[#5B6472] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br/>(Land Acquisition Wing)</p>
+                  <p className="text-[13px] text-[#5B6472] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br />(Land Acquisition Wing)</p>
                   <a href="#" className="w-[38px] h-[38px] rounded-full bg-white border border-[#DDD8C8] flex items-center justify-center text-[18px] text-[#B96E22] font-semibold hover:bg-gray-50 transition" aria-label="Open LA Target Monitoring">+</a>
                 </div>
 
-                <div 
+                <div
                   className="rounded-[4px] py-[34px] px-6 text-center relative overflow-hidden min-h-[220px] flex flex-col items-center justify-center text-white"
                   style={{ backgroundImage: "linear-gradient(rgba(10,20,32,0.35), rgba(10,20,32,0.72)), url('https://images.unsplash.com/photo-1508260418124-01161d1cea2d?auto=format&fit=crop&w=800&q=60')", backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
                   <div className="w-[56px] h-[56px] mb-4">
                     <svg viewBox="0 0 48 48" className="w-full h-full stroke-white fill-transparent stroke-[1.4px]">
-                      <rect x="10" y="16" width="28" height="20" rx="1"/><path d="M10 24 L38 24 M18 16 L18 36 M30 16 L30 36"/><circle cx="18" cy="30" r="2"/><circle cx="30" cy="30" r="2"/>
+                      <rect x="10" y="16" width="28" height="20" rx="1" /><path d="M10 24 L38 24 M18 16 L18 36 M30 16 L30 36" /><circle cx="18" cy="30" r="2" /><circle cx="30" cy="30" r="2" />
                     </svg>
                   </div>
                   <h4 className="font-serif text-[19px] text-white m-0 mb-3">Public Grievances</h4>
-                  <p className="text-[13px] text-[#EAEAEA] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br/>(Land Acquisition Wing)</p>
+                  <p className="text-[13px] text-[#EAEAEA] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br />(Land Acquisition Wing)</p>
                   <a href="#" className="inline-flex items-center gap-2 bg-white text-[#1B2430] font-bold text-[13px] py-2.5 px-[18px] rounded-[3px] hover:bg-gray-100 transition">+ Read More</a>
                 </div>
 
                 <div className="bg-[#F3F1EA] rounded-[4px] py-[34px] px-6 text-center relative overflow-hidden min-h-[220px] flex flex-col items-center justify-center hover:bg-[#eceae2] transition">
                   <div className="w-[56px] h-[56px] mb-4">
                     <svg viewBox="0 0 48 48" className="w-full h-full stroke-[#B96E22] fill-transparent stroke-[1.4px]">
-                      <rect x="10" y="8" width="28" height="32" rx="1"/><path d="M16 16 L32 16 M16 22 L32 22 M16 28 L26 28"/><rect x="18" y="32" width="12" height="8"/>
+                      <rect x="10" y="8" width="28" height="32" rx="1" /><path d="M16 16 L32 16 M16 22 L32 22 M16 28 L26 28" /><rect x="18" y="32" width="12" height="8" />
                     </svg>
                   </div>
                   <h4 className="font-serif text-[19px] text-[#1B2430] m-0 mb-3">Act</h4>
-                  <p className="text-[13px] text-[#5B6472] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br/>(Land Acquisition Wing)</p>
+                  <p className="text-[13px] text-[#5B6472] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br />(Land Acquisition Wing)</p>
                   <a href="#" className="w-[38px] h-[38px] rounded-full bg-white border border-[#DDD8C8] flex items-center justify-center text-[18px] text-[#B96E22] font-semibold hover:bg-gray-50 transition" aria-label="Open Act">+</a>
                 </div>
 
                 <div className="bg-[#F3F1EA] rounded-[4px] py-[34px] px-6 text-center relative overflow-hidden min-h-[220px] flex flex-col items-center justify-center hover:bg-[#eceae2] transition">
                   <div className="w-[56px] h-[56px] mb-4">
                     <svg viewBox="0 0 48 48" className="w-full h-full stroke-[#B96E22] fill-transparent stroke-[1.4px]">
-                      <path d="M14 40 L14 24 L20 24 L20 40 M28 40 L28 30 L34 30 L34 40" /><path d="M10 40 L38 40"/><circle cx="17" cy="18" r="3"/><path d="M17 12 L17 8 M13 10 L11 8 M21 10 L23 8"/>
+                      <path d="M14 40 L14 24 L20 24 L20 40 M28 40 L28 30 L34 30 L34 40" /><path d="M10 40 L38 40" /><circle cx="17" cy="18" r="3" /><path d="M17 12 L17 8 M13 10 L11 8 M21 10 L23 8" />
                     </svg>
                   </div>
                   <h4 className="font-serif text-[19px] text-[#1B2430] m-0 mb-3">Search</h4>
-                  <p className="text-[13px] text-[#5B6472] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br/>(Land Acquisition Wing)</p>
+                  <p className="text-[13px] text-[#5B6472] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br />(Land Acquisition Wing)</p>
                   <a href="#" className="w-[38px] h-[38px] rounded-full bg-white border border-[#DDD8C8] flex items-center justify-center text-[18px] text-[#B96E22] font-semibold hover:bg-gray-50 transition" aria-label="Open Search">+</a>
                 </div>
 
                 <div className="bg-[#F3F1EA] rounded-[4px] py-[34px] px-6 text-center relative overflow-hidden min-h-[220px] flex flex-col items-center justify-center hover:bg-[#eceae2] transition">
                   <div className="w-[56px] h-[56px] mb-4">
                     <svg viewBox="0 0 48 48" className="w-full h-full stroke-[#B96E22] fill-transparent stroke-[1.4px]">
-                      <path d="M24 8 L38 16 L38 32 L24 40 L10 32 L10 16 Z"/><path d="M18 26 L24 30 L34 20"/>
+                      <path d="M24 8 L38 16 L38 32 L24 40 L10 32 L10 16 Z" /><path d="M18 26 L24 30 L34 20" />
                     </svg>
                   </div>
                   <h4 className="font-serif text-[19px] text-[#1B2430] m-0 mb-3">FAQs</h4>
-                  <p className="text-[13px] text-[#5B6472] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br/>(Land Acquisition Wing)</p>
+                  <p className="text-[13px] text-[#5B6472] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br />(Land Acquisition Wing)</p>
                   <a href="#" className="w-[38px] h-[38px] rounded-full bg-white border border-[#DDD8C8] flex items-center justify-center text-[18px] text-[#B96E22] font-semibold hover:bg-gray-50 transition" aria-label="Open FAQs">+</a>
                 </div>
 
                 <div className="bg-[#F3F1EA] rounded-[4px] py-[34px] px-6 text-center relative overflow-hidden min-h-[220px] flex flex-col items-center justify-center hover:bg-[#eceae2] transition">
                   <div className="w-[56px] h-[56px] mb-4">
                     <svg viewBox="0 0 48 48" className="w-full h-full stroke-[#B96E22] fill-transparent stroke-[1.4px]">
-                      <rect x="8" y="26" width="10" height="14"/><rect x="20" y="18" width="10" height="22"/><rect x="32" y="10" width="8" height="30"/>
+                      <rect x="8" y="26" width="10" height="14" /><rect x="20" y="18" width="10" height="22" /><rect x="32" y="10" width="8" height="30" />
                     </svg>
                   </div>
                   <h4 className="font-serif text-[19px] text-[#1B2430] m-0 mb-3">Projects</h4>
-                  <p className="text-[13px] text-[#5B6472] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br/>(Land Acquisition Wing)</p>
+                  <p className="text-[13px] text-[#5B6472] leading-[1.5] m-0 mb-[18px]">Ministry of Rural Development<br />(Land Acquisition Wing)</p>
                   <a href="#" className="w-[38px] h-[38px] rounded-full bg-white border border-[#DDD8C8] flex items-center justify-center text-[18px] text-[#B96E22] font-semibold hover:bg-gray-50 transition" aria-label="Open Projects">+</a>
                 </div>
 
