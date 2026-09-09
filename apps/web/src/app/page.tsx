@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Link from 'next/link';
 export default function Page() {
   return (
     <div className="min-h-screen bg-[#FBFAF6] text-[#1B2430] font-sans">
@@ -45,12 +45,11 @@ export default function Page() {
           <span className="text-[12px] font-semibold text-[#122C4A] border border-[#DDD8C8] rounded-full px-3 py-1 bg-[#FDF8E3]">
             EN | HI
           </span>
-          <button className="text-[12px] font-bold px-4 py-[9px] rounded bg-[#F2A71B] text-white tracking-[0.02em] hover:opacity-90">
-            Official Login
-          </button>
-          <button className="text-[12px] font-bold px-4 py-[9px] rounded bg-[#1D5FA8] text-white tracking-[0.02em] hover:opacity-90">
-            Citizen Login
-          </button>
+          <Link href="/login/mainlogin" className="w-full block">
+            <button className="w-full bg-[#F59E0B] hover:bg-[#D97706] text-white font-bold py-3 px-4 rounded transition-colors">
+            Login
+            </button>
+          </Link>
         </div>
       </div>
 

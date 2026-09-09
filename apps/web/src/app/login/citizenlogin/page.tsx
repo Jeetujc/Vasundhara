@@ -20,19 +20,6 @@ export default function LoginPage() {
       {/* Login Cards Container */}
       <div className="flex flex-col md:flex-row gap-8 w-full max-w-4xl">
         
-        {/* Citizen / Farmer Login */}
-        <div className="flex-1 bg-white p-8 rounded-xl shadow-md border border-gray-100 flex flex-col items-center text-center">
-          <h2 className="text-2xl font-semibold text-[#0F172A] mb-4">Citizen Portal</h2>
-          <p className="text-gray-600 mb-8">
-            Track your land status, view compensation, and access R&R details directly.
-          </p>
-          <button className="w-full bg-[#10B981] hover:bg-[#059669] text-white font-bold py-3 px-4 rounded transition-colors">
-            Login with Adhaar Number
-          </button>
-          <p className="text-xs text-gray-400 mt-4">
-            No username or password required. Secure login via Aadhaar OTP.
-          </p>
-        </div>
 
         {/* Official / Department Login */}
         <div className="flex-1 bg-white p-8 rounded-xl shadow-md border border-gray-100 flex flex-col items-center text-center">
@@ -40,9 +27,9 @@ export default function LoginPage() {
           <p className="text-gray-600 mb-8">
             Access Ministry dashboards, Collector action queues, and MIS reports.
           </p>
-          <Link href="/login/departmentlogin" className="w-full block">
+          <Link href="./departmentlogin" className="w-full block">
             <button className="w-full bg-[#F59E0B] hover:bg-[#D97706] text-white font-bold py-3 px-4 rounded transition-colors">
-              Department Login
+              citizen Login
             </button>
           </Link>
           <p className="text-xs text-gray-400 mt-4">
