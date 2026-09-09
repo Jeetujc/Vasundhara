@@ -1,31 +1,34 @@
 {
   "compilerOptions": {
-    "module": "Node16",
-    "moduleResolution": "node16",
-    "target": "ES2021",
+  "module": "Node16",
+  "moduleResolution": "node16",
+  "target": "ES2021",
 
-    "rootDir": "./src",
-    "outDir": "./dist",
+  "rootDir": "./src",
+  "outDir": "./dist",
 
-    "declaration": true,
-    "sourceMap": true,
-    "removeComments": true,
-    "incremental": true,
+  "declaration": true,
+  "sourceMap": true,
+  "removeComments": true,
+  "incremental": true,
 
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "useDefineForClassFields": false,
+  "experimentalDecorators": true,
+  "emitDecoratorMetadata": true,
+  "useDefineForClassFields": false,
 
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
+  "allowSyntheticDefaultImports": true,
+  "esModuleInterop": true,
+  "resolveJsonModule": true,
 
-    "strict": true,
-    "strictNullChecks": true,
-    "skipLibCheck": true,
+  "strict": true,
+  "strictNullChecks": true,
+  "skipLibCheck": true,
 
-    "ignoreDeprecations": "5.0"
-  },
+  "ignoreDeprecations": "5.0",
+
+  "types": ["node"]
+},
+  
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
 }
