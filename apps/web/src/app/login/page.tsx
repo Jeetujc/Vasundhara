@@ -40,7 +40,7 @@ export default function LoginPage() {
           <p className="text-gray-600 mb-8">
             Access Ministry dashboards, Collector action queues, and MIS reports.
           </p>
-          <Link href="./login/departmentlogin" className="w-full block">
+          <Link href="/login/departmentlogin" className="w-full block">
             <button className="w-full bg-[#F59E0B] hover:bg-[#D97706] text-white font-bold py-3 px-4 rounded transition-colors">
               Department Login
             </button>
