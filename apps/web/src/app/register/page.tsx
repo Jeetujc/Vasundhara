@@ -1,18 +1,124 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { authService, type RegisterPayload } from '../../services/auth.service';
+import { locationService, type LocationItem } from '../../services/location.service';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function CitizenRegister() {
+
+  const [formData, setFormData] = useState<RegisterPayload>({
+    name: '',
+    aadharId: '',
+    mobileNo: '',
+    dob: '',
+    stateId: '',
+    districtId: '',
+    tehsilId: '',
+    password: '',
+  });
+  
+  const [confirmPassword, setConfirmPassword] = useState('');
+  
+  const [states, setStates] = useState<LocationItem[]>([]);
+  const [districts, setDistricts] = useState<LocationItem[]>([]);
+  const [tehsils, setTehsils] = useState<LocationItem[]>([]);
+  
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
   const router = useRouter();
   const [step, setStep] = useState(1);
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, submit data to backend API here
-    alert("Registration Successful! Redirecting to login...");
-    router.push('/login/mainlogin');
+  
+    setError('');
+  
+    if (formData.password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+  
+    if (formData.aadharId.length !== 12) {
+      setError('Aadhaar number must be 12 digits');
+      return;
+    }
+  
+    if (formData.mobileNo.length !== 10) {
+      setError('Mobile number must be 10 digits');
+      return;
+    }
+  
+    try {
+      setLoading(true);
+  
+      await authService.register(formData);
+  
+      router.push('/login/mainlogin');
+    } catch (err) {
+      console.error(err);
+  
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Registration failed. Please try again.',
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const loadStates = async () => {
+      try {
+        const data = await locationService.getStates();
+        setStates(data);
+      } catch {
+        setError('Unable to load states');
+      }
+    };
+  
+    loadStates();
+  }, []);
+  const handleStateChange = async (stateId: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      stateId,
+      districtId: '',
+      tehsilId: '',
+    }));
+  
+    setDistricts([]);
+    setTehsils([]);
+  
+    if (!stateId) return;
+  
+    try {
+      const data = await locationService.getDistricts(stateId);
+      setDistricts(data);
+    } catch {
+      setError('Unable to load districts');
+    }
+  };
+  const handleDistrictChange = async (districtId: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      districtId,
+      tehsilId: '',
+    }));
+  
+    setTehsils([]);
+  
+    if (!districtId) return;
+  
+    try {
+      const data = await locationService.getTehsils(districtId);
+      setTehsils(data);
+    } catch {
+      setError('Unable to load tehsils');
+    }
   };
 
   return (
@@ -77,24 +183,65 @@ export default function CitizenRegister() {
               <div className={`w-8 h-2 rounded-full ${step >= 2 ? 'bg-[#1D5FA8]' : 'bg-gray-200'}`}></div>
             </div>
           </div>
-
+          {error && (
+            <div className="mb-5 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+              {error}
+            </div>
+          )}
           <form onSubmit={handleRegister} className="space-y-5">
             
             {step === 1 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-300 space-y-5">
                 <div>
                   <label className="block text-sm font-bold text-[#5B6472] mb-1.5">Aadhaar Number <span className="text-red-500">*</span></label>
-                  <input required type="text" placeholder="XXXX-XXXX-XXXX" className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]" />
+                  <input
+                    required
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={12}
+                    value={formData.aadharId}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        aadharId: e.target.value.replace(/\D/g, ''),
+                      })
+                    }
+                    placeholder="12-digit Aadhaar number"
+                    className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]"
+                  />
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-bold text-[#5B6472] mb-1.5">Full Name <span className="text-red-500">*</span></label>
-                    <input required type="text" placeholder="As per Aadhaar" className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]" />
-                  </div>
+                    <input
+                      required
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          name: e.target.value,
+                        })
+                      }
+                      placeholder="As per Aadhaar"
+                      className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]"
+                    />
+                    </div>
                   <div>
                     <label className="block text-sm font-bold text-[#5B6472] mb-1.5">Date of Birth <span className="text-red-500">*</span></label>
-                    <input required type="date" className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8] text-[#5B6472]" />
+                    <input
+                      required
+                      type="date"
+                      value={formData.dob}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          dob: e.target.value,
+                        })
+                      }
+                      className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8] text-[#5B6472]"
+                    />
                   </div>
                 </div>
 
@@ -103,7 +250,21 @@ export default function CitizenRegister() {
                     <label className="block text-sm font-bold text-[#5B6472] mb-1.5">Mobile Number <span className="text-red-500">*</span></label>
                     <div className="flex">
                       <span className="inline-flex items-center px-3 text-sm text-[#5B6472] bg-gray-100 border border-r-0 border-[#DDD8C8] rounded-l">+91</span>
-                      <input required type="tel" placeholder="10-digit number" className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded-r focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]" />
+                      <input
+                        required
+                        type="tel"
+                        inputMode="numeric"
+                        maxLength={10}
+                        value={formData.mobileNo}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            mobileNo: e.target.value.replace(/\D/g, ''),
+                          })
+                        }
+                        placeholder="10-digit number"
+                        className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded-r focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]"
+                      />
                     </div>
                   </div>
                   <div>
@@ -128,25 +289,61 @@ export default function CitizenRegister() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-bold text-[#5B6472] mb-1.5">State <span className="text-red-500">*</span></label>
-                    <select required className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8] text-sm">
-                      <option value="">Select State</option>
-                      <option value="MP">Madhya Pradesh</option>
-                      <option value="UP">Uttar Pradesh</option>
-                      <option value="MH">Maharashtra</option>
-                    </select>
+                    <select
+                        required
+                        value={formData.stateId}
+                        onChange={(e) => handleStateChange(e.target.value)}
+                        className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8] text-sm"
+                      >
+                        <option value="">Select State</option>
+
+                        {states.map((state) => (
+                          <option key={state.id} value={state.id}>
+                            {state.name}
+                          </option>
+                        ))}
+                      </select>
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-[#5B6472] mb-1.5">District <span className="text-red-500">*</span></label>
-                    <select required className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8] text-sm">
+                    <select
+                      required
+                      disabled={!formData.stateId}
+                      value={formData.districtId}
+                      onChange={(e) => handleDistrictChange(e.target.value)}
+                      className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8] text-sm disabled:opacity-50"
+                    >
                       <option value="">Select District</option>
-                      <option value="Indore">Indore</option>
-                      <option value="Bhopal">Bhopal</option>
-                      <option value="Ujjain">Ujjain</option>
+
+                      {districts.map((district) => (
+                        <option key={district.id} value={district.id}>
+                          {district.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-[#5B6472] mb-1.5">Tehsil <span className="text-red-500">*</span></label>
-                    <input required type="text" placeholder="Enter Tehsil" className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]" />
+                    <select
+                      required
+                      disabled={!formData.districtId}
+                      value={formData.tehsilId}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          tehsilId: e.target.value,
+                        })
+                      }
+                      className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8] text-sm disabled:opacity-50"
+                    >
+                      <option value="">Select Tehsil</option>
+
+                      {tehsils.map((tehsil) => (
+                        <option key={tehsil.id} value={tehsil.id}>
+                          {tehsil.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-[#5B6472] mb-1.5">Village <span className="text-red-500">*</span></label>
@@ -158,11 +355,30 @@ export default function CitizenRegister() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-bold text-[#5B6472] mb-1.5">Create Password <span className="text-red-500">*</span></label>
-                      <input required type="password" placeholder="••••••••" className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]" />
+                      <input
+                        required
+                        type="password"
+                        value={formData.password}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            password: e.target.value,
+                          })
+                        }
+                        placeholder="••••••••"
+                        className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]"
+                      />
                     </div>
                     <div>
                       <label className="block text-sm font-bold text-[#5B6472] mb-1.5">Confirm Password <span className="text-red-500">*</span></label>
-                      <input required type="password" placeholder="••••••••" className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]" />
+                      <input
+                        required
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        placeholder="••••••••"
+                        className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8]"
+                      />
                     </div>
                   </div>
                 </div>
@@ -182,11 +398,12 @@ export default function CitizenRegister() {
                   >
                     Back
                   </button>
-                  <button 
-                    type="submit" 
-                    className="w-2/3 bg-[#F2A71B] hover:bg-[#D97706] text-[#0B1F35] font-bold py-3.5 px-4 rounded shadow-sm transition-colors text-sm uppercase tracking-wide"
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-2/3 bg-[#F2A71B] hover:bg-[#D97706] disabled:opacity-50 disabled:cursor-not-allowed text-[#0B1F35] font-bold py-3.5 px-4 rounded shadow-sm transition-colors text-sm uppercase tracking-wide"
                   >
-                    Complete Registration
+                    {loading ? 'Creating Account...' : 'Complete Registration'}
                   </button>
                 </div>
               </div>

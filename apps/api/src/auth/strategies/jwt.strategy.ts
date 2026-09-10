@@ -32,13 +32,23 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       },
       select: {
         id: true,
-        email: true,
+        name: true,
+        aadharId: true,
+        mobileNo: true,
         role: true,
+        stateId: true,
+        districtId: true,
+        tehsilId: true,
+        isActive: true,
       },
     });
 
     if (!user) {
       throw new UnauthorizedException('User no longer exists');
+    }
+
+    if (!user.isActive) {
+      throw new UnauthorizedException('User account is inactive');
     }
 
     return user;

@@ -14,7 +14,13 @@ async function bootstrap() {
       transform: true,
     }),
   );
-
+  app.enableCors({
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:5000',
+    ],
+    credentials: true,
+  });
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Vasundhara API')
     .setDescription(
