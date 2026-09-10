@@ -28,9 +28,9 @@ export default function LoginPage() {
             Login with Adhaar Number
           </button>
           </Link>
-          <p className="text-xs text-gray-400 mt-4">
-            No username or password required. Secure login via Aadhaar OTP.
-          </p>
+           <a href="/register"><p className="text-xs text-gray-400 mt-4">
+           New User? Register Here
+          </p></a>
         </div>
 
         {/* Official / Department Login */}
@@ -54,6 +54,4 @@ export default function LoginPage() {
     </>
   );
 }
-
-
 

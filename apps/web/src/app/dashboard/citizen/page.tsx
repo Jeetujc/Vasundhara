@@ -235,12 +235,15 @@ export default function CitizenDashboard() {
 
             {/* 4. NEW: GRIEVANCE & HELPDESK */}
             <div className="bg-[#FDF8E3] border border-[#E7DFB8] rounded shadow-sm p-6">
+
               <h2 className="text-lg font-serif font-bold text-[#122C4A] mb-2">Help & Grievances</h2>
               <p className="text-xs text-[#5B6472] mb-4">Having issues with your land area, asset calculation, or bank transfer? Raise an official grievance here.</p>
               
+              <Link href="../../grivence/citizen" className="w-full block">
               <button className="w-full bg-white border-2 border-[#122C4A] text-[#122C4A] font-bold py-2 rounded hover:bg-[#122C4A] hover:text-white transition-colors mb-4">
-                + Raise New Grievance
-              </button>
+                   + Raise New Grievance
+               </button>
+                </Link>
 
               <div className="bg-white p-3 rounded border border-[#DDD8C8]">
                 <div className="flex justify-between items-center mb-1">
