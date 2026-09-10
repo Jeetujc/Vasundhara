@@ -14,7 +14,8 @@ export const Role = {
   CENTRAL_OFFICER: 'CENTRAL_OFFICER',
   STATE_OFFICER: 'STATE_OFFICER',
   DISTRICT_OFFICER: 'DISTRICT_OFFICER',
-  FIELD_OFFICER: 'FIELD_OFFICER'
+  FIELD_OFFICER: 'FIELD_OFFICER',
+  PUBLIC_USER: 'PUBLIC_USER'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]

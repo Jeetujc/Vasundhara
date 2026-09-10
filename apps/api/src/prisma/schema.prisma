@@ -21,6 +21,7 @@ enum Role {
   STATE_OFFICER
   DISTRICT_OFFICER
   FIELD_OFFICER
+  PUBLIC_USER
 }
 
 enum ProjectStatus {
@@ -121,7 +122,6 @@ enum DocumentStatus {
   ARCHIVED
 }
 
-
 // ============================================================
 // ORGANIZATION / JURISDICTION
 // ============================================================
@@ -141,12 +141,12 @@ model Organization {
 }
 
 model State {
-  id             String       @id @default(cuid())
+  id             String   @id @default(cuid())
   name           String
-  code           String       @unique
+  code           String   @unique
   organizationId String
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   organization Organization @relation(fields: [organizationId], references: [id])
   districts    District[]
@@ -166,9 +166,10 @@ model District {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  state    State    @relation(fields: [stateId], references: [id])
+  state    State     @relation(fields: [stateId], references: [id])
   users    User[]
   projects Project[]
+  tehsils  Tehsil[]
 
   @@unique([stateId, code])
   @@index([stateId])
@@ -176,33 +177,55 @@ model District {
   @@map("districts")
 }
 
+model Tehsil {
+  id         String @id @default(cuid())
+  name       String
+  code       String
+  districtId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  district District @relation(fields: [districtId], references: [id])
+  users    User[]
+
+  @@unique([districtId, code])
+  @@index([districtId])
+  @@index([name])
+  @@map("tehsils")
+}
 
 // ============================================================
 // USERS
 // ============================================================
-
 model User {
-  id             String   @id @default(cuid())
-  name           String
-  email          String   @unique
-  passwordHash   String
-  role           Role
+  id           String    @id @default(cuid())
+  name         String
+  aadharId     String?   @unique
+  mobileNo     String    @unique
+  dob          DateTime?
+  passwordHash String
+  role         Role
+
   organizationId String?
   stateId        String?
   districtId     String?
-  isActive       Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  tehsilId       String?
+
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   organization Organization? @relation(fields: [organizationId], references: [id])
   state        State?        @relation(fields: [stateId], references: [id])
   district     District?     @relation(fields: [districtId], references: [id])
+  tehsil       Tehsil?       @relation(fields: [tehsilId], references: [id])
 
-  assignedTasks       WorkflowTask[]      @relation("TaskAssignee")
-  notifications       Notification[]
-  auditLogs           AuditLog[]
-  uploadedDocuments   Document[]          @relation("DocumentUploader")
-  possessionRecords   PossessionRecord[]  @relation("PossessionOfficer")
+  assignedTasks     WorkflowTask[]     @relation("TaskAssignee")
+  notifications     Notification[]
+  auditLogs         AuditLog[]
+  uploadedDocuments Document[]         @relation("DocumentUploader")
+  possessionRecords PossessionRecord[] @relation("PossessionOfficer")
 
   @@index([organizationId])
   @@index([stateId])
@@ -211,7 +234,6 @@ model User {
   @@index([isActive])
   @@map("users")
 }
-
 
 // ============================================================
 // PROJECTS
@@ -256,20 +278,19 @@ model Project {
   @@map("projects")
 }
 
-
 // ============================================================
 // LAND PARCELS
 // ============================================================
 
 model LandParcel {
-  id          String       @id @default(cuid())
-  projectId   String
+  id           String       @id @default(cuid())
+  projectId    String
   parcelNumber String
   surveyNumber String?
-  village     String?
-  tehsil      String?
-  area        Decimal?     @db.Decimal(18, 4)
-  status      ParcelStatus @default(PROPOSED)
+  village      String?
+  tehsil       String?
+  area         Decimal?     @db.Decimal(18, 4)
+  status       ParcelStatus @default(PROPOSED)
 
   // PostGIS spatial field.
   // Actual geometry type/SRID/index will be configured through
@@ -282,11 +303,11 @@ model LandParcel {
 
   project Project @relation(fields: [projectId], references: [id])
 
-  familyParcels      FamilyParcel[]
-  compensationCases  CompensationCase[]
-  possessionRecords  PossessionRecord[]
-  documents          Document[]
-  auditLogs          AuditLog[]
+  familyParcels     FamilyParcel[]
+  compensationCases CompensationCase[]
+  possessionRecords PossessionRecord[]
+  documents         Document[]
+  auditLogs         AuditLog[]
 
   @@unique([projectId, parcelNumber])
   @@index([projectId])
@@ -294,13 +315,12 @@ model LandParcel {
   @@map("land_parcels")
 }
 
-
 // ============================================================
 // AFFECTED FAMILIES
 // ============================================================
 
 model AffectedFamily {
-  id        String   @id @default(cuid())
+  id        String @id @default(cuid())
   projectId String
 
   familyReference String  @unique
@@ -327,7 +347,6 @@ model AffectedFamily {
   @@map("affected_families")
 }
 
-
 // Many-to-many relationship between families and parcels.
 model FamilyParcel {
   id       String @id @default(cuid())
@@ -339,7 +358,7 @@ model FamilyParcel {
   createdAt DateTime @default(now())
 
   family AffectedFamily @relation(fields: [familyId], references: [id])
-  parcel LandParcel    @relation(fields: [parcelId], references: [id])
+  parcel LandParcel     @relation(fields: [parcelId], references: [id])
 
   @@unique([familyId, parcelId])
   @@index([familyId])
@@ -347,16 +366,15 @@ model FamilyParcel {
   @@map("family_parcels")
 }
 
-
 // ============================================================
 // WORKFLOW
 // ============================================================
 
 model WorkflowInstance {
-  id        String         @id @default(cuid())
-  projectId String
+  id           String         @id @default(cuid())
+  projectId    String
   currentStage String
-  status    WorkflowStatus @default(NOT_STARTED)
+  status       WorkflowStatus @default(NOT_STARTED)
 
   startedAt   DateTime?
   completedAt DateTime?
@@ -364,7 +382,7 @@ model WorkflowInstance {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  project Project @relation(fields: [projectId], references: [id])
+  project Project        @relation(fields: [projectId], references: [id])
   tasks   WorkflowTask[]
 
   @@index([projectId])
@@ -374,7 +392,7 @@ model WorkflowInstance {
 }
 
 model WorkflowTask {
-  id         String             @id @default(cuid())
+  id         String @id @default(cuid())
   workflowId String
   stage      String
   title      String
@@ -399,14 +417,14 @@ model WorkflowTask {
 }
 
 model Milestone {
-  id        String   @id @default(cuid())
+  id        String @id @default(cuid())
   projectId String
   name      String
   stage     String
 
-  dueDate      DateTime?
-  completedAt  DateTime?
-  isCompleted  Boolean  @default(false)
+  dueDate     DateTime?
+  completedAt DateTime?
+  isCompleted Boolean   @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -417,7 +435,6 @@ model Milestone {
   @@index([dueDate])
   @@map("milestones")
 }
-
 
 // ============================================================
 // COMPENSATION
@@ -459,7 +476,6 @@ model CompensationCase {
   @@map("compensation_cases")
 }
 
-
 // ============================================================
 // POSSESSION
 // ============================================================
@@ -480,15 +496,15 @@ model PossessionRecord {
   evidenceUrl String?
   remarks     String?
 
-  verifiedAt  DateTime?
-  recordedAt  DateTime?
+  verifiedAt DateTime?
+  recordedAt DateTime?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  project      Project     @relation(fields: [projectId], references: [id])
-  parcel       LandParcel  @relation(fields: [parcelId], references: [id])
-  fieldOfficer User?       @relation("PossessionOfficer", fields: [fieldOfficerId], references: [id])
+  project      Project    @relation(fields: [projectId], references: [id])
+  parcel       LandParcel @relation(fields: [parcelId], references: [id])
+  fieldOfficer User?      @relation("PossessionOfficer", fields: [fieldOfficerId], references: [id])
 
   documents Document[]
   auditLogs AuditLog[]
@@ -499,7 +515,6 @@ model PossessionRecord {
   @@index([status])
   @@map("possession_records")
 }
-
 
 // ============================================================
 // REHABILITATION & RESETTLEMENT
@@ -512,16 +527,16 @@ model RrCase {
 
   status RrStatus @default(ASSESSED)
 
-  housingSupport          Boolean @default(false)
-  financialAssistance     Boolean @default(false)
-  employmentSupport       Boolean @default(false)
-  relocationSupport       Boolean @default(false)
+  housingSupport      Boolean @default(false)
+  financialAssistance Boolean @default(false)
+  employmentSupport   Boolean @default(false)
+  relocationSupport   Boolean @default(false)
 
   benefitsDescription String?
 
-  assessedAt   DateTime?
-  completedAt  DateTime?
-  verifiedAt   DateTime?
+  assessedAt  DateTime?
+  completedAt DateTime?
+  verifiedAt  DateTime?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -537,7 +552,6 @@ model RrCase {
   @@index([status])
   @@map("rr_cases")
 }
-
 
 // ============================================================
 // DOCUMENTS
@@ -556,10 +570,10 @@ model Document {
 
   uploadedById String?
 
-  name        String
-  storageKey  String
-  mimeType    String?
-  sizeBytes   BigInt?
+  name       String
+  storageKey String
+  mimeType   String?
+  sizeBytes  BigInt?
 
   status DocumentStatus @default(UPLOADED)
 
@@ -585,7 +599,6 @@ model Document {
   @@map("documents")
 }
 
-
 // ============================================================
 // NOTIFICATIONS
 // ============================================================
@@ -599,8 +612,8 @@ model Notification {
 
   status NotificationStatus @default(PENDING)
 
-  readAt   DateTime?
-  sentAt   DateTime?
+  readAt DateTime?
+  sentAt DateTime?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -613,7 +626,6 @@ model Notification {
   @@map("notifications")
 }
 
-
 // ============================================================
 // AUDIT LOGS
 // ============================================================
@@ -622,16 +634,16 @@ model AuditLog {
   id     String  @id @default(cuid())
   userId String?
 
-  projectId       String?
-  parcelId        String?
-  familyId        String?
-  compensationId  String?
-  possessionId    String?
-  rrCaseId        String?
+  projectId      String?
+  parcelId       String?
+  familyId       String?
+  compensationId String?
+  possessionId   String?
+  rrCaseId       String?
 
-  action      String
-  entityType  String
-  entityId    String?
+  action     String
+  entityType String
+  entityId   String?
 
   description String?
   metadata    Json?

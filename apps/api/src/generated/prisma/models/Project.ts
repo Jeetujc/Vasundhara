@@ -708,10 +708,6 @@ export type NullableDecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type ProjectCreateNestedOneWithoutParcelsInput = {
   create?: Prisma.XOR<Prisma.ProjectCreateWithoutParcelsInput, Prisma.ProjectUncheckedCreateWithoutParcelsInput>
   connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutParcelsInput

@@ -11,6 +11,7 @@
 export type * from './models/Organization.js'
 export type * from './models/State.js'
 export type * from './models/District.js'
+export type * from './models/Tehsil.js'
 export type * from './models/User.js'
 export type * from './models/Project.js'
 export type * from './models/LandParcel.js'

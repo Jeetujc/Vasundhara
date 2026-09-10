@@ -14,7 +14,7 @@ import { RegisterDto } from './dto/register.dto.js';
 
 interface TokenPayload {
   sub: string;
-  email: string;
+  mobileNo: string;
   role: string;
 }
 
@@ -27,11 +27,19 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterDto) {
-    const email = dto.email.trim().toLowerCase();
+    const mobileNo = dto.mobileNo.trim();
+    const aadharId = dto.aadharId.trim();
 
-    const existingUser = await this.prisma.user.findUnique({
-      where: { email },
-      select: { id: true },
+    const existingUser = await this.prisma.user.findFirst({
+      where: {
+        OR: [
+          { mobileNo },
+          { aadharId },
+        ],
+      },
+      select: {
+        id: true,
+      },
     });
 
     if (existingUser) {
@@ -42,15 +50,30 @@ export class AuthService {
 
     const user = await this.prisma.user.create({
       data: {
-        email,
-        passwordHash,
         name: dto.name.trim(),
-        role: 'FIELD_OFFICER',
+        aadharId,
+        mobileNo,
+        dob: new Date(dto.dob),
+
+        passwordHash,
+
+        // Public registration always creates a public user.
+        role: 'PUBLIC_USER',
+
+        stateId: dto.stateId,
+        districtId: dto.districtId,
+        tehsilId: dto.tehsilId,
       },
       select: {
         id: true,
-        email: true,
+        name: true,
+        aadharId: true,
+        mobileNo: true,
+        dob: true,
         role: true,
+        stateId: true,
+        districtId: true,
+        tehsilId: true,
       },
     });
 
@@ -63,30 +86,44 @@ export class AuthService {
   }
 
   async login(dto: LoginDto) {
-    const email = dto.email.trim().toLowerCase();
-
+    const aadharId = dto.aadharId.trim();
+  
     const user = await this.prisma.user.findUnique({
-      where: { email },
+      where: {
+        aadharId,
+      },
     });
-
+  
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
-
-    const passwordValid = await argon2.verify(user.passwordHash, dto.password);
-
+  
+    if (!user.isActive) {
+      throw new UnauthorizedException('Account is inactive');
+    }
+  
+    const passwordValid = await argon2.verify(
+      user.passwordHash,
+      dto.password,
+    );
+  
     if (!passwordValid) {
       throw new UnauthorizedException('Invalid credentials');
     }
-
+  
     const safeUser = {
       id: user.id,
-      email: user.email,
+      name: user.name,
+      aadharId: user.aadharId,
+      mobileNo: user.mobileNo,
       role: user.role,
+      stateId: user.stateId,
+      districtId: user.districtId,
+      tehsilId: user.tehsilId,
     };
-
+  
     const tokens = await this.generateTokens(safeUser);
-
+  
     return {
       user: safeUser,
       ...tokens,
@@ -97,43 +134,73 @@ export class AuthService {
     let payload: TokenPayload;
 
     try {
-      payload = await this.jwtService.verifyAsync<TokenPayload>(dto.refreshToken, {
-        secret: this.configService.getOrThrow<string>('JWT_REFRESH_SECRET'),
-      });
+      payload = await this.jwtService.verifyAsync<TokenPayload>(
+        dto.refreshToken,
+        {
+          secret: this.configService.getOrThrow<string>(
+            'JWT_REFRESH_SECRET',
+          ),
+        },
+      );
     } catch {
       throw new UnauthorizedException('Invalid refresh token');
     }
 
     const user = await this.prisma.user.findUnique({
-      where: { id: payload.sub },
-      select: { id: true, email: true, role: true, isActive: true },
+      where: {
+        id: payload.sub,
+      },
+      select: {
+        id: true,
+        name: true,
+        mobileNo: true,
+        role: true,
+        stateId: true,
+        districtId: true,
+        tehsilId: true,
+        isActive: true,
+      },
     });
 
     if (!user || !user.isActive) {
       throw new UnauthorizedException('Invalid refresh token');
     }
 
-    const safeUser = { id: user.id, email: user.email, role: user.role };
+    const safeUser = {
+      id: user.id,
+      name: user.name,
+      mobileNo: user.mobileNo,
+      role: user.role,
+      stateId: user.stateId,
+      districtId: user.districtId,
+      tehsilId: user.tehsilId,
+    };
+
     const tokens = await this.generateTokens(safeUser);
 
-    return { user: safeUser, ...tokens };
+    return {
+      user: safeUser,
+      ...tokens,
+    };
   }
 
   private async generateTokens(user: {
     id: string;
-    email: string;
+    mobileNo: string;
     role: string;
   }) {
     const payload: TokenPayload = {
       sub: user.id,
-      email: user.email,
+      mobileNo: user.mobileNo,
       role: user.role,
     };
 
     const accessToken = await this.jwtService.signAsync(payload);
 
     const refreshToken = await this.jwtService.signAsync(payload, {
-      secret: this.configService.getOrThrow<string>('JWT_REFRESH_SECRET'),
+      secret: this.configService.getOrThrow<string>(
+        'JWT_REFRESH_SECRET',
+      ),
       expiresIn: '7d',
     });
 

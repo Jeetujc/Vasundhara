@@ -400,6 +400,7 @@ export const ModelName = {
   Organization: 'Organization',
   State: 'State',
   District: 'District',
+  Tehsil: 'Tehsil',
   User: 'User',
   Project: 'Project',
   LandParcel: 'LandParcel',
@@ -429,7 +430,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "state" | "district" | "user" | "project" | "landParcel" | "affectedFamily" | "familyParcel" | "workflowInstance" | "workflowTask" | "milestone" | "compensationCase" | "possessionRecord" | "rrCase" | "document" | "notification" | "auditLog"
+    modelProps: "organization" | "state" | "district" | "tehsil" | "user" | "project" | "landParcel" | "affectedFamily" | "familyParcel" | "workflowInstance" | "workflowTask" | "milestone" | "compensationCase" | "possessionRecord" | "rrCase" | "document" | "notification" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -652,6 +653,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.DistrictCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.DistrictCountAggregateOutputType> | number
+        }
+      }
+    }
+    Tehsil: {
+      payload: Prisma.$TehsilPayload<ExtArgs>
+      fields: Prisma.TehsilFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TehsilFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TehsilFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload>
+        }
+        findFirst: {
+          args: Prisma.TehsilFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TehsilFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload>
+        }
+        findMany: {
+          args: Prisma.TehsilFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload>[]
+        }
+        create: {
+          args: Prisma.TehsilCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload>
+        }
+        createMany: {
+          args: Prisma.TehsilCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TehsilCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload>[]
+        }
+        delete: {
+          args: Prisma.TehsilDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload>
+        }
+        update: {
+          args: Prisma.TehsilUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload>
+        }
+        deleteMany: {
+          args: Prisma.TehsilDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TehsilUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TehsilUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload>[]
+        }
+        upsert: {
+          args: Prisma.TehsilUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TehsilPayload>
+        }
+        aggregate: {
+          args: Prisma.TehsilAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTehsil>
+        }
+        groupBy: {
+          args: Prisma.TehsilGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TehsilGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TehsilCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TehsilCountAggregateOutputType> | number
         }
       }
     }
@@ -1765,15 +1840,30 @@ export const DistrictScalarFieldEnum = {
 export type DistrictScalarFieldEnum = (typeof DistrictScalarFieldEnum)[keyof typeof DistrictScalarFieldEnum]
 
 
+export const TehsilScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  districtId: 'districtId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TehsilScalarFieldEnum = (typeof TehsilScalarFieldEnum)[keyof typeof TehsilScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  email: 'email',
+  aadharId: 'aadharId',
+  mobileNo: 'mobileNo',
+  dob: 'dob',
   passwordHash: 'passwordHash',
   role: 'role',
   organizationId: 'organizationId',
   stateId: 'stateId',
   districtId: 'districtId',
+  tehsilId: 'tehsilId',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -2464,6 +2554,7 @@ export type GlobalOmitConfig = {
   organization?: Prisma.OrganizationOmit
   state?: Prisma.StateOmit
   district?: Prisma.DistrictOmit
+  tehsil?: Prisma.TehsilOmit
   user?: Prisma.UserOmit
   project?: Prisma.ProjectOmit
   landParcel?: Prisma.LandParcelOmit

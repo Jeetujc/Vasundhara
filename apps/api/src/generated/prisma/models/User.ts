@@ -27,12 +27,15 @@ export type AggregateUser = {
 export type UserMinAggregateOutputType = {
   id: string | null
   name: string | null
-  email: string | null
+  aadharId: string | null
+  mobileNo: string | null
+  dob: Date | null
   passwordHash: string | null
   role: $Enums.Role | null
   organizationId: string | null
   stateId: string | null
   districtId: string | null
+  tehsilId: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -41,12 +44,15 @@ export type UserMinAggregateOutputType = {
 export type UserMaxAggregateOutputType = {
   id: string | null
   name: string | null
-  email: string | null
+  aadharId: string | null
+  mobileNo: string | null
+  dob: Date | null
   passwordHash: string | null
   role: $Enums.Role | null
   organizationId: string | null
   stateId: string | null
   districtId: string | null
+  tehsilId: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -55,12 +61,15 @@ export type UserMaxAggregateOutputType = {
 export type UserCountAggregateOutputType = {
   id: number
   name: number
-  email: number
+  aadharId: number
+  mobileNo: number
+  dob: number
   passwordHash: number
   role: number
   organizationId: number
   stateId: number
   districtId: number
+  tehsilId: number
   isActive: number
   createdAt: number
   updatedAt: number
@@ -71,12 +80,15 @@ export type UserCountAggregateOutputType = {
 export type UserMinAggregateInputType = {
   id?: true
   name?: true
-  email?: true
+  aadharId?: true
+  mobileNo?: true
+  dob?: true
   passwordHash?: true
   role?: true
   organizationId?: true
   stateId?: true
   districtId?: true
+  tehsilId?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -85,12 +97,15 @@ export type UserMinAggregateInputType = {
 export type UserMaxAggregateInputType = {
   id?: true
   name?: true
-  email?: true
+  aadharId?: true
+  mobileNo?: true
+  dob?: true
   passwordHash?: true
   role?: true
   organizationId?: true
   stateId?: true
   districtId?: true
+  tehsilId?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -99,12 +114,15 @@ export type UserMaxAggregateInputType = {
 export type UserCountAggregateInputType = {
   id?: true
   name?: true
-  email?: true
+  aadharId?: true
+  mobileNo?: true
+  dob?: true
   passwordHash?: true
   role?: true
   organizationId?: true
   stateId?: true
   districtId?: true
+  tehsilId?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -186,12 +204,15 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   name: string
-  email: string
+  aadharId: string | null
+  mobileNo: string
+  dob: Date | null
   passwordHash: string
   role: $Enums.Role
   organizationId: string | null
   stateId: string | null
   districtId: string | null
+  tehsilId: string | null
   isActive: boolean
   createdAt: Date
   updatedAt: Date
@@ -221,18 +242,22 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
-  email?: Prisma.StringFilter<"User"> | string
+  aadharId?: Prisma.StringNullableFilter<"User"> | string | null
+  mobileNo?: Prisma.StringFilter<"User"> | string
+  dob?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   passwordHash?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   organizationId?: Prisma.StringNullableFilter<"User"> | string | null
   stateId?: Prisma.StringNullableFilter<"User"> | string | null
   districtId?: Prisma.StringNullableFilter<"User"> | string | null
+  tehsilId?: Prisma.StringNullableFilter<"User"> | string | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   state?: Prisma.XOR<Prisma.StateNullableScalarRelationFilter, Prisma.StateWhereInput> | null
   district?: Prisma.XOR<Prisma.DistrictNullableScalarRelationFilter, Prisma.DistrictWhereInput> | null
+  tehsil?: Prisma.XOR<Prisma.TehsilNullableScalarRelationFilter, Prisma.TehsilWhereInput> | null
   assignedTasks?: Prisma.WorkflowTaskListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
@@ -243,18 +268,22 @@ export type UserWhereInput = {
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
+  aadharId?: Prisma.SortOrderInput | Prisma.SortOrder
+  mobileNo?: Prisma.SortOrder
+  dob?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   stateId?: Prisma.SortOrderInput | Prisma.SortOrder
   districtId?: Prisma.SortOrderInput | Prisma.SortOrder
+  tehsilId?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
   state?: Prisma.StateOrderByWithRelationInput
   district?: Prisma.DistrictOrderByWithRelationInput
+  tehsil?: Prisma.TehsilOrderByWithRelationInput
   assignedTasks?: Prisma.WorkflowTaskOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
@@ -264,38 +293,45 @@ export type UserOrderByWithRelationInput = {
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  email?: string
+  aadharId?: string
+  mobileNo?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
+  dob?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   passwordHash?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   organizationId?: Prisma.StringNullableFilter<"User"> | string | null
   stateId?: Prisma.StringNullableFilter<"User"> | string | null
   districtId?: Prisma.StringNullableFilter<"User"> | string | null
+  tehsilId?: Prisma.StringNullableFilter<"User"> | string | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationNullableScalarRelationFilter, Prisma.OrganizationWhereInput> | null
   state?: Prisma.XOR<Prisma.StateNullableScalarRelationFilter, Prisma.StateWhereInput> | null
   district?: Prisma.XOR<Prisma.DistrictNullableScalarRelationFilter, Prisma.DistrictWhereInput> | null
+  tehsil?: Prisma.XOR<Prisma.TehsilNullableScalarRelationFilter, Prisma.TehsilWhereInput> | null
   assignedTasks?: Prisma.WorkflowTaskListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   uploadedDocuments?: Prisma.DocumentListRelationFilter
   possessionRecords?: Prisma.PossessionRecordListRelationFilter
-}, "id" | "email">
+}, "id" | "aadharId" | "mobileNo">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
+  aadharId?: Prisma.SortOrderInput | Prisma.SortOrder
+  mobileNo?: Prisma.SortOrder
+  dob?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   organizationId?: Prisma.SortOrderInput | Prisma.SortOrder
   stateId?: Prisma.SortOrderInput | Prisma.SortOrder
   districtId?: Prisma.SortOrderInput | Prisma.SortOrder
+  tehsilId?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -310,12 +346,15 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
-  email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  aadharId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  mobileNo?: Prisma.StringWithAggregatesFilter<"User"> | string
+  dob?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   organizationId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   stateId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   districtId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  tehsilId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -324,7 +363,9 @@ export type UserScalarWhereWithAggregatesInput = {
 export type UserCreateInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   isActive?: boolean
@@ -333,6 +374,7 @@ export type UserCreateInput = {
   organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
   state?: Prisma.StateCreateNestedOneWithoutUsersInput
   district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  tehsil?: Prisma.TehsilCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.WorkflowTaskCreateNestedManyWithoutAssignedToInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
@@ -343,12 +385,15 @@ export type UserCreateInput = {
 export type UserUncheckedCreateInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   stateId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -362,7 +407,9 @@ export type UserUncheckedCreateInput = {
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -371,6 +418,7 @@ export type UserUpdateInput = {
   organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
   state?: Prisma.StateUpdateOneWithoutUsersNestedInput
   district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  tehsil?: Prisma.TehsilUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.WorkflowTaskUpdateManyWithoutAssignedToNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
@@ -381,12 +429,15 @@ export type UserUpdateInput = {
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -400,12 +451,15 @@ export type UserUncheckedUpdateInput = {
 export type UserCreateManyInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   stateId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -414,7 +468,9 @@ export type UserCreateManyInput = {
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -425,12 +481,15 @@ export type UserUpdateManyMutationInput = {
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -449,12 +508,15 @@ export type UserOrderByRelationAggregateInput = {
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
+  aadharId?: Prisma.SortOrder
+  mobileNo?: Prisma.SortOrder
+  dob?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   stateId?: Prisma.SortOrder
   districtId?: Prisma.SortOrder
+  tehsilId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -463,12 +525,15 @@ export type UserCountOrderByAggregateInput = {
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
+  aadharId?: Prisma.SortOrder
+  mobileNo?: Prisma.SortOrder
+  dob?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   stateId?: Prisma.SortOrder
   districtId?: Prisma.SortOrder
+  tehsilId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -477,12 +542,15 @@ export type UserMaxOrderByAggregateInput = {
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
+  aadharId?: Prisma.SortOrder
+  mobileNo?: Prisma.SortOrder
+  dob?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   stateId?: Prisma.SortOrder
   districtId?: Prisma.SortOrder
+  tehsilId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -624,6 +692,52 @@ export type UserUncheckedUpdateManyWithoutDistrictNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserCreateNestedManyWithoutTehsilInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTehsilInput, Prisma.UserUncheckedCreateWithoutTehsilInput> | Prisma.UserCreateWithoutTehsilInput[] | Prisma.UserUncheckedCreateWithoutTehsilInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTehsilInput | Prisma.UserCreateOrConnectWithoutTehsilInput[]
+  createMany?: Prisma.UserCreateManyTehsilInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutTehsilInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTehsilInput, Prisma.UserUncheckedCreateWithoutTehsilInput> | Prisma.UserCreateWithoutTehsilInput[] | Prisma.UserUncheckedCreateWithoutTehsilInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTehsilInput | Prisma.UserCreateOrConnectWithoutTehsilInput[]
+  createMany?: Prisma.UserCreateManyTehsilInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutTehsilNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTehsilInput, Prisma.UserUncheckedCreateWithoutTehsilInput> | Prisma.UserCreateWithoutTehsilInput[] | Prisma.UserUncheckedCreateWithoutTehsilInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTehsilInput | Prisma.UserCreateOrConnectWithoutTehsilInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutTehsilInput | Prisma.UserUpsertWithWhereUniqueWithoutTehsilInput[]
+  createMany?: Prisma.UserCreateManyTehsilInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutTehsilInput | Prisma.UserUpdateWithWhereUniqueWithoutTehsilInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutTehsilInput | Prisma.UserUpdateManyWithWhereWithoutTehsilInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutTehsilNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTehsilInput, Prisma.UserUncheckedCreateWithoutTehsilInput> | Prisma.UserCreateWithoutTehsilInput[] | Prisma.UserUncheckedCreateWithoutTehsilInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTehsilInput | Prisma.UserCreateOrConnectWithoutTehsilInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutTehsilInput | Prisma.UserUpsertWithWhereUniqueWithoutTehsilInput[]
+  createMany?: Prisma.UserCreateManyTehsilInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutTehsilInput | Prisma.UserUpdateWithWhereUniqueWithoutTehsilInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutTehsilInput | Prisma.UserUpdateManyWithWhereWithoutTehsilInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type EnumRoleFieldUpdateOperationsInput = {
   set?: $Enums.Role
 }
@@ -713,7 +827,9 @@ export type UserUpdateOneWithoutAuditLogsNestedInput = {
 export type UserCreateWithoutOrganizationInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   isActive?: boolean
@@ -721,6 +837,7 @@ export type UserCreateWithoutOrganizationInput = {
   updatedAt?: Date | string
   state?: Prisma.StateCreateNestedOneWithoutUsersInput
   district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  tehsil?: Prisma.TehsilCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.WorkflowTaskCreateNestedManyWithoutAssignedToInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
@@ -731,11 +848,14 @@ export type UserCreateWithoutOrganizationInput = {
 export type UserUncheckedCreateWithoutOrganizationInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   stateId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -778,12 +898,15 @@ export type UserScalarWhereInput = {
   NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
-  email?: Prisma.StringFilter<"User"> | string
+  aadharId?: Prisma.StringNullableFilter<"User"> | string | null
+  mobileNo?: Prisma.StringFilter<"User"> | string
+  dob?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   passwordHash?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   organizationId?: Prisma.StringNullableFilter<"User"> | string | null
   stateId?: Prisma.StringNullableFilter<"User"> | string | null
   districtId?: Prisma.StringNullableFilter<"User"> | string | null
+  tehsilId?: Prisma.StringNullableFilter<"User"> | string | null
   isActive?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -792,7 +915,9 @@ export type UserScalarWhereInput = {
 export type UserCreateWithoutStateInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   isActive?: boolean
@@ -800,6 +925,7 @@ export type UserCreateWithoutStateInput = {
   updatedAt?: Date | string
   organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
   district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  tehsil?: Prisma.TehsilCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.WorkflowTaskCreateNestedManyWithoutAssignedToInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
@@ -810,11 +936,14 @@ export type UserCreateWithoutStateInput = {
 export type UserUncheckedCreateWithoutStateInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -854,7 +983,9 @@ export type UserUpdateManyWithWhereWithoutStateInput = {
 export type UserCreateWithoutDistrictInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   isActive?: boolean
@@ -862,6 +993,7 @@ export type UserCreateWithoutDistrictInput = {
   updatedAt?: Date | string
   organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
   state?: Prisma.StateCreateNestedOneWithoutUsersInput
+  tehsil?: Prisma.TehsilCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.WorkflowTaskCreateNestedManyWithoutAssignedToInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
@@ -872,11 +1004,14 @@ export type UserCreateWithoutDistrictInput = {
 export type UserUncheckedCreateWithoutDistrictInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   stateId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -913,10 +1048,12 @@ export type UserUpdateManyWithWhereWithoutDistrictInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutDistrictInput>
 }
 
-export type UserCreateWithoutAssignedTasksInput = {
+export type UserCreateWithoutTehsilInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   isActive?: boolean
@@ -925,6 +1062,75 @@ export type UserCreateWithoutAssignedTasksInput = {
   organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
   state?: Prisma.StateCreateNestedOneWithoutUsersInput
   district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  assignedTasks?: Prisma.WorkflowTaskCreateNestedManyWithoutAssignedToInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+}
+
+export type UserUncheckedCreateWithoutTehsilInput = {
+  id?: string
+  name: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
+  passwordHash: string
+  role: $Enums.Role
+  organizationId?: string | null
+  stateId?: string | null
+  districtId?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedTasks?: Prisma.WorkflowTaskUncheckedCreateNestedManyWithoutAssignedToInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+}
+
+export type UserCreateOrConnectWithoutTehsilInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTehsilInput, Prisma.UserUncheckedCreateWithoutTehsilInput>
+}
+
+export type UserCreateManyTehsilInputEnvelope = {
+  data: Prisma.UserCreateManyTehsilInput | Prisma.UserCreateManyTehsilInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutTehsilInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTehsilInput, Prisma.UserUncheckedUpdateWithoutTehsilInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTehsilInput, Prisma.UserUncheckedCreateWithoutTehsilInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutTehsilInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTehsilInput, Prisma.UserUncheckedUpdateWithoutTehsilInput>
+}
+
+export type UserUpdateManyWithWhereWithoutTehsilInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutTehsilInput>
+}
+
+export type UserCreateWithoutAssignedTasksInput = {
+  id?: string
+  name: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
+  passwordHash: string
+  role: $Enums.Role
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  state?: Prisma.StateCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  tehsil?: Prisma.TehsilCreateNestedOneWithoutUsersInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
@@ -934,12 +1140,15 @@ export type UserCreateWithoutAssignedTasksInput = {
 export type UserUncheckedCreateWithoutAssignedTasksInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   stateId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -968,7 +1177,9 @@ export type UserUpdateToOneWithWhereWithoutAssignedTasksInput = {
 export type UserUpdateWithoutAssignedTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -977,6 +1188,7 @@ export type UserUpdateWithoutAssignedTasksInput = {
   organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
   state?: Prisma.StateUpdateOneWithoutUsersNestedInput
   district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  tehsil?: Prisma.TehsilUpdateOneWithoutUsersNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
@@ -986,12 +1198,15 @@ export type UserUpdateWithoutAssignedTasksInput = {
 export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1004,7 +1219,9 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
 export type UserCreateWithoutPossessionRecordsInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   isActive?: boolean
@@ -1013,6 +1230,7 @@ export type UserCreateWithoutPossessionRecordsInput = {
   organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
   state?: Prisma.StateCreateNestedOneWithoutUsersInput
   district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  tehsil?: Prisma.TehsilCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.WorkflowTaskCreateNestedManyWithoutAssignedToInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
@@ -1022,12 +1240,15 @@ export type UserCreateWithoutPossessionRecordsInput = {
 export type UserUncheckedCreateWithoutPossessionRecordsInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   stateId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1056,7 +1277,9 @@ export type UserUpdateToOneWithWhereWithoutPossessionRecordsInput = {
 export type UserUpdateWithoutPossessionRecordsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1065,6 +1288,7 @@ export type UserUpdateWithoutPossessionRecordsInput = {
   organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
   state?: Prisma.StateUpdateOneWithoutUsersNestedInput
   district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  tehsil?: Prisma.TehsilUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.WorkflowTaskUpdateManyWithoutAssignedToNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
@@ -1074,12 +1298,15 @@ export type UserUpdateWithoutPossessionRecordsInput = {
 export type UserUncheckedUpdateWithoutPossessionRecordsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1092,7 +1319,9 @@ export type UserUncheckedUpdateWithoutPossessionRecordsInput = {
 export type UserCreateWithoutUploadedDocumentsInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   isActive?: boolean
@@ -1101,6 +1330,7 @@ export type UserCreateWithoutUploadedDocumentsInput = {
   organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
   state?: Prisma.StateCreateNestedOneWithoutUsersInput
   district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  tehsil?: Prisma.TehsilCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.WorkflowTaskCreateNestedManyWithoutAssignedToInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
@@ -1110,12 +1340,15 @@ export type UserCreateWithoutUploadedDocumentsInput = {
 export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   stateId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1144,7 +1377,9 @@ export type UserUpdateToOneWithWhereWithoutUploadedDocumentsInput = {
 export type UserUpdateWithoutUploadedDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1153,6 +1388,7 @@ export type UserUpdateWithoutUploadedDocumentsInput = {
   organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
   state?: Prisma.StateUpdateOneWithoutUsersNestedInput
   district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  tehsil?: Prisma.TehsilUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.WorkflowTaskUpdateManyWithoutAssignedToNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
@@ -1162,12 +1398,15 @@ export type UserUpdateWithoutUploadedDocumentsInput = {
 export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1180,7 +1419,9 @@ export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
 export type UserCreateWithoutNotificationsInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   isActive?: boolean
@@ -1189,6 +1430,7 @@ export type UserCreateWithoutNotificationsInput = {
   organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
   state?: Prisma.StateCreateNestedOneWithoutUsersInput
   district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  tehsil?: Prisma.TehsilCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.WorkflowTaskCreateNestedManyWithoutAssignedToInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
@@ -1198,12 +1440,15 @@ export type UserCreateWithoutNotificationsInput = {
 export type UserUncheckedCreateWithoutNotificationsInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   stateId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1232,7 +1477,9 @@ export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
 export type UserUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1241,6 +1488,7 @@ export type UserUpdateWithoutNotificationsInput = {
   organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
   state?: Prisma.StateUpdateOneWithoutUsersNestedInput
   district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  tehsil?: Prisma.TehsilUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.WorkflowTaskUpdateManyWithoutAssignedToNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
@@ -1250,12 +1498,15 @@ export type UserUpdateWithoutNotificationsInput = {
 export type UserUncheckedUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1268,7 +1519,9 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
 export type UserCreateWithoutAuditLogsInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   isActive?: boolean
@@ -1277,6 +1530,7 @@ export type UserCreateWithoutAuditLogsInput = {
   organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
   state?: Prisma.StateCreateNestedOneWithoutUsersInput
   district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  tehsil?: Prisma.TehsilCreateNestedOneWithoutUsersInput
   assignedTasks?: Prisma.WorkflowTaskCreateNestedManyWithoutAssignedToInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
@@ -1286,12 +1540,15 @@ export type UserCreateWithoutAuditLogsInput = {
 export type UserUncheckedCreateWithoutAuditLogsInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   stateId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1320,7 +1577,9 @@ export type UserUpdateToOneWithWhereWithoutAuditLogsInput = {
 export type UserUpdateWithoutAuditLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1329,6 +1588,7 @@ export type UserUpdateWithoutAuditLogsInput = {
   organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
   state?: Prisma.StateUpdateOneWithoutUsersNestedInput
   district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  tehsil?: Prisma.TehsilUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.WorkflowTaskUpdateManyWithoutAssignedToNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
@@ -1338,12 +1598,15 @@ export type UserUpdateWithoutAuditLogsInput = {
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1356,11 +1619,14 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
 export type UserCreateManyOrganizationInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   stateId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1369,7 +1635,9 @@ export type UserCreateManyOrganizationInput = {
 export type UserUpdateWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1377,6 +1645,7 @@ export type UserUpdateWithoutOrganizationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state?: Prisma.StateUpdateOneWithoutUsersNestedInput
   district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  tehsil?: Prisma.TehsilUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.WorkflowTaskUpdateManyWithoutAssignedToNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
@@ -1387,11 +1656,14 @@ export type UserUpdateWithoutOrganizationInput = {
 export type UserUncheckedUpdateWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1405,11 +1677,14 @@ export type UserUncheckedUpdateWithoutOrganizationInput = {
 export type UserUncheckedUpdateManyWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1418,11 +1693,14 @@ export type UserUncheckedUpdateManyWithoutOrganizationInput = {
 export type UserCreateManyStateInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   districtId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1431,7 +1709,9 @@ export type UserCreateManyStateInput = {
 export type UserUpdateWithoutStateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1439,6 +1719,7 @@ export type UserUpdateWithoutStateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
   district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  tehsil?: Prisma.TehsilUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.WorkflowTaskUpdateManyWithoutAssignedToNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
@@ -1449,11 +1730,14 @@ export type UserUpdateWithoutStateInput = {
 export type UserUncheckedUpdateWithoutStateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1467,11 +1751,14 @@ export type UserUncheckedUpdateWithoutStateInput = {
 export type UserUncheckedUpdateManyWithoutStateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1480,11 +1767,14 @@ export type UserUncheckedUpdateManyWithoutStateInput = {
 export type UserCreateManyDistrictInput = {
   id?: string
   name: string
-  email: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
   passwordHash: string
   role: $Enums.Role
   organizationId?: string | null
   stateId?: string | null
+  tehsilId?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1493,7 +1783,9 @@ export type UserCreateManyDistrictInput = {
 export type UserUpdateWithoutDistrictInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1501,6 +1793,7 @@ export type UserUpdateWithoutDistrictInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
   state?: Prisma.StateUpdateOneWithoutUsersNestedInput
+  tehsil?: Prisma.TehsilUpdateOneWithoutUsersNestedInput
   assignedTasks?: Prisma.WorkflowTaskUpdateManyWithoutAssignedToNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
@@ -1511,11 +1804,14 @@ export type UserUpdateWithoutDistrictInput = {
 export type UserUncheckedUpdateWithoutDistrictInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1529,11 +1825,88 @@ export type UserUncheckedUpdateWithoutDistrictInput = {
 export type UserUncheckedUpdateManyWithoutDistrictInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserCreateManyTehsilInput = {
+  id?: string
+  name: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
+  passwordHash: string
+  role: $Enums.Role
+  organizationId?: string | null
+  stateId?: string | null
+  districtId?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserUpdateWithoutTehsilInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
+  state?: Prisma.StateUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  assignedTasks?: Prisma.WorkflowTaskUpdateManyWithoutAssignedToNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTehsilInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedTasks?: Prisma.WorkflowTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutTehsilInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1609,18 +1982,22 @@ export type UserCountOutputTypeCountPossessionRecordsArgs<ExtArgs extends runtim
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  email?: boolean
+  aadharId?: boolean
+  mobileNo?: boolean
+  dob?: boolean
   passwordHash?: boolean
   role?: boolean
   organizationId?: boolean
   stateId?: boolean
   districtId?: boolean
+  tehsilId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
   state?: boolean | Prisma.User$stateArgs<ExtArgs>
   district?: boolean | Prisma.User$districtArgs<ExtArgs>
+  tehsil?: boolean | Prisma.User$tehsilArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
@@ -1632,56 +2009,68 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  email?: boolean
+  aadharId?: boolean
+  mobileNo?: boolean
+  dob?: boolean
   passwordHash?: boolean
   role?: boolean
   organizationId?: boolean
   stateId?: boolean
   districtId?: boolean
+  tehsilId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
   state?: boolean | Prisma.User$stateArgs<ExtArgs>
   district?: boolean | Prisma.User$districtArgs<ExtArgs>
+  tehsil?: boolean | Prisma.User$tehsilArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  email?: boolean
+  aadharId?: boolean
+  mobileNo?: boolean
+  dob?: boolean
   passwordHash?: boolean
   role?: boolean
   organizationId?: boolean
   stateId?: boolean
   districtId?: boolean
+  tehsilId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
   state?: boolean | Prisma.User$stateArgs<ExtArgs>
   district?: boolean | Prisma.User$districtArgs<ExtArgs>
+  tehsil?: boolean | Prisma.User$tehsilArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   name?: boolean
-  email?: boolean
+  aadharId?: boolean
+  mobileNo?: boolean
+  dob?: boolean
   passwordHash?: boolean
   role?: boolean
   organizationId?: boolean
   stateId?: boolean
   districtId?: boolean
+  tehsilId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "passwordHash" | "role" | "organizationId" | "stateId" | "districtId" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "aadharId" | "mobileNo" | "dob" | "passwordHash" | "role" | "organizationId" | "stateId" | "districtId" | "tehsilId" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
   state?: boolean | Prisma.User$stateArgs<ExtArgs>
   district?: boolean | Prisma.User$districtArgs<ExtArgs>
+  tehsil?: boolean | Prisma.User$tehsilArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
@@ -1693,11 +2082,13 @@ export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
   state?: boolean | Prisma.User$stateArgs<ExtArgs>
   district?: boolean | Prisma.User$districtArgs<ExtArgs>
+  tehsil?: boolean | Prisma.User$tehsilArgs<ExtArgs>
 }
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.User$organizationArgs<ExtArgs>
   state?: boolean | Prisma.User$stateArgs<ExtArgs>
   district?: boolean | Prisma.User$districtArgs<ExtArgs>
+  tehsil?: boolean | Prisma.User$tehsilArgs<ExtArgs>
 }
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1706,6 +2097,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     organization: Prisma.$OrganizationPayload<ExtArgs> | null
     state: Prisma.$StatePayload<ExtArgs> | null
     district: Prisma.$DistrictPayload<ExtArgs> | null
+    tehsil: Prisma.$TehsilPayload<ExtArgs> | null
     assignedTasks: Prisma.$WorkflowTaskPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
@@ -1715,12 +2107,15 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    email: string
+    aadharId: string | null
+    mobileNo: string
+    dob: Date | null
     passwordHash: string
     role: $Enums.Role
     organizationId: string | null
     stateId: string | null
     districtId: string | null
+    tehsilId: string | null
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -2121,6 +2516,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   organization<T extends Prisma.User$organizationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$organizationArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   state<T extends Prisma.User$stateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stateArgs<ExtArgs>>): Prisma.Prisma__StateClient<runtime.Types.Result.GetResult<Prisma.$StatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   district<T extends Prisma.User$districtArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$districtArgs<ExtArgs>>): Prisma.Prisma__DistrictClient<runtime.Types.Result.GetResult<Prisma.$DistrictPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tehsil<T extends Prisma.User$tehsilArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tehsilArgs<ExtArgs>>): Prisma.Prisma__TehsilClient<runtime.Types.Result.GetResult<Prisma.$TehsilPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   assignedTasks<T extends Prisma.User$assignedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkflowTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2157,12 +2553,15 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
-  readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly aadharId: Prisma.FieldRef<"User", 'String'>
+  readonly mobileNo: Prisma.FieldRef<"User", 'String'>
+  readonly dob: Prisma.FieldRef<"User", 'DateTime'>
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly organizationId: Prisma.FieldRef<"User", 'String'>
   readonly stateId: Prisma.FieldRef<"User", 'String'>
   readonly districtId: Prisma.FieldRef<"User", 'String'>
+  readonly tehsilId: Prisma.FieldRef<"User", 'String'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -2621,6 +3020,25 @@ export type User$districtArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   include?: Prisma.DistrictInclude<ExtArgs> | null
   where?: Prisma.DistrictWhereInput
+}
+
+/**
+ * User.tehsil
+ */
+export type User$tehsilArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tehsil
+   */
+  select?: Prisma.TehsilSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tehsil
+   */
+  omit?: Prisma.TehsilOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TehsilInclude<ExtArgs> | null
+  where?: Prisma.TehsilWhereInput
 }
 
 /**

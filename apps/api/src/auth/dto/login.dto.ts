@@ -1,11 +1,17 @@
-import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsString,
+  Matches,
+  MinLength,
+} from 'class-validator';
 
 export class LoginDto {
-  @IsEmail()
-  email!: string;
+  @IsString()
+  @Matches(/^\d{12}$/, {
+    message: 'aadharId must be a valid 12-digit Aadhaar number',
+  })
+  aadharId!: string;
 
   @IsString()
-  @MinLength(1)
-  @MaxLength(128)
+  @MinLength(8)
   password!: string;
 }

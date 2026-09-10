@@ -141,3 +141,12 @@ def score(payload: RiskScoreRequest) -> RiskScoreResponse:
         model='ForestGreen Random Forest Ensemble',
         dataset='scikit-learn California Housing (online fetch)',
     )
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
+    )

@@ -54,6 +54,7 @@ export const ModelName = {
   Organization: 'Organization',
   State: 'State',
   District: 'District',
+  Tehsil: 'Tehsil',
   User: 'User',
   Project: 'Project',
   LandParcel: 'LandParcel',
@@ -121,15 +122,30 @@ export const DistrictScalarFieldEnum = {
 export type DistrictScalarFieldEnum = (typeof DistrictScalarFieldEnum)[keyof typeof DistrictScalarFieldEnum]
 
 
+export const TehsilScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  districtId: 'districtId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TehsilScalarFieldEnum = (typeof TehsilScalarFieldEnum)[keyof typeof TehsilScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  email: 'email',
+  aadharId: 'aadharId',
+  mobileNo: 'mobileNo',
+  dob: 'dob',
   passwordHash: 'passwordHash',
   role: 'role',
   organizationId: 'organizationId',
   stateId: 'stateId',
   districtId: 'districtId',
+  tehsilId: 'tehsilId',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

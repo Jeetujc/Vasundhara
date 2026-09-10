@@ -57,6 +57,11 @@ export type State = Prisma.StateModel
  */
 export type District = Prisma.DistrictModel
 /**
+ * Model Tehsil
+ * 
+ */
+export type Tehsil = Prisma.TehsilModel
+/**
  * Model User
  * 
  */

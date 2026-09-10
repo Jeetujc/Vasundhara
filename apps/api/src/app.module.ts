@@ -11,6 +11,7 @@ import { NotificationsModule } from './notifications/notifications.module.js';
 import { PossessionModule } from './possession/possession.module.js';
 import { RrModule } from './rr/rr.module.js';
 import { AuditModule } from './audit/audit.module.js';
+import { LocationsModule } from './location/location.module.js';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AuditModule } from './audit/audit.module.js';
     RrModule,
     NotificationsModule,
     AuditModule,
+    LocationsModule
   ],
 })
 export class AppModule {

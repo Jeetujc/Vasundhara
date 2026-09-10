@@ -193,6 +193,7 @@ export type DistrictWhereInput = {
   state?: Prisma.XOR<Prisma.StateScalarRelationFilter, Prisma.StateWhereInput>
   users?: Prisma.UserListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  tehsils?: Prisma.TehsilListRelationFilter
 }
 
 export type DistrictOrderByWithRelationInput = {
@@ -205,6 +206,7 @@ export type DistrictOrderByWithRelationInput = {
   state?: Prisma.StateOrderByWithRelationInput
   users?: Prisma.UserOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
+  tehsils?: Prisma.TehsilOrderByRelationAggregateInput
 }
 
 export type DistrictWhereUniqueInput = Prisma.AtLeast<{
@@ -221,6 +223,7 @@ export type DistrictWhereUniqueInput = Prisma.AtLeast<{
   state?: Prisma.XOR<Prisma.StateScalarRelationFilter, Prisma.StateWhereInput>
   users?: Prisma.UserListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  tehsils?: Prisma.TehsilListRelationFilter
 }, "id" | "stateId_code">
 
 export type DistrictOrderByWithAggregationInput = {
@@ -256,6 +259,7 @@ export type DistrictCreateInput = {
   state: Prisma.StateCreateNestedOneWithoutDistrictsInput
   users?: Prisma.UserCreateNestedManyWithoutDistrictInput
   projects?: Prisma.ProjectCreateNestedManyWithoutDistrictInput
+  tehsils?: Prisma.TehsilCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictUncheckedCreateInput = {
@@ -267,6 +271,7 @@ export type DistrictUncheckedCreateInput = {
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutDistrictInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutDistrictInput
+  tehsils?: Prisma.TehsilUncheckedCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictUpdateInput = {
@@ -278,6 +283,7 @@ export type DistrictUpdateInput = {
   state?: Prisma.StateUpdateOneRequiredWithoutDistrictsNestedInput
   users?: Prisma.UserUpdateManyWithoutDistrictNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutDistrictNestedInput
+  tehsils?: Prisma.TehsilUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictUncheckedUpdateInput = {
@@ -289,6 +295,7 @@ export type DistrictUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutDistrictNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutDistrictNestedInput
+  tehsils?: Prisma.TehsilUncheckedUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictCreateManyInput = {
@@ -359,14 +366,14 @@ export type DistrictMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type DistrictNullableScalarRelationFilter = {
-  is?: Prisma.DistrictWhereInput | null
-  isNot?: Prisma.DistrictWhereInput | null
-}
-
 export type DistrictScalarRelationFilter = {
   is?: Prisma.DistrictWhereInput
   isNot?: Prisma.DistrictWhereInput
+}
+
+export type DistrictNullableScalarRelationFilter = {
+  is?: Prisma.DistrictWhereInput | null
+  isNot?: Prisma.DistrictWhereInput | null
 }
 
 export type DistrictCreateNestedManyWithoutStateInput = {
@@ -411,6 +418,20 @@ export type DistrictUncheckedUpdateManyWithoutStateNestedInput = {
   deleteMany?: Prisma.DistrictScalarWhereInput | Prisma.DistrictScalarWhereInput[]
 }
 
+export type DistrictCreateNestedOneWithoutTehsilsInput = {
+  create?: Prisma.XOR<Prisma.DistrictCreateWithoutTehsilsInput, Prisma.DistrictUncheckedCreateWithoutTehsilsInput>
+  connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutTehsilsInput
+  connect?: Prisma.DistrictWhereUniqueInput
+}
+
+export type DistrictUpdateOneRequiredWithoutTehsilsNestedInput = {
+  create?: Prisma.XOR<Prisma.DistrictCreateWithoutTehsilsInput, Prisma.DistrictUncheckedCreateWithoutTehsilsInput>
+  connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutTehsilsInput
+  upsert?: Prisma.DistrictUpsertWithoutTehsilsInput
+  connect?: Prisma.DistrictWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DistrictUpdateToOneWithWhereWithoutTehsilsInput, Prisma.DistrictUpdateWithoutTehsilsInput>, Prisma.DistrictUncheckedUpdateWithoutTehsilsInput>
+}
+
 export type DistrictCreateNestedOneWithoutUsersInput = {
   create?: Prisma.XOR<Prisma.DistrictCreateWithoutUsersInput, Prisma.DistrictUncheckedCreateWithoutUsersInput>
   connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutUsersInput
@@ -449,6 +470,7 @@ export type DistrictCreateWithoutStateInput = {
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutDistrictInput
   projects?: Prisma.ProjectCreateNestedManyWithoutDistrictInput
+  tehsils?: Prisma.TehsilCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictUncheckedCreateWithoutStateInput = {
@@ -459,6 +481,7 @@ export type DistrictUncheckedCreateWithoutStateInput = {
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutDistrictInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutDistrictInput
+  tehsils?: Prisma.TehsilUncheckedCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictCreateOrConnectWithoutStateInput = {
@@ -499,6 +522,66 @@ export type DistrictScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"District"> | Date | string
 }
 
+export type DistrictCreateWithoutTehsilsInput = {
+  id?: string
+  name: string
+  code: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state: Prisma.StateCreateNestedOneWithoutDistrictsInput
+  users?: Prisma.UserCreateNestedManyWithoutDistrictInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutDistrictInput
+}
+
+export type DistrictUncheckedCreateWithoutTehsilsInput = {
+  id?: string
+  name: string
+  code: string
+  stateId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutDistrictInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutDistrictInput
+}
+
+export type DistrictCreateOrConnectWithoutTehsilsInput = {
+  where: Prisma.DistrictWhereUniqueInput
+  create: Prisma.XOR<Prisma.DistrictCreateWithoutTehsilsInput, Prisma.DistrictUncheckedCreateWithoutTehsilsInput>
+}
+
+export type DistrictUpsertWithoutTehsilsInput = {
+  update: Prisma.XOR<Prisma.DistrictUpdateWithoutTehsilsInput, Prisma.DistrictUncheckedUpdateWithoutTehsilsInput>
+  create: Prisma.XOR<Prisma.DistrictCreateWithoutTehsilsInput, Prisma.DistrictUncheckedCreateWithoutTehsilsInput>
+  where?: Prisma.DistrictWhereInput
+}
+
+export type DistrictUpdateToOneWithWhereWithoutTehsilsInput = {
+  where?: Prisma.DistrictWhereInput
+  data: Prisma.XOR<Prisma.DistrictUpdateWithoutTehsilsInput, Prisma.DistrictUncheckedUpdateWithoutTehsilsInput>
+}
+
+export type DistrictUpdateWithoutTehsilsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state?: Prisma.StateUpdateOneRequiredWithoutDistrictsNestedInput
+  users?: Prisma.UserUpdateManyWithoutDistrictNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutDistrictNestedInput
+}
+
+export type DistrictUncheckedUpdateWithoutTehsilsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  stateId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutDistrictNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutDistrictNestedInput
+}
+
 export type DistrictCreateWithoutUsersInput = {
   id?: string
   name: string
@@ -507,6 +590,7 @@ export type DistrictCreateWithoutUsersInput = {
   updatedAt?: Date | string
   state: Prisma.StateCreateNestedOneWithoutDistrictsInput
   projects?: Prisma.ProjectCreateNestedManyWithoutDistrictInput
+  tehsils?: Prisma.TehsilCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictUncheckedCreateWithoutUsersInput = {
@@ -517,6 +601,7 @@ export type DistrictUncheckedCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutDistrictInput
+  tehsils?: Prisma.TehsilUncheckedCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictCreateOrConnectWithoutUsersInput = {
@@ -543,6 +628,7 @@ export type DistrictUpdateWithoutUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state?: Prisma.StateUpdateOneRequiredWithoutDistrictsNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutDistrictNestedInput
+  tehsils?: Prisma.TehsilUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictUncheckedUpdateWithoutUsersInput = {
@@ -553,6 +639,7 @@ export type DistrictUncheckedUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutDistrictNestedInput
+  tehsils?: Prisma.TehsilUncheckedUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictCreateWithoutProjectsInput = {
@@ -563,6 +650,7 @@ export type DistrictCreateWithoutProjectsInput = {
   updatedAt?: Date | string
   state: Prisma.StateCreateNestedOneWithoutDistrictsInput
   users?: Prisma.UserCreateNestedManyWithoutDistrictInput
+  tehsils?: Prisma.TehsilCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictUncheckedCreateWithoutProjectsInput = {
@@ -573,6 +661,7 @@ export type DistrictUncheckedCreateWithoutProjectsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutDistrictInput
+  tehsils?: Prisma.TehsilUncheckedCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictCreateOrConnectWithoutProjectsInput = {
@@ -599,6 +688,7 @@ export type DistrictUpdateWithoutProjectsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state?: Prisma.StateUpdateOneRequiredWithoutDistrictsNestedInput
   users?: Prisma.UserUpdateManyWithoutDistrictNestedInput
+  tehsils?: Prisma.TehsilUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictUncheckedUpdateWithoutProjectsInput = {
@@ -609,6 +699,7 @@ export type DistrictUncheckedUpdateWithoutProjectsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutDistrictNestedInput
+  tehsils?: Prisma.TehsilUncheckedUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictCreateManyStateInput = {
@@ -627,6 +718,7 @@ export type DistrictUpdateWithoutStateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutDistrictNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutDistrictNestedInput
+  tehsils?: Prisma.TehsilUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictUncheckedUpdateWithoutStateInput = {
@@ -637,6 +729,7 @@ export type DistrictUncheckedUpdateWithoutStateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutDistrictNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutDistrictNestedInput
+  tehsils?: Prisma.TehsilUncheckedUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictUncheckedUpdateManyWithoutStateInput = {
@@ -655,11 +748,13 @@ export type DistrictUncheckedUpdateManyWithoutStateInput = {
 export type DistrictCountOutputType = {
   users: number
   projects: number
+  tehsils: number
 }
 
 export type DistrictCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | DistrictCountOutputTypeCountUsersArgs
   projects?: boolean | DistrictCountOutputTypeCountProjectsArgs
+  tehsils?: boolean | DistrictCountOutputTypeCountTehsilsArgs
 }
 
 /**
@@ -686,6 +781,13 @@ export type DistrictCountOutputTypeCountProjectsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.ProjectWhereInput
 }
 
+/**
+ * DistrictCountOutputType without action
+ */
+export type DistrictCountOutputTypeCountTehsilsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TehsilWhereInput
+}
+
 
 export type DistrictSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -697,6 +799,7 @@ export type DistrictSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
   users?: boolean | Prisma.District$usersArgs<ExtArgs>
   projects?: boolean | Prisma.District$projectsArgs<ExtArgs>
+  tehsils?: boolean | Prisma.District$tehsilsArgs<ExtArgs>
   _count?: boolean | Prisma.DistrictCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["district"]>
 
@@ -734,6 +837,7 @@ export type DistrictInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   state?: boolean | Prisma.StateDefaultArgs<ExtArgs>
   users?: boolean | Prisma.District$usersArgs<ExtArgs>
   projects?: boolean | Prisma.District$projectsArgs<ExtArgs>
+  tehsils?: boolean | Prisma.District$tehsilsArgs<ExtArgs>
   _count?: boolean | Prisma.DistrictCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DistrictIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -749,6 +853,7 @@ export type $DistrictPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     state: Prisma.$StatePayload<ExtArgs>
     users: Prisma.$UserPayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
+    tehsils: Prisma.$TehsilPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1154,6 +1259,7 @@ export interface Prisma__DistrictClient<T, Null = never, ExtArgs extends runtime
   state<T extends Prisma.StateDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StateDefaultArgs<ExtArgs>>): Prisma.Prisma__StateClient<runtime.Types.Result.GetResult<Prisma.$StatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   users<T extends Prisma.District$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.District$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.District$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.District$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tehsils<T extends Prisma.District$tehsilsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.District$tehsilsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TehsilPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1635,6 +1741,30 @@ export type District$projectsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * District.tehsils
+ */
+export type District$tehsilsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tehsil
+   */
+  select?: Prisma.TehsilSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tehsil
+   */
+  omit?: Prisma.TehsilOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TehsilInclude<ExtArgs> | null
+  where?: Prisma.TehsilWhereInput
+  orderBy?: Prisma.TehsilOrderByWithRelationInput | Prisma.TehsilOrderByWithRelationInput[]
+  cursor?: Prisma.TehsilWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TehsilScalarFieldEnum | Prisma.TehsilScalarFieldEnum[]
 }
 
 /**
