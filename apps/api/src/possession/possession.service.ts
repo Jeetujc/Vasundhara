@@ -22,7 +22,7 @@ export class PossessionService {
       include: {
         project: { select: { id: true, name: true, code: true } },
         parcel: { select: { id: true, parcelNumber: true, village: true, status: true } },
-        fieldOfficer: { select: { id: true, name: true, email: true } },
+        fieldOfficer: { select: { id: true, name: true, mobileNo: true } },
       },
       orderBy: { createdAt: 'desc' },
     });

@@ -9,6 +9,7 @@ import {
   grievanceService,
   type GrievanceItem,
 } from '../../../services/grievance.service';
+import { aiService, type AiGrievanceSuggestion } from '../../../services/ai.service';
 import { useLanguage } from '../../../context/LanguageContext';
 
 export default function GrievancePortal() {
@@ -25,6 +26,8 @@ export default function GrievancePortal() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedTicketNo, setSubmittedTicketNo] = useState('');
   const [error, setError] = useState('');
+  const [aiSuggestion, setAiSuggestion] = useState<AiGrievanceSuggestion | null>(null);
+  const [loadingAi, setLoadingAi] = useState(false);
 
   useEffect(() => {
     const loadGrievanceData = async () => {
@@ -226,17 +229,58 @@ export default function GrievancePortal() {
 
                   {/* Description */}
                   <div>
-                    <label className="block text-sm font-bold text-[#5B6472] mb-1.5">
-                      Detailed Description <span className="text-red-500">*</span>
-                    </label>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="block text-sm font-bold text-[#5B6472]">
+                        Detailed Description <span className="text-red-500">*</span>
+                      </label>
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          if (!description) {
+                            alert('Please type a brief description first.');
+                            return;
+                          }
+                          try {
+                            setLoadingAi(true);
+                            const res = await aiService.suggestGrievance(category || 'general', description);
+                            setAiSuggestion(res);
+                          } catch (e: any) {
+                            console.warn('AI suggestion error:', e);
+                          } finally {
+                            setLoadingAi(false);
+                          }
+                        }}
+                        disabled={loadingAi}
+                        className="text-xs font-bold text-[#1D5FA8] hover:text-[#122C4A] flex items-center gap-1 cursor-pointer"
+                      >
+                        ⚡ {loadingAi ? 'Checking Act...' : 'Ask AI Statutory Advice'}
+                      </button>
+                    </div>
                     <textarea
                       required
                       rows={5}
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      placeholder="Please explain the issue in detail..."
+                      placeholder="Please explain the issue in detail (e.g. 5 mature mango trees omitted from joint measurement, or bank account IFSC mismatch)..."
                       className="w-full px-4 py-3 bg-[#F8FAFC] border border-[#DDD8C8] rounded focus:outline-none focus:border-[#1D5FA8] focus:ring-1 focus:ring-[#1D5FA8] text-sm resize-y"
                     ></textarea>
+
+                    {aiSuggestion && (
+                      <div className="mt-3 bg-blue-50 border border-blue-200 rounded p-3 text-xs space-y-1">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-[#122C4A] flex items-center gap-1">
+                            🤖 AI Statutory Suggestion: {aiSuggestion.suggestedAction}
+                          </span>
+                          <span className="text-[10px] bg-red-100 text-red-800 font-bold px-2 py-0.5 rounded">
+                            Priority: {aiSuggestion.priority}
+                          </span>
+                        </div>
+                        <p className="text-gray-700">{aiSuggestion.guideline}</p>
+                        <p className="text-[10px] text-gray-500">
+                          Estimated statutory disposal: {aiSuggestion.estimatedResolutionDays} days
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* File Upload */}

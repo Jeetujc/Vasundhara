@@ -17,6 +17,8 @@ import { AdminUsersModule } from './admin/admin-user.module.js';
 import { DashboardModule } from './dashboard/dashboard.module.js';
 import { GrievancesModule } from './grievances/grievances.module.js';
 import { DocumentsModule } from './documents/documents.module.js';
+import { GisModule } from './gis/gis.module.js';
+import { AiModule } from './ai/ai.module.js';
 
 @Module({
   imports: [
@@ -40,6 +42,8 @@ import { DocumentsModule } from './documents/documents.module.js';
     DashboardModule,
     GrievancesModule,
     DocumentsModule,
+    GisModule,
+    AiModule,
   ],
 })
 export class AppModule {

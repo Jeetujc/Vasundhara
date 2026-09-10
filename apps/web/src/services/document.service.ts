@@ -19,6 +19,17 @@ export interface DocumentItem {
   };
 }
 
+export interface CreateDocumentPayload {
+  name: string;
+  storageKey: string;
+  mimeType?: string;
+  sizeBytes?: number;
+  projectId?: string;
+  parcelId?: string;
+  familyId?: string;
+  compensationId?: string;
+}
+
 export const documentService = {
   getMyDocuments: () => apiClient.get<DocumentItem[]>('/documents/mine'),
   list: (projectId?: string, parcelId?: string) => {
@@ -29,4 +40,6 @@ export const documentService = {
     return apiClient.get<DocumentItem[]>(`/documents${suffix}`);
   },
   getById: (id: string) => apiClient.get<DocumentItem>(`/documents/${id}`),
+  create: (payload: CreateDocumentPayload) => apiClient.post<DocumentItem>('/documents', payload),
+  upload: (payload: CreateDocumentPayload) => apiClient.post<DocumentItem>('/documents', payload),
 };

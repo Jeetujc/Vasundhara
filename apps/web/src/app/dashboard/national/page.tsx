@@ -167,15 +167,44 @@ Direct MoEFCC & DoLR joint review with PMO next Monday.`;
                 </div>
               </div>
 
-              <button
-                onClick={handleGenerateCabinetNote}
-                className="w-full md:w-auto flex items-center justify-center gap-2 bg-[#122C4A] text-white hover:bg-[#0B1F35] font-bold py-3 px-6 rounded-lg transition-all shadow-md whitespace-nowrap"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                {t('btn.generate_cabinet', 'Generate Cabinet Note')}
-              </button>
+              <div className="flex flex-wrap items-center gap-2">
+                <Link
+                  href="/dashboard/field"
+                  className="flex items-center justify-center gap-1.5 bg-[#B96E22] text-white hover:bg-[#965516] font-bold py-2.5 px-3.5 rounded-lg transition-all shadow-md text-xs whitespace-nowrap"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                  </svg>
+                  Field Officer Work Management
+                </Link>
+
+                <Link
+                  href="/gis"
+                  className="flex items-center justify-center gap-1.5 bg-[#1D5FA8] text-white hover:bg-[#122C4A] font-bold py-2.5 px-3.5 rounded-lg transition-all shadow-md text-xs whitespace-nowrap"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                  </svg>
+                  National GIS Masterplan
+                </Link>
+
+                <Link
+                  href="/projects"
+                  className="flex items-center justify-center gap-1.5 bg-white border border-[#DDD8C8] text-[#122C4A] hover:bg-gray-50 font-bold py-2.5 px-3.5 rounded-lg transition-all shadow-md text-xs whitespace-nowrap"
+                >
+                  Projects
+                </Link>
+
+                <button
+                  onClick={handleGenerateCabinetNote}
+                  className="flex items-center justify-center gap-2 bg-[#122C4A] text-white hover:bg-[#0B1F35] font-bold py-2.5 px-4 rounded-lg transition-all shadow-md whitespace-nowrap text-xs"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  {t('btn.generate_cabinet', 'Generate Cabinet Note')}
+                </button>
+              </div>
             </div>
           </div>
         </div>

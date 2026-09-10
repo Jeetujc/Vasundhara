@@ -540,12 +540,20 @@ export default function CitizenDashboard() {
                     </span>
                   </div>
 
-                  <Link
-                    href="/audit"
-                    className="bg-[#F2A71B] hover:bg-[#D97706] text-[#0B1F35] font-bold py-2.5 px-5 rounded transition-colors text-sm text-center w-full sm:w-auto"
-                  >
-                    {t('btn.view_audit', 'View Detailed Audit')}
-                  </Link>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Link
+                      href="/compensation"
+                      className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold py-2.5 px-4 rounded transition-colors text-sm text-center w-full sm:w-auto"
+                    >
+                      Compensation Dossier
+                    </Link>
+                    <Link
+                      href="/audit"
+                      className="bg-[#F2A71B] hover:bg-[#D97706] text-[#0B1F35] font-bold py-2.5 px-5 rounded transition-colors text-sm text-center w-full sm:w-auto"
+                    >
+                      {t('btn.view_audit', 'View Detailed Audit')}
+                    </Link>
+                  </div>
                 </div>
               </div>
 
@@ -650,6 +658,15 @@ export default function CitizenDashboard() {
                     <circle cx="180" cy="160" r="4" fill="#122C4A" />
                   </svg>
                 </div>
+                <div className="p-3 bg-white border-t border-[#DDD8C8] flex justify-between items-center">
+                  <span className="text-xs text-[#5B6472]">Geo-Coordinates Plotted</span>
+                  <Link
+                    href="/gis"
+                    className="text-xs font-bold text-[#1D5FA8] hover:text-[#122C4A] hover:underline flex items-center gap-1"
+                  >
+                    Open Interactive GIS Map →
+                  </Link>
+                </div>
               </div>
 
               {/* =========================
@@ -689,6 +706,11 @@ export default function CitizenDashboard() {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-4 pt-3 border-t border-[#DDD8C8] flex justify-end">
+                  <Link href="/documents" className="text-xs font-bold text-[#1D5FA8] hover:underline flex items-center gap-1">
+                    Open Full Document Vault →
+                  </Link>
+                </div>
               </div>
 
               {/* =========================

@@ -326,6 +326,44 @@ async function main() {
     },
   });
 
+  const parcel4 = await prisma.landParcel.upsert({
+    where: {
+      projectId_parcelNumber: {
+        projectId: project3.id,
+        parcelNumber: '89/1',
+      },
+    },
+    update: {},
+    create: {
+      projectId: project3.id,
+      parcelNumber: '89/1',
+      surveyNumber: 'SV-89-A',
+      village: 'Majholi',
+      tehsil: 'Majholi',
+      area: 1.9500,
+      status: ParcelStatus.AWARD_DECLARED,
+    },
+  });
+
+  const parcel5 = await prisma.landParcel.upsert({
+    where: {
+      projectId_parcelNumber: {
+        projectId: project3.id,
+        parcelNumber: '89/2',
+      },
+    },
+    update: {},
+    create: {
+      projectId: project3.id,
+      parcelNumber: '89/2',
+      surveyNumber: 'SV-89-B',
+      village: 'Majholi',
+      tehsil: 'Majholi',
+      area: 2.1000,
+      status: ParcelStatus.ACQUIRED,
+    },
+  });
+
   // =====================================================
   // 8. Affected Families & Linking
   // =====================================================
@@ -454,6 +492,57 @@ async function main() {
         latitude: 23.1815,
         longitude: 79.9864,
         remarks: 'Preliminary peg-marking and boundary walkover completed. Ready for joint panchnama upon compensation disbursal.',
+      },
+    });
+
+    await prisma.possessionRecord.create({
+      data: {
+        projectId: project1.id,
+        parcelId: parcel2.id,
+        fieldOfficerId: fieldOfficer.id,
+        status: PossessionStatus.VERIFIED,
+        latitude: 23.1840,
+        longitude: 79.9900,
+        remarks: 'GPS boundaries walked and verified. Joint panchnama executed with Patwari.',
+        recordedAt: new Date('2026-08-20'),
+      },
+    });
+
+    await prisma.possessionRecord.create({
+      data: {
+        projectId: project2.id,
+        parcelId: parcel3.id,
+        fieldOfficerId: fieldOfficer.id,
+        status: PossessionStatus.ELIGIBLE,
+        latitude: 23.2280,
+        longitude: 80.2010,
+        remarks: 'Freight corridor alignment peg marking completed.',
+      },
+    });
+
+    await prisma.possessionRecord.create({
+      data: {
+        projectId: project3.id,
+        parcelId: parcel4.id,
+        fieldOfficerId: fieldOfficer.id,
+        status: PossessionStatus.POSSESSION_RECORDED,
+        latitude: 23.2845,
+        longitude: 79.9120,
+        remarks: 'Physical possession recorded under Section 38. Handed over to Irrigation Department.',
+        recordedAt: new Date('2026-07-15'),
+      },
+    });
+
+    await prisma.possessionRecord.create({
+      data: {
+        projectId: project3.id,
+        parcelId: parcel5.id,
+        fieldOfficerId: fieldOfficer.id,
+        status: PossessionStatus.COMPLETED,
+        latitude: 23.2870,
+        longitude: 79.9160,
+        remarks: 'Canal construction right-of-way cleared and fenced.',
+        recordedAt: new Date('2026-06-10'),
       },
     });
   }

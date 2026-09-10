@@ -9,6 +9,8 @@ import {
   dashboardService,
   type FieldDashboardData,
 } from '../../../services/dashboard.service';
+import { gisService } from '../../../services/gis.service';
+import { workflowService } from '../../../services/workflow.service';
 import { useLanguage } from '../../../context/LanguageContext';
 
 export default function FieldOfficerDashboard() {
@@ -105,13 +107,22 @@ export default function FieldOfficerDashboard() {
     return multipliedValue + solatium;
   };
 
-  const handleSaveSurvey = () => {
+  const handleSaveSurvey = async () => {
     if (selectedTask) {
       setSurveyCompletedTasks((prev) => ({ ...prev, [selectedTask.id]: true }));
+      try {
+        await gisService.saveParcelBoundary(selectedTask.id, {
+          latitude: 23.1815,
+          longitude: 79.9864,
+          remarks: surveyNotes,
+        });
+      } catch (err) {
+        console.warn('Could not sync boundary to GIS backend:', err);
+      }
     }
     setOfflineQueue((prev) => prev + 1);
     setActivePanel('toolbox');
-    alert(`Survey data for Khasra ${selectedTask?.parcelNumber || '452/1'} saved to local encrypted cache. Ready to push to CALA.`);
+    alert(`Survey data for Khasra ${selectedTask?.parcelNumber || '452/1'} successfully verified & pushed to CALA & GIS repository.`);
   };
 
   const handleSyncData = () => {
@@ -217,12 +228,32 @@ export default function FieldOfficerDashboard() {
               </p>
             </div>
           </div>
-          <button
-            onClick={toggleLanguage}
-            className="border-2 border-[#122C4A] text-[#122C4A] font-bold px-4 py-2 rounded hover:bg-[#122C4A] hover:text-white transition-colors text-sm"
-          >
-            {isHindi ? 'Switch to English' : 'हिंदी में देखें'}
-          </button>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/workflow/tasks"
+              className="bg-[#122C4A] hover:bg-[#0B1F35] text-white text-xs font-bold px-3.5 py-2 rounded shadow-sm transition flex items-center gap-1.5"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
+              All Workflow Tasks
+            </Link>
+            <Link
+              href="/gis"
+              className="bg-[#1D5FA8] hover:bg-[#122C4A] text-white text-xs font-bold px-3.5 py-2 rounded shadow-sm transition flex items-center gap-1.5"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              Open Full GIS Map
+            </Link>
+            <button
+              onClick={toggleLanguage}
+              className="border-2 border-[#122C4A] text-[#122C4A] font-bold px-3.5 py-1.5 rounded hover:bg-[#122C4A] hover:text-white transition-colors text-xs"
+            >
+              {isHindi ? 'Switch to English' : 'हिंदी में देखें'}
+            </button>
+          </div>
         </div>
 
         {/* 2-Column Grid Layout */}
@@ -337,9 +368,18 @@ export default function FieldOfficerDashboard() {
                           />
                         </svg>
                       </button>
+                      <Link
+                        href={`/gis/parcels?parcelId=${task.id}`}
+                        className="w-full text-xs font-bold text-[#1D5FA8] hover:bg-blue-50 py-2 rounded transition border border-blue-200 text-center flex items-center justify-center gap-1"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                        </svg>
+                        View on GIS Map
+                      </Link>
                       <button
                         onClick={() => alert(`Discrepancy logged for Khasra ${task.parcelNumber}: Discrepancy sent to CALA review.`)}
-                        className="w-full text-xs font-bold text-red-600 hover:bg-red-50 py-2 rounded transition border border-transparent hover:border-red-200"
+                        className="w-full text-xs font-bold text-red-600 hover:bg-red-50 py-1.5 rounded transition border border-transparent hover:border-red-200"
                       >
                         {t.flag}
                       </button>

@@ -215,7 +215,37 @@ export default function AdminPage() {
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <Link
+                href="/gis"
+                className="bg-[#1D5FA8] hover:bg-[#122C4A] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
+              >
+                🗺️ GIS Portal
+              </Link>
+              <Link
+                href="/dashboard/field"
+                className="bg-[#B96E22] hover:bg-[#965516] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
+              >
+                ⚡ Field Officer Work Management
+              </Link>
+              <Link
+                href="/projects"
+                className="bg-white border border-[#DDD8C8] text-[#122C4A] hover:bg-gray-50 px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow-sm"
+              >
+                Projects
+              </Link>
+              <Link
+                href="/parcels"
+                className="bg-white border border-[#DDD8C8] text-[#122C4A] hover:bg-gray-50 px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow-sm"
+              >
+                Parcels
+              </Link>
+              <Link
+                href="/audit"
+                className="bg-white border border-[#DDD8C8] text-[#122C4A] hover:bg-gray-50 px-3 py-1.5 rounded-lg text-xs font-semibold transition shadow-sm"
+              >
+                Audit
+              </Link>
               <span className="text-xs font-bold uppercase tracking-wider bg-[#FDF8E3] text-[#B96E22] border border-[#E7DFB8] px-3 py-1.5 rounded">
                 Super Admin Active
               </span>
