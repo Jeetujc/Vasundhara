@@ -26,26 +26,12 @@ const PROTECTED_PREFIXES = [
   '/gis',
 ];
 
-function isPublicPath(pathname: string): boolean {
-  if (pathname === '/') {
-    return true;
-  }
-
-  return PUBLIC_PATH_PREFIXES.some(
-    (prefix) => prefix !== '/' && pathname.startsWith(prefix),
-  );
-}
-
 function isProtectedPath(pathname: string): boolean {
   return PROTECTED_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 }
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  if (isPublicPath(pathname) && !isProtectedPath(pathname)) {
-    return NextResponse.next();
-  }
 
   if (!isProtectedPath(pathname)) {
     return NextResponse.next();
