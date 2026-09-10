@@ -57,10 +57,10 @@ export default function Page() {
       <nav className="bg-[#122C4A] flex flex-wrap items-center px-8 py-2 md:py-0">
         <ul className="flex flex-wrap flex-1 list-none m-0 p-0">
           {[
-            { name: 'Home', href: '/#home' },
+            { name: 'Home', href: '/' },
             { name: 'About Us', href: '/#about-us' },
             { name: 'Notification', href: '/#notification' },
-            { name: 'Act', href: 'https://mwcc.org.in/knowledge%20center/LandAcqisition/landAcquisitionAct-2013-.pdf' }, // This now points to your Act page folder!
+            { name: 'Act', href: 'https://mwcc.org.in/knowledge%20center/LandAcqisition/landAcquisitionAct-2013-.pdf',newTab: true }, // This now points to your Act page folder!
             { name: 'Projects', href: '/#projects' },
             { name: 'Important Links', href: '/#important-links' }
           ].map((item) => (

@@ -53,7 +53,7 @@ export default function LoginPage() {
             Access land records, track acquisition status, and submit claims or grievances.
           </p>
 
-          <form onSubmit={handleCitizenSubmit} className="w-full flex flex-col gap-4 text-left">
+          <form onSubmit={handleCitizenSubmit} className="w-full flex flex-col gap-4 text-left" >
             {/* User ID Field */}
             <div>
               <label className="block text-xs font-semibold text-gray-700 uppercase mb-1">
