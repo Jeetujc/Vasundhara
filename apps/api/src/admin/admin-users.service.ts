@@ -20,13 +20,16 @@ import {
       // Validate hierarchy according to role
       // --------------------------------------------------
   
-      if (
-        dto.role !== Role.PUBLIC_USER &&
-        !dto.organizationId
-      ) {
-        throw new BadRequestException(
-          'organizationId is required for authority accounts',
-        );
+      let organizationId = dto.organizationId;
+      if (dto.role !== Role.PUBLIC_USER && !organizationId) {
+        const defaultOrg = await this.prisma.organization.findFirst();
+        if (defaultOrg) {
+          organizationId = defaultOrg.id;
+        } else {
+          throw new BadRequestException(
+            'organizationId is required for authority accounts',
+          );
+        }
       }
   
       if (
@@ -70,10 +73,10 @@ import {
       // Verify organization
       // --------------------------------------------------
   
-      if (dto.organizationId) {
+      if (organizationId) {
         const organization = await this.prisma.organization.findUnique({
           where: {
-            id: dto.organizationId,
+            id: organizationId,
           },
         });
   
@@ -87,71 +90,77 @@ import {
       // --------------------------------------------------
       // Verify state
       // --------------------------------------------------
-  
+
+      let resolvedStateId = dto.stateId;
       if (dto.stateId) {
-        const state = await this.prisma.state.findUnique({
+        const state = await this.prisma.state.findFirst({
           where: {
-            id: dto.stateId,
+            OR: [{ id: dto.stateId }, { code: dto.stateId }],
           },
         });
-  
+
         if (!state) {
           throw new NotFoundException('State not found');
         }
+        resolvedStateId = state.id;
       }
   
       // --------------------------------------------------
       // Verify district belongs to state
       // --------------------------------------------------
-  
+
+      let resolvedDistrictId = dto.districtId;
       if (dto.districtId) {
-        const district = await this.prisma.district.findUnique({
+        const district = await this.prisma.district.findFirst({
           where: {
-            id: dto.districtId,
+            OR: [{ id: dto.districtId }, { code: dto.districtId }],
           },
         });
-  
+
         if (!district) {
           throw new NotFoundException(
             'District not found',
           );
         }
-  
+
         if (
-          dto.stateId &&
-          district.stateId !== dto.stateId
+          resolvedStateId &&
+          district.stateId !== resolvedStateId
         ) {
           throw new BadRequestException(
             'District does not belong to selected state',
           );
         }
+        resolvedDistrictId = district.id;
       }
   
       // --------------------------------------------------
       // Verify tehsil belongs to district
       // --------------------------------------------------
-  
+
+      let resolvedTehsilId = dto.tehsilId;
       if (dto.tehsilId) {
-        const tehsil = await this.prisma.tehsil.findUnique({
+        const tehsil = await this.prisma.tehsil.findFirst({
           where: {
-            id: dto.tehsilId,
+            OR: [{ id: dto.tehsilId }, { code: dto.tehsilId }],
           },
         });
-  
+
         if (!tehsil) {
           throw new NotFoundException(
             'Tehsil not found',
           );
         }
-  
+
         if (
-          dto.districtId &&
-          tehsil.districtId !== dto.districtId
+          resolvedDistrictId &&
+          tehsil.districtId !== resolvedDistrictId
         ) {
           throw new BadRequestException(
             'Tehsil does not belong to selected district',
           );
         }
+        resolvedTehsilId = tehsil.id;
       }
   
       // --------------------------------------------------
@@ -203,16 +212,16 @@ import {
           role: dto.role,
   
           organizationId:
-            dto.organizationId,
+            organizationId,
   
           stateId:
-            dto.stateId,
-  
+            resolvedStateId,
+
           districtId:
-            dto.districtId,
-  
+            resolvedDistrictId,
+
           tehsilId:
-            dto.tehsilId,
+            resolvedTehsilId,
   
           isActive: true,
         },

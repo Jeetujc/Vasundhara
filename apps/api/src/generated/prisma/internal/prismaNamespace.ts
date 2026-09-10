@@ -414,7 +414,8 @@ export const ModelName = {
   RrCase: 'RrCase',
   Document: 'Document',
   Notification: 'Notification',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  Grievance: 'Grievance'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -430,7 +431,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "state" | "district" | "tehsil" | "user" | "project" | "landParcel" | "affectedFamily" | "familyParcel" | "workflowInstance" | "workflowTask" | "milestone" | "compensationCase" | "possessionRecord" | "rrCase" | "document" | "notification" | "auditLog"
+    modelProps: "organization" | "state" | "district" | "tehsil" | "user" | "project" | "landParcel" | "affectedFamily" | "familyParcel" | "workflowInstance" | "workflowTask" | "milestone" | "compensationCase" | "possessionRecord" | "rrCase" | "document" | "notification" | "auditLog" | "grievance"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1766,6 +1767,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Grievance: {
+      payload: Prisma.$GrievancePayload<ExtArgs>
+      fields: Prisma.GrievanceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GrievanceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GrievanceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload>
+        }
+        findFirst: {
+          args: Prisma.GrievanceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GrievanceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload>
+        }
+        findMany: {
+          args: Prisma.GrievanceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload>[]
+        }
+        create: {
+          args: Prisma.GrievanceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload>
+        }
+        createMany: {
+          args: Prisma.GrievanceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GrievanceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload>[]
+        }
+        delete: {
+          args: Prisma.GrievanceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload>
+        }
+        update: {
+          args: Prisma.GrievanceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload>
+        }
+        deleteMany: {
+          args: Prisma.GrievanceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GrievanceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GrievanceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload>[]
+        }
+        upsert: {
+          args: Prisma.GrievanceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GrievancePayload>
+        }
+        aggregate: {
+          args: Prisma.GrievanceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGrievance>
+        }
+        groupBy: {
+          args: Prisma.GrievanceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GrievanceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GrievanceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GrievanceCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2095,6 +2170,25 @@ export const AuditLogScalarFieldEnum = {
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
 
 
+export const GrievanceScalarFieldEnum = {
+  id: 'id',
+  ticketNo: 'ticketNo',
+  userId: 'userId',
+  projectId: 'projectId',
+  category: 'category',
+  description: 'description',
+  khasraNo: 'khasraNo',
+  evidenceUrl: 'evidenceUrl',
+  status: 'status',
+  resolution: 'resolution',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GrievanceScalarFieldEnum = (typeof GrievanceScalarFieldEnum)[keyof typeof GrievanceScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2388,6 +2482,20 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
 
 
 /**
+ * Reference to a field of type 'GrievanceStatus'
+ */
+export type EnumGrievanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GrievanceStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'GrievanceStatus[]'
+ */
+export type ListEnumGrievanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GrievanceStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2569,6 +2677,7 @@ export type GlobalOmitConfig = {
   document?: Prisma.DocumentOmit
   notification?: Prisma.NotificationOmit
   auditLog?: Prisma.AuditLogOmit
+  grievance?: Prisma.GrievanceOmit
 }
 
 /* Types for Logging */

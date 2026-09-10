@@ -131,3 +131,8 @@ export type Notification = Prisma.NotificationModel
  * 
  */
 export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model Grievance
+ * 
+ */
+export type Grievance = Prisma.GrievanceModel

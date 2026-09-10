@@ -1,10 +1,12 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 import {
   ProjectStatus,
+  Role,
   WorkflowStatus,
   WorkflowTaskStatus,
 } from '../generated/prisma/client.js';
@@ -44,11 +46,20 @@ export class WorkflowService {
     });
   }
 
-  async listTasks(workflowId?: string, assignedToId?: string) {
+  async listTasks(
+    workflowId?: string,
+    assignedToId?: string,
+    user?: { id: string; role: Role },
+  ) {
+    let effectiveAssignedToId = assignedToId;
+    if (user?.role === Role.FIELD_OFFICER) {
+      effectiveAssignedToId = user.id;
+    }
+
     return this.prisma.workflowTask.findMany({
       where: {
         workflowId,
-        assignedToId,
+        assignedToId: effectiveAssignedToId,
       },
       include: {
         workflow: {
@@ -134,7 +145,11 @@ export class WorkflowService {
     return this.getById(workflow.id);
   }
 
-  async completeTask(taskId: string, dto: CompleteTaskDto, actorId: string) {
+  async completeTask(
+    taskId: string,
+    dto: CompleteTaskDto,
+    actor: { id: string; role: Role },
+  ) {
     const task = await this.prisma.workflowTask.findUnique({
       where: { id: taskId },
       include: {
@@ -144,6 +159,12 @@ export class WorkflowService {
 
     if (!task) {
       throw new NotFoundException('Workflow task not found');
+    }
+
+    if (actor.role === Role.FIELD_OFFICER && task.assignedToId !== actor.id) {
+      throw new ForbiddenException(
+        'Field officers can only complete tasks assigned to them',
+      );
     }
 
     if (
@@ -217,7 +238,7 @@ export class WorkflowService {
       action: 'WORKFLOW_TASK_COMPLETED',
       entityType: 'WorkflowTask',
       entityId: task.id,
-      userId: actorId,
+      userId: actor.id,
       projectId: task.workflow.projectId,
       description: dto.remarks ?? `${task.stage} completed`,
       metadata: {

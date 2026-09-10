@@ -1,6 +1,12 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { useLanguage } from '../context/LanguageContext';
+
 export default function Page() {
+  const { language, setLanguage, t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-[#FBFAF6] text-[#1B2430] font-sans">
       {/* Top identity bar */}
@@ -19,17 +25,31 @@ export default function Page() {
               VASUNDHARA
             </span>
             <span className="text-[14px] text-[#5B6472] mt-1 hidden sm:block">
-              National Land Acquisition &amp; Management System
+              {t('app.subtitle', 'National Land Acquisition & Management System')}
             </span>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-[12px] font-semibold text-[#122C4A] border border-[#DDD8C8] rounded-full px-3 py-1 bg-[#FDF8E3]">
-            EN | HI
-          </span>
+          <div className="flex items-center text-[12px] font-semibold border border-[#DDD8C8] rounded-full overflow-hidden bg-[#FDF8E3]">
+            <button
+              type="button"
+              onClick={() => setLanguage('en')}
+              className={`px-3 py-1 transition-colors ${language === 'en' ? 'bg-[#122C4A] text-white font-bold' : 'text-[#122C4A] hover:bg-[#eae3cb]'}`}
+            >
+              EN
+            </button>
+            <span className="text-[#DDD8C8]">|</span>
+            <button
+              type="button"
+              onClick={() => setLanguage('hi')}
+              className={`px-3 py-1 transition-colors ${language === 'hi' ? 'bg-[#122C4A] text-white font-bold' : 'text-[#122C4A] hover:bg-[#eae3cb]'}`}
+            >
+              HI
+            </button>
+          </div>
           <Link href="/login/mainlogin" className="w-full block">
             <button className="w-full bg-[#F59E0B] hover:bg-[#D97706] text-white font-bold py-3 px-4 rounded transition-colors">
-              Login
+              {t('nav.login', 'Login')}
             </button>
           </Link>
         </div>
@@ -39,12 +59,12 @@ export default function Page() {
       <nav className="bg-[#122C4A] flex flex-wrap items-center px-8 py-2 md:py-0">
         <ul className="flex flex-wrap flex-1 list-none m-0 p-0">
           {[
-            { name: 'Home', href: '/' },
-            { name: 'About Us', href: '/#about-us' },
-            { name: 'Notification', href: '/notifications' },
-            { name: 'Act', href: 'https://mwcc.org.in/knowledge%20center/LandAcqisition/landAcquisitionAct-2013-.pdf',newTab: true }, // This now points to your Act page folder!
-            { name: 'Projects', href: '/#projects' },
-            { name: 'Important Links', href: '/#important-links' }
+            { name: t('nav.home', 'Home'), href: '/' },
+            { name: t('nav.about', 'About Us'), href: '/#about-us' },
+            { name: t('nav.notifications', 'Notification'), href: '/notifications' },
+            { name: t('nav.act', 'Act'), href: 'https://mwcc.org.in/knowledge%20center/LandAcqisition/landAcquisitionAct-2013-.pdf', newTab: true },
+            { name: t('nav.projects', 'Projects'), href: '/#projects' },
+            { name: t('nav.links', 'Important Links'), href: '/#important-links' }
           ].map((item) => (
             <li key={item.name}>
               <Link

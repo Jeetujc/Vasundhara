@@ -1,24 +1,42 @@
 import {
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Prisma, Project } from '../generated/prisma/client.js';
+import { Prisma, Project, Role } from '../generated/prisma/client.js';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateProjectDto } from './dto/create-project.dto.js';
 import { ListProjectsQueryDto } from './dto/list-projects-query.dto.js';
 import { UpdateProjectDto } from './dto/update-project.dto.js';
 
+interface UserContext {
+  id: string;
+  role: Role;
+  stateId?: string;
+  districtId?: string;
+}
+
 @Injectable()
 export class ProjectsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async list(query: ListProjectsQueryDto) {
+  async list(query: ListProjectsQueryDto, user?: UserContext) {
     const page = query.page ?? 1;
     const pageSize = query.pageSize ?? 20;
+
+    let effectiveStateId = query.stateId;
+    let effectiveDistrictId = query.districtId;
+
+    if (user?.role === Role.STATE_OFFICER && user.stateId) {
+      effectiveStateId = user.stateId;
+    } else if (user?.role === Role.DISTRICT_OFFICER && user.districtId) {
+      effectiveDistrictId = user.districtId;
+    }
+
     const where: Prisma.ProjectWhereInput = {
-      stateId: query.stateId,
-      districtId: query.districtId,
+      stateId: effectiveStateId,
+      districtId: effectiveDistrictId,
       status: query.status,
       ...(query.search
         ? {
@@ -62,7 +80,7 @@ export class ProjectsService {
     };
   }
 
-  async get(id: string) {
+  async get(id: string, user?: UserContext) {
     const project = await this.prisma.project.findUnique({
       where: { id },
       include: {
@@ -86,10 +104,22 @@ export class ProjectsService {
       throw new NotFoundException('Project not found');
     }
 
+    if (user?.role === Role.STATE_OFFICER && project.stateId !== user.stateId) {
+      throw new ForbiddenException('Access denied: Project outside your state');
+    }
+
+    if (user?.role === Role.DISTRICT_OFFICER && project.districtId !== user.districtId) {
+      throw new ForbiddenException('Access denied: Project outside your district');
+    }
+
     return project;
   }
 
-  async create(dto: CreateProjectDto): Promise<Project> {
+  async create(dto: CreateProjectDto, user?: UserContext): Promise<Project> {
+    if (user?.role === Role.STATE_OFFICER && dto.stateId !== user.stateId) {
+      throw new ForbiddenException('Cannot create project outside your assigned state');
+    }
+
     await this.ensureStateAndDistrict(dto.stateId, dto.districtId);
 
     try {
@@ -109,8 +139,8 @@ export class ProjectsService {
     }
   }
 
-  async update(id: string, dto: UpdateProjectDto): Promise<Project> {
-    await this.get(id);
+  async update(id: string, dto: UpdateProjectDto, user?: UserContext): Promise<Project> {
+    await this.get(id, user);
 
     try {
       return await this.prisma.project.update({

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Header from '../../components/layout/header';
 
 // Mock Data for Official Notifications
 const NOTIFICATIONS_DATA = [
@@ -47,6 +48,18 @@ export default function NotificationPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('All');
 
+  const handleDownload = (notif: typeof NOTIFICATIONS_DATA[0]) => {
+    const content = `THE MADHYA PRADESH GAZETTE (EXTRAORDINARY)\nREVENUE DEPARTMENT, VALLABH BHAWAN, BHOPAL\n--------------------------------------------------\nNotification ID: ${notif.id}\nDocument Type: ${notif.type}\nProject: ${notif.project}\nDistrict: ${notif.district}\nDate of Publication: ${notif.date}\nTitle: ${notif.title}\n--------------------------------------------------\nIn exercise of the powers conferred by the Right to Fair Compensation and Transparency in Land Acquisition, Rehabilitation and Resettlement Act, 2013 (RFCTLARR Act, 2013), notice is hereby officially notified and recorded under statutory authority.\n\n[Digitally Signed & Sealed - CALA / Department of Revenue]`;
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${notif.id}_${notif.type.replace(/\s+/g, '_')}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   // Filter Logic
   const filteredNotifications = NOTIFICATIONS_DATA.filter((notif) => {
     const matchesSearch = notif.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -58,6 +71,7 @@ export default function NotificationPage() {
 
   return (
     <div className="min-h-screen bg-[#FBFAF6] font-sans text-[#1B2430]">
+      <Header />
       
       {/* HEADER SECTION */}
       <div className="bg-[#122C4A] text-white py-12 px-6 lg:px-10">
@@ -65,7 +79,7 @@ export default function NotificationPage() {
           <Link href="/" className="inline-flex items-center text-sm font-bold text-[#9FB0C4] hover:text-white mb-6 transition-colors">
             &larr; Back to Home
           </Link>
-          <h1 className="text-3xl md:text-4xl font-serif font-bold text-[#FDF8E3] mb-3">Official Notifications & Orders</h1>
+          <h1 className="text-3xl md:text-4xl font-serif font-bold text-[#FDF8E3] mb-3">Official Notifications &amp; Orders</h1>
           <p className="text-[#9FB0C4] max-w-2xl">
             Search and download digitally signed Gazette notifications, circulars, and land acquisition awards under the RFCTLARR Act, 2013.
           </p>
@@ -144,7 +158,10 @@ export default function NotificationPage() {
                     </div>
                   </div>
 
-                  <button className="shrink-0 flex items-center justify-center gap-2 bg-white border-2 border-[#122C4A] text-[#122C4A] hover:bg-[#122C4A] hover:text-white font-bold py-2 px-6 rounded transition-colors w-full md:w-auto shadow-sm">
+                  <button
+                    onClick={() => handleDownload(notif)}
+                    className="shrink-0 flex items-center justify-center gap-2 bg-white border-2 border-[#122C4A] text-[#122C4A] hover:bg-[#122C4A] hover:text-white font-bold py-2 px-6 rounded transition-colors w-full md:w-auto shadow-sm cursor-pointer"
+                  >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     Download PDF <span className="text-[10px] opacity-80 font-normal">({notif.size})</span>
                   </button>

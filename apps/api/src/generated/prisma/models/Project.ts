@@ -291,6 +291,7 @@ export type ProjectWhereInput = {
   rrCases?: Prisma.RrCaseListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
+  grievances?: Prisma.GrievanceListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -318,6 +319,7 @@ export type ProjectOrderByWithRelationInput = {
   rrCases?: Prisma.RrCaseOrderByRelationAggregateInput
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
+  grievances?: Prisma.GrievanceOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -348,6 +350,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   rrCases?: Prisma.RrCaseListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
+  grievances?: Prisma.GrievanceListRelationFilter
 }, "id" | "code">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -413,6 +416,7 @@ export type ProjectCreateInput = {
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -438,6 +442,7 @@ export type ProjectUncheckedCreateInput = {
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -463,6 +468,7 @@ export type ProjectUpdateInput = {
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -488,6 +494,7 @@ export type ProjectUncheckedUpdateInput = {
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -838,6 +845,22 @@ export type ProjectUpdateOneWithoutAuditLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.ProjectUpdateWithoutAuditLogsInput>, Prisma.ProjectUncheckedUpdateWithoutAuditLogsInput>
 }
 
+export type ProjectCreateNestedOneWithoutGrievancesInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutGrievancesInput, Prisma.ProjectUncheckedCreateWithoutGrievancesInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutGrievancesInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneWithoutGrievancesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutGrievancesInput, Prisma.ProjectUncheckedCreateWithoutGrievancesInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutGrievancesInput
+  upsert?: Prisma.ProjectUpsertWithoutGrievancesInput
+  disconnect?: Prisma.ProjectWhereInput | boolean
+  delete?: Prisma.ProjectWhereInput | boolean
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutGrievancesInput, Prisma.ProjectUpdateWithoutGrievancesInput>, Prisma.ProjectUncheckedUpdateWithoutGrievancesInput>
+}
+
 export type ProjectCreateWithoutStateInput = {
   id?: string
   name: string
@@ -860,6 +883,7 @@ export type ProjectCreateWithoutStateInput = {
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutStateInput = {
@@ -884,6 +908,7 @@ export type ProjectUncheckedCreateWithoutStateInput = {
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutStateInput = {
@@ -953,6 +978,7 @@ export type ProjectCreateWithoutDistrictInput = {
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutDistrictInput = {
@@ -977,6 +1003,7 @@ export type ProjectUncheckedCreateWithoutDistrictInput = {
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutDistrictInput = {
@@ -1027,6 +1054,7 @@ export type ProjectCreateWithoutParcelsInput = {
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutParcelsInput = {
@@ -1051,6 +1079,7 @@ export type ProjectUncheckedCreateWithoutParcelsInput = {
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutParcelsInput = {
@@ -1091,6 +1120,7 @@ export type ProjectUpdateWithoutParcelsInput = {
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutParcelsInput = {
@@ -1115,6 +1145,7 @@ export type ProjectUncheckedUpdateWithoutParcelsInput = {
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutAffectedFamiliesInput = {
@@ -1139,6 +1170,7 @@ export type ProjectCreateWithoutAffectedFamiliesInput = {
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutAffectedFamiliesInput = {
@@ -1163,6 +1195,7 @@ export type ProjectUncheckedCreateWithoutAffectedFamiliesInput = {
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutAffectedFamiliesInput = {
@@ -1203,6 +1236,7 @@ export type ProjectUpdateWithoutAffectedFamiliesInput = {
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutAffectedFamiliesInput = {
@@ -1227,6 +1261,7 @@ export type ProjectUncheckedUpdateWithoutAffectedFamiliesInput = {
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutWorkflowInstancesInput = {
@@ -1251,6 +1286,7 @@ export type ProjectCreateWithoutWorkflowInstancesInput = {
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutWorkflowInstancesInput = {
@@ -1275,6 +1311,7 @@ export type ProjectUncheckedCreateWithoutWorkflowInstancesInput = {
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutWorkflowInstancesInput = {
@@ -1315,6 +1352,7 @@ export type ProjectUpdateWithoutWorkflowInstancesInput = {
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutWorkflowInstancesInput = {
@@ -1339,6 +1377,7 @@ export type ProjectUncheckedUpdateWithoutWorkflowInstancesInput = {
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutMilestonesInput = {
@@ -1363,6 +1402,7 @@ export type ProjectCreateWithoutMilestonesInput = {
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutMilestonesInput = {
@@ -1387,6 +1427,7 @@ export type ProjectUncheckedCreateWithoutMilestonesInput = {
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutMilestonesInput = {
@@ -1427,6 +1468,7 @@ export type ProjectUpdateWithoutMilestonesInput = {
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutMilestonesInput = {
@@ -1451,6 +1493,7 @@ export type ProjectUncheckedUpdateWithoutMilestonesInput = {
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutCompensationCasesInput = {
@@ -1475,6 +1518,7 @@ export type ProjectCreateWithoutCompensationCasesInput = {
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutCompensationCasesInput = {
@@ -1499,6 +1543,7 @@ export type ProjectUncheckedCreateWithoutCompensationCasesInput = {
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutCompensationCasesInput = {
@@ -1539,6 +1584,7 @@ export type ProjectUpdateWithoutCompensationCasesInput = {
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutCompensationCasesInput = {
@@ -1563,6 +1609,7 @@ export type ProjectUncheckedUpdateWithoutCompensationCasesInput = {
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPossessionRecordsInput = {
@@ -1587,6 +1634,7 @@ export type ProjectCreateWithoutPossessionRecordsInput = {
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPossessionRecordsInput = {
@@ -1611,6 +1659,7 @@ export type ProjectUncheckedCreateWithoutPossessionRecordsInput = {
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPossessionRecordsInput = {
@@ -1651,6 +1700,7 @@ export type ProjectUpdateWithoutPossessionRecordsInput = {
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPossessionRecordsInput = {
@@ -1675,6 +1725,7 @@ export type ProjectUncheckedUpdateWithoutPossessionRecordsInput = {
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutRrCasesInput = {
@@ -1699,6 +1750,7 @@ export type ProjectCreateWithoutRrCasesInput = {
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutRrCasesInput = {
@@ -1723,6 +1775,7 @@ export type ProjectUncheckedCreateWithoutRrCasesInput = {
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutRrCasesInput = {
@@ -1763,6 +1816,7 @@ export type ProjectUpdateWithoutRrCasesInput = {
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutRrCasesInput = {
@@ -1787,6 +1841,7 @@ export type ProjectUncheckedUpdateWithoutRrCasesInput = {
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutDocumentsInput = {
@@ -1811,6 +1866,7 @@ export type ProjectCreateWithoutDocumentsInput = {
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutProjectInput
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutDocumentsInput = {
@@ -1835,6 +1891,7 @@ export type ProjectUncheckedCreateWithoutDocumentsInput = {
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutProjectInput
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutDocumentsInput = {
@@ -1875,6 +1932,7 @@ export type ProjectUpdateWithoutDocumentsInput = {
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutProjectNestedInput
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutDocumentsInput = {
@@ -1899,6 +1957,7 @@ export type ProjectUncheckedUpdateWithoutDocumentsInput = {
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutProjectNestedInput
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutAuditLogsInput = {
@@ -1923,6 +1982,7 @@ export type ProjectCreateWithoutAuditLogsInput = {
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutProjectInput
   rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutAuditLogsInput = {
@@ -1947,6 +2007,7 @@ export type ProjectUncheckedCreateWithoutAuditLogsInput = {
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutProjectInput
   rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutAuditLogsInput = {
@@ -1987,6 +2048,7 @@ export type ProjectUpdateWithoutAuditLogsInput = {
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutProjectNestedInput
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutAuditLogsInput = {
@@ -2011,6 +2073,123 @@ export type ProjectUncheckedUpdateWithoutAuditLogsInput = {
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutProjectNestedInput
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutGrievancesInput = {
+  id?: string
+  name: string
+  code: string
+  description?: string | null
+  status?: $Enums.ProjectStatus
+  proposedArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  proposalDate?: Date | string | null
+  approvalDate?: Date | string | null
+  closureDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state: Prisma.StateCreateNestedOneWithoutProjectsInput
+  district: Prisma.DistrictCreateNestedOneWithoutProjectsInput
+  parcels?: Prisma.LandParcelCreateNestedManyWithoutProjectInput
+  workflowInstances?: Prisma.WorkflowInstanceCreateNestedManyWithoutProjectInput
+  milestones?: Prisma.MilestoneCreateNestedManyWithoutProjectInput
+  affectedFamilies?: Prisma.AffectedFamilyCreateNestedManyWithoutProjectInput
+  compensationCases?: Prisma.CompensationCaseCreateNestedManyWithoutProjectInput
+  possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutProjectInput
+  rrCases?: Prisma.RrCaseCreateNestedManyWithoutProjectInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutGrievancesInput = {
+  id?: string
+  name: string
+  code: string
+  description?: string | null
+  status?: $Enums.ProjectStatus
+  stateId: string
+  districtId: string
+  proposedArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  proposalDate?: Date | string | null
+  approvalDate?: Date | string | null
+  closureDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parcels?: Prisma.LandParcelUncheckedCreateNestedManyWithoutProjectInput
+  workflowInstances?: Prisma.WorkflowInstanceUncheckedCreateNestedManyWithoutProjectInput
+  milestones?: Prisma.MilestoneUncheckedCreateNestedManyWithoutProjectInput
+  affectedFamilies?: Prisma.AffectedFamilyUncheckedCreateNestedManyWithoutProjectInput
+  compensationCases?: Prisma.CompensationCaseUncheckedCreateNestedManyWithoutProjectInput
+  possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutProjectInput
+  rrCases?: Prisma.RrCaseUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutGrievancesInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutGrievancesInput, Prisma.ProjectUncheckedCreateWithoutGrievancesInput>
+}
+
+export type ProjectUpsertWithoutGrievancesInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutGrievancesInput, Prisma.ProjectUncheckedUpdateWithoutGrievancesInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutGrievancesInput, Prisma.ProjectUncheckedCreateWithoutGrievancesInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutGrievancesInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutGrievancesInput, Prisma.ProjectUncheckedUpdateWithoutGrievancesInput>
+}
+
+export type ProjectUpdateWithoutGrievancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  proposedArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  proposalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  closureDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state?: Prisma.StateUpdateOneRequiredWithoutProjectsNestedInput
+  district?: Prisma.DistrictUpdateOneRequiredWithoutProjectsNestedInput
+  parcels?: Prisma.LandParcelUpdateManyWithoutProjectNestedInput
+  workflowInstances?: Prisma.WorkflowInstanceUpdateManyWithoutProjectNestedInput
+  milestones?: Prisma.MilestoneUpdateManyWithoutProjectNestedInput
+  affectedFamilies?: Prisma.AffectedFamilyUpdateManyWithoutProjectNestedInput
+  compensationCases?: Prisma.CompensationCaseUpdateManyWithoutProjectNestedInput
+  possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutProjectNestedInput
+  rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutGrievancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  stateId?: Prisma.StringFieldUpdateOperationsInput | string
+  districtId?: Prisma.StringFieldUpdateOperationsInput | string
+  proposedArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  proposalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  closureDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parcels?: Prisma.LandParcelUncheckedUpdateManyWithoutProjectNestedInput
+  workflowInstances?: Prisma.WorkflowInstanceUncheckedUpdateManyWithoutProjectNestedInput
+  milestones?: Prisma.MilestoneUncheckedUpdateManyWithoutProjectNestedInput
+  affectedFamilies?: Prisma.AffectedFamilyUncheckedUpdateManyWithoutProjectNestedInput
+  compensationCases?: Prisma.CompensationCaseUncheckedUpdateManyWithoutProjectNestedInput
+  possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutProjectNestedInput
+  rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyStateInput = {
@@ -2050,6 +2229,7 @@ export type ProjectUpdateWithoutStateInput = {
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutStateInput = {
@@ -2074,6 +2254,7 @@ export type ProjectUncheckedUpdateWithoutStateInput = {
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutStateInput = {
@@ -2128,6 +2309,7 @@ export type ProjectUpdateWithoutDistrictInput = {
   rrCases?: Prisma.RrCaseUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutDistrictInput = {
@@ -2152,6 +2334,7 @@ export type ProjectUncheckedUpdateWithoutDistrictInput = {
   rrCases?: Prisma.RrCaseUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutProjectNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutDistrictInput = {
@@ -2184,6 +2367,7 @@ export type ProjectCountOutputType = {
   rrCases: number
   documents: number
   auditLogs: number
+  grievances: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2196,6 +2380,7 @@ export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   rrCases?: boolean | ProjectCountOutputTypeCountRrCasesArgs
   documents?: boolean | ProjectCountOutputTypeCountDocumentsArgs
   auditLogs?: boolean | ProjectCountOutputTypeCountAuditLogsArgs
+  grievances?: boolean | ProjectCountOutputTypeCountGrievancesArgs
 }
 
 /**
@@ -2271,6 +2456,13 @@ export type ProjectCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.AuditLogWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountGrievancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GrievanceWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2297,6 +2489,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   rrCases?: boolean | Prisma.Project$rrCasesArgs<ExtArgs>
   documents?: boolean | Prisma.Project$documentsArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Project$auditLogsArgs<ExtArgs>
+  grievances?: boolean | Prisma.Project$grievancesArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -2365,6 +2558,7 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   rrCases?: boolean | Prisma.Project$rrCasesArgs<ExtArgs>
   documents?: boolean | Prisma.Project$documentsArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Project$auditLogsArgs<ExtArgs>
+  grievances?: boolean | Prisma.Project$grievancesArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2390,6 +2584,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     rrCases: Prisma.$RrCasePayload<ExtArgs>[]
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
+    grievances: Prisma.$GrievancePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2810,6 +3005,7 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   rrCases<T extends Prisma.Project$rrCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$rrCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RrCasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Project$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.Project$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  grievances<T extends Prisma.Project$grievancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$grievancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GrievancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3466,6 +3662,30 @@ export type Project$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
+}
+
+/**
+ * Project.grievances
+ */
+export type Project$grievancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Grievance
+   */
+  select?: Prisma.GrievanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Grievance
+   */
+  omit?: Prisma.GrievanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GrievanceInclude<ExtArgs> | null
+  where?: Prisma.GrievanceWhereInput
+  orderBy?: Prisma.GrievanceOrderByWithRelationInput | Prisma.GrievanceOrderByWithRelationInput[]
+  cursor?: Prisma.GrievanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GrievanceScalarFieldEnum | Prisma.GrievanceScalarFieldEnum[]
 }
 
 /**

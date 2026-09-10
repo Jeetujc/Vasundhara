@@ -68,7 +68,8 @@ export const ModelName = {
   RrCase: 'RrCase',
   Document: 'Document',
   Notification: 'Notification',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  Grievance: 'Grievance'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -375,6 +376,25 @@ export const AuditLogScalarFieldEnum = {
 } as const
 
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const GrievanceScalarFieldEnum = {
+  id: 'id',
+  ticketNo: 'ticketNo',
+  userId: 'userId',
+  projectId: 'projectId',
+  category: 'category',
+  description: 'description',
+  khasraNo: 'khasraNo',
+  evidenceUrl: 'evidenceUrl',
+  status: 'status',
+  resolution: 'resolution',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GrievanceScalarFieldEnum = (typeof GrievanceScalarFieldEnum)[keyof typeof GrievanceScalarFieldEnum]
 
 
 export const SortOrder = {

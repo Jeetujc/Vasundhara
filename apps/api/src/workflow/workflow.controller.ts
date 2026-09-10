@@ -19,6 +19,7 @@ import { WorkflowService } from './workflow.service.js';
 
 interface AuthUser {
   id: string;
+  role: Role;
 }
 
 @Controller('workflow')
@@ -35,8 +36,9 @@ export class WorkflowController {
   listTasks(
     @Query('workflowId') workflowId?: string,
     @Query('assignedToId') assignedToId?: string,
+    @CurrentUser() user?: AuthUser,
   ) {
-    return this.workflowService.listTasks(workflowId, assignedToId);
+    return this.workflowService.listTasks(workflowId, assignedToId, user);
   }
 
   @Get(':id')
@@ -63,6 +65,6 @@ export class WorkflowController {
     @Body() dto: CompleteTaskDto,
     @CurrentUser() user: AuthUser,
   ) {
-    return this.workflowService.completeTask(taskId, dto, user.id);
+    return this.workflowService.completeTask(taskId, dto, user);
   }
 }

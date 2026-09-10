@@ -36,6 +36,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         aadharId: true,
         mobileNo: true,
         role: true,
+        organizationId: true,
         stateId: true,
         districtId: true,
         tehsilId: true,

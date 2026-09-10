@@ -7,7 +7,9 @@ interface RequestOptions {
 }
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, '') ?? 'http://localhost:5000';
+  (process.env.NEXT_PUBLIC_API_URL ||
+    process.env.NEXT_PUBLIC_API_BASE_URL ||
+    'http://localhost:5000').replace(/\/$/, '');
 
 function getStoredToken(): string | null {
   if (typeof window === 'undefined') {
@@ -32,6 +34,13 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   });
 
   if (!response.ok) {
+    if (response.status === 401 && typeof window !== 'undefined') {
+      localStorage.removeItem('vasundhara.accessToken');
+      localStorage.removeItem('vasundhara.refreshToken');
+      localStorage.removeItem('vasundhara.user');
+      document.cookie = 'vasundhara_access_token=; path=/; max-age=0; samesite=lax';
+    }
+
     let message = `Request failed with status ${response.status}`;
 
     try {

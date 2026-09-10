@@ -191,6 +191,13 @@ export default function LoginPage() {
             </Link>
           </p>
 
+          <Link
+            href="/login/mainlogin"
+            className="text-xs font-bold text-[#1E3A8A] hover:underline mt-4"
+          >
+            ← Back to Portal Selection
+          </Link>
+
         </div>
 
       </div>

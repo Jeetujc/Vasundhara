@@ -36,7 +36,10 @@ export default function Audit() {
       
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-serif font-bold text-[#122C4A]">Compensation Audit & Calculator</h1>
+          <Link href="/dashboard/citizen" className="inline-flex items-center text-sm font-bold text-[#1D5FA8] hover:text-[#122C4A] mb-4 transition-colors">
+            ← Back to Dashboard
+          </Link>
+          <h1 className="text-3xl font-serif font-bold text-[#122C4A]">Compensation Audit &amp; Calculator</h1>
           <p className="text-[#5B6472] mt-2">
             Transparent calculation based on the RFCTLARR Act, 2013 formula.
           </p>

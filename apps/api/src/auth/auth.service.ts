@@ -14,7 +14,6 @@ import { RegisterDto } from './dto/register.dto.js';
 
 interface TokenPayload {
   sub: string;
-  mobileNo: string;
   role: string;
 }
 
@@ -186,12 +185,10 @@ export class AuthService {
 
   private async generateTokens(user: {
     id: string;
-    mobileNo: string;
     role: string;
   }) {
     const payload: TokenPayload = {
       sub: user.id,
-      mobileNo: user.mobileNo,
       role: user.role,
     };
 

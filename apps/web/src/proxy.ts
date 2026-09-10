@@ -20,7 +20,6 @@ const PROTECTED_PREFIXES = [
   '/r-and-r',
   '/documents',
   '/audit',
-  '/notifications',
   '/reports',
   '/admin',
   '/gis',

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
+import { PrismaModule } from './prisma/prisma.module.js';
 import { AuthModule } from './auth/auth.module.js';
 import { UsersModule } from './users/users.module.js';
 import { ProjectsModule } from './projects/projects.module.js';
@@ -12,6 +13,10 @@ import { PossessionModule } from './possession/possession.module.js';
 import { RrModule } from './rr/rr.module.js';
 import { AuditModule } from './audit/audit.module.js';
 import { LocationsModule } from './location/location.module.js';
+import { AdminUsersModule } from './admin/admin-user.module.js';
+import { DashboardModule } from './dashboard/dashboard.module.js';
+import { GrievancesModule } from './grievances/grievances.module.js';
+import { DocumentsModule } from './documents/documents.module.js';
 
 @Module({
   imports: [
@@ -19,6 +24,7 @@ import { LocationsModule } from './location/location.module.js';
       isGlobal: true,
     }),
 
+    PrismaModule,
     AuthModule,
     UsersModule,
     ProjectsModule,
@@ -29,7 +35,11 @@ import { LocationsModule } from './location/location.module.js';
     RrModule,
     NotificationsModule,
     AuditModule,
-    LocationsModule
+    LocationsModule,
+    AdminUsersModule,
+    DashboardModule,
+    GrievancesModule,
+    DocumentsModule,
   ],
 })
 export class AppModule {

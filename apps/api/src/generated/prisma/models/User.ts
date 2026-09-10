@@ -263,6 +263,7 @@ export type UserWhereInput = {
   auditLogs?: Prisma.AuditLogListRelationFilter
   uploadedDocuments?: Prisma.DocumentListRelationFilter
   possessionRecords?: Prisma.PossessionRecordListRelationFilter
+  grievances?: Prisma.GrievanceListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -289,6 +290,7 @@ export type UserOrderByWithRelationInput = {
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
   uploadedDocuments?: Prisma.DocumentOrderByRelationAggregateInput
   possessionRecords?: Prisma.PossessionRecordOrderByRelationAggregateInput
+  grievances?: Prisma.GrievanceOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -318,6 +320,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   auditLogs?: Prisma.AuditLogListRelationFilter
   uploadedDocuments?: Prisma.DocumentListRelationFilter
   possessionRecords?: Prisma.PossessionRecordListRelationFilter
+  grievances?: Prisma.GrievanceListRelationFilter
 }, "id" | "aadharId" | "mobileNo">
 
 export type UserOrderByWithAggregationInput = {
@@ -380,6 +383,7 @@ export type UserCreateInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -402,6 +406,7 @@ export type UserUncheckedCreateInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -424,6 +429,7 @@ export type UserUpdateInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -446,6 +452,7 @@ export type UserUncheckedUpdateInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -824,6 +831,20 @@ export type UserUpdateOneWithoutAuditLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.UserUpdateWithoutAuditLogsInput>, Prisma.UserUncheckedUpdateWithoutAuditLogsInput>
 }
 
+export type UserCreateNestedOneWithoutGrievancesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGrievancesInput, Prisma.UserUncheckedCreateWithoutGrievancesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGrievancesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutGrievancesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGrievancesInput, Prisma.UserUncheckedCreateWithoutGrievancesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGrievancesInput
+  upsert?: Prisma.UserUpsertWithoutGrievancesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutGrievancesInput, Prisma.UserUpdateWithoutGrievancesInput>, Prisma.UserUncheckedUpdateWithoutGrievancesInput>
+}
+
 export type UserCreateWithoutOrganizationInput = {
   id?: string
   name: string
@@ -843,6 +864,7 @@ export type UserCreateWithoutOrganizationInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationInput = {
@@ -864,6 +886,7 @@ export type UserUncheckedCreateWithoutOrganizationInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationInput = {
@@ -931,6 +954,7 @@ export type UserCreateWithoutStateInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStateInput = {
@@ -952,6 +976,7 @@ export type UserUncheckedCreateWithoutStateInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStateInput = {
@@ -999,6 +1024,7 @@ export type UserCreateWithoutDistrictInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDistrictInput = {
@@ -1020,6 +1046,7 @@ export type UserUncheckedCreateWithoutDistrictInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDistrictInput = {
@@ -1067,6 +1094,7 @@ export type UserCreateWithoutTehsilInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTehsilInput = {
@@ -1088,6 +1116,7 @@ export type UserUncheckedCreateWithoutTehsilInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTehsilInput = {
@@ -1135,6 +1164,7 @@ export type UserCreateWithoutAssignedTasksInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -1156,6 +1186,7 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -1193,6 +1224,7 @@ export type UserUpdateWithoutAssignedTasksInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -1214,6 +1246,7 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPossessionRecordsInput = {
@@ -1235,6 +1268,7 @@ export type UserCreateWithoutPossessionRecordsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPossessionRecordsInput = {
@@ -1256,6 +1290,7 @@ export type UserUncheckedCreateWithoutPossessionRecordsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPossessionRecordsInput = {
@@ -1293,6 +1328,7 @@ export type UserUpdateWithoutPossessionRecordsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPossessionRecordsInput = {
@@ -1314,6 +1350,7 @@ export type UserUncheckedUpdateWithoutPossessionRecordsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUploadedDocumentsInput = {
@@ -1335,6 +1372,7 @@ export type UserCreateWithoutUploadedDocumentsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
@@ -1356,6 +1394,7 @@ export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUploadedDocumentsInput = {
@@ -1393,6 +1432,7 @@ export type UserUpdateWithoutUploadedDocumentsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
@@ -1414,6 +1454,7 @@ export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -1435,6 +1476,7 @@ export type UserCreateWithoutNotificationsInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -1456,6 +1498,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -1493,6 +1536,7 @@ export type UserUpdateWithoutNotificationsInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -1514,6 +1558,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAuditLogsInput = {
@@ -1535,6 +1580,7 @@ export type UserCreateWithoutAuditLogsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -1556,6 +1602,7 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
   possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+  grievances?: Prisma.GrievanceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -1593,6 +1640,7 @@ export type UserUpdateWithoutAuditLogsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -1612,6 +1660,111 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedTasks?: Prisma.WorkflowTaskUncheckedUpdateManyWithoutAssignedToNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutGrievancesInput = {
+  id?: string
+  name: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
+  passwordHash: string
+  role: $Enums.Role
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization?: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  state?: Prisma.StateCreateNestedOneWithoutUsersInput
+  district?: Prisma.DistrictCreateNestedOneWithoutUsersInput
+  tehsil?: Prisma.TehsilCreateNestedOneWithoutUsersInput
+  assignedTasks?: Prisma.WorkflowTaskCreateNestedManyWithoutAssignedToInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  uploadedDocuments?: Prisma.DocumentCreateNestedManyWithoutUploadedByInput
+  possessionRecords?: Prisma.PossessionRecordCreateNestedManyWithoutFieldOfficerInput
+}
+
+export type UserUncheckedCreateWithoutGrievancesInput = {
+  id?: string
+  name: string
+  aadharId?: string | null
+  mobileNo: string
+  dob?: Date | string | null
+  passwordHash: string
+  role: $Enums.Role
+  organizationId?: string | null
+  stateId?: string | null
+  districtId?: string | null
+  tehsilId?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedTasks?: Prisma.WorkflowTaskUncheckedCreateNestedManyWithoutAssignedToInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  uploadedDocuments?: Prisma.DocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  possessionRecords?: Prisma.PossessionRecordUncheckedCreateNestedManyWithoutFieldOfficerInput
+}
+
+export type UserCreateOrConnectWithoutGrievancesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutGrievancesInput, Prisma.UserUncheckedCreateWithoutGrievancesInput>
+}
+
+export type UserUpsertWithoutGrievancesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutGrievancesInput, Prisma.UserUncheckedUpdateWithoutGrievancesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutGrievancesInput, Prisma.UserUncheckedCreateWithoutGrievancesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutGrievancesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutGrievancesInput, Prisma.UserUncheckedUpdateWithoutGrievancesInput>
+}
+
+export type UserUpdateWithoutGrievancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneWithoutUsersNestedInput
+  state?: Prisma.StateUpdateOneWithoutUsersNestedInput
+  district?: Prisma.DistrictUpdateOneWithoutUsersNestedInput
+  tehsil?: Prisma.TehsilUpdateOneWithoutUsersNestedInput
+  assignedTasks?: Prisma.WorkflowTaskUpdateManyWithoutAssignedToNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
+  possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutGrievancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  aadharId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNo?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  districtId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tehsilId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedTasks?: Prisma.WorkflowTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
 }
@@ -1651,6 +1804,7 @@ export type UserUpdateWithoutOrganizationInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationInput = {
@@ -1672,6 +1826,7 @@ export type UserUncheckedUpdateWithoutOrganizationInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1725,6 +1880,7 @@ export type UserUpdateWithoutStateInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStateInput = {
@@ -1746,6 +1902,7 @@ export type UserUncheckedUpdateWithoutStateInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutStateInput = {
@@ -1799,6 +1956,7 @@ export type UserUpdateWithoutDistrictInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDistrictInput = {
@@ -1820,6 +1978,7 @@ export type UserUncheckedUpdateWithoutDistrictInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutDistrictInput = {
@@ -1873,6 +2032,7 @@ export type UserUpdateWithoutTehsilInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTehsilInput = {
@@ -1894,6 +2054,7 @@ export type UserUncheckedUpdateWithoutTehsilInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   possessionRecords?: Prisma.PossessionRecordUncheckedUpdateManyWithoutFieldOfficerNestedInput
+  grievances?: Prisma.GrievanceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutTehsilInput = {
@@ -1923,6 +2084,7 @@ export type UserCountOutputType = {
   auditLogs: number
   uploadedDocuments: number
   possessionRecords: number
+  grievances: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1931,6 +2093,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
   uploadedDocuments?: boolean | UserCountOutputTypeCountUploadedDocumentsArgs
   possessionRecords?: boolean | UserCountOutputTypeCountPossessionRecordsArgs
+  grievances?: boolean | UserCountOutputTypeCountGrievancesArgs
 }
 
 /**
@@ -1978,6 +2141,13 @@ export type UserCountOutputTypeCountPossessionRecordsArgs<ExtArgs extends runtim
   where?: Prisma.PossessionRecordWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountGrievancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GrievanceWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2003,6 +2173,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   uploadedDocuments?: boolean | Prisma.User$uploadedDocumentsArgs<ExtArgs>
   possessionRecords?: boolean | Prisma.User$possessionRecordsArgs<ExtArgs>
+  grievances?: boolean | Prisma.User$grievancesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2076,6 +2247,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   uploadedDocuments?: boolean | Prisma.User$uploadedDocumentsArgs<ExtArgs>
   possessionRecords?: boolean | Prisma.User$possessionRecordsArgs<ExtArgs>
+  grievances?: boolean | Prisma.User$grievancesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2103,6 +2275,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
     uploadedDocuments: Prisma.$DocumentPayload<ExtArgs>[]
     possessionRecords: Prisma.$PossessionRecordPayload<ExtArgs>[]
+    grievances: Prisma.$GrievancePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2522,6 +2695,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   uploadedDocuments<T extends Prisma.User$uploadedDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$uploadedDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   possessionRecords<T extends Prisma.User$possessionRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$possessionRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PossessionRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  grievances<T extends Prisma.User$grievancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$grievancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GrievancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3159,6 +3333,30 @@ export type User$possessionRecordsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.PossessionRecordScalarFieldEnum | Prisma.PossessionRecordScalarFieldEnum[]
+}
+
+/**
+ * User.grievances
+ */
+export type User$grievancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Grievance
+   */
+  select?: Prisma.GrievanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Grievance
+   */
+  omit?: Prisma.GrievanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GrievanceInclude<ExtArgs> | null
+  where?: Prisma.GrievanceWhereInput
+  orderBy?: Prisma.GrievanceOrderByWithRelationInput | Prisma.GrievanceOrderByWithRelationInput[]
+  cursor?: Prisma.GrievanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GrievanceScalarFieldEnum | Prisma.GrievanceScalarFieldEnum[]
 }
 
 /**
