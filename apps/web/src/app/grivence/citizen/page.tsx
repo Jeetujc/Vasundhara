@@ -17,7 +17,7 @@ export default function GrievancePortal() {
 
   return (
     <div className="min-h-screen bg-[#FBFAF6] p-6 lg:p-10 font-sans text-[#1B2430]">
-      <div className="max-w-[1280px] mx-auto">
+      <div className="max-w-7xl mx-auto">
         
         {/* HEADER & BACK BUTTON */}
         <div className="mb-8">

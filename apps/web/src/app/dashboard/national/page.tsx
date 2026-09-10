@@ -18,7 +18,7 @@ export default function NationalDashboard() {
             <li key={item.name}>
               <Link
                 href={item.href}
-                className="block px-[18px] py-[14px] text-[#EAF0F7] text-[13px] font-semibold tracking-[0.02em] hover:bg-[#0B1F35] transition-colors"
+                className="block px-4.5 py-3.5 text-[#EAF0F7] text-[13px] font-semibold tracking-[0.02em] hover:bg-[#0B1F35] transition-colors"
               >
                 {item.name}
               </Link>
@@ -32,7 +32,7 @@ export default function NationalDashboard() {
       <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
         <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-5 flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6">
           <div className="flex items-center gap-4">
-            <div className="w-[40px] h-[40px] shrink-0">
+            <div className="w-10 h-10 shrink-0">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-full h-full block">
                 <circle cx="50" cy="50" r="46" fill="none" stroke="#122C4A" strokeWidth="2.5" />
                 <circle cx="50" cy="50" r="30" fill="none" stroke="#122C4A" strokeWidth="1.5" />
@@ -109,7 +109,7 @@ export default function NationalDashboard() {
             </button>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[1200px]">
+            <table className="w-full text-left border-collapse min-w-300">
               <thead>
                 <tr className="bg-white text-gray-500 text-[11px] uppercase tracking-wider border-b border-gray-200">
                   <th className="px-8 py-4 font-bold">Corridor / Requiring Body</th>
