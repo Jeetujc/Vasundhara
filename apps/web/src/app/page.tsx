@@ -59,7 +59,7 @@ export default function Page() {
           {[
             { name: 'Home', href: '/' },
             { name: 'About Us', href: '/#about-us' },
-            { name: 'Notification', href: '/#notification' },
+            { name: 'Notification', href: '/notifications' },
             { name: 'Act', href: 'https://mwcc.org.in/knowledge%20center/LandAcqisition/landAcquisitionAct-2013-.pdf',newTab: true }, // This now points to your Act page folder!
             { name: 'Projects', href: '/#projects' },
             { name: 'Important Links', href: '/#important-links' }
