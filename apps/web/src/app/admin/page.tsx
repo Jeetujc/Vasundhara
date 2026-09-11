@@ -223,10 +223,10 @@ export default function AdminPage() {
                 🗺️ GIS Portal
               </Link>
               <Link
-                href="/dashboard/field"
-                className="bg-[#B96E22] hover:bg-[#965516] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
+                href="/organizations"
+                className="bg-[#122C4A] hover:bg-[#0B1F35] text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
               >
-                ⚡ Field Officer Work Management
+                🏢 Requiring Bodies
               </Link>
               <Link
                 href="/projects"

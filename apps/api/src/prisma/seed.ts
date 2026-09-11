@@ -36,14 +36,59 @@ async function main() {
   console.log('🌱 Seeding VASUNDHARA database...');
 
   // =====================================================
-  // 1. Organization
+  // 1. Requiring Bodies & Organizations
   // =====================================================
   const organization = await prisma.organization.upsert({
     where: { code: 'GOVT-MP' },
     update: {},
     create: {
-      name: 'Government of Madhya Pradesh',
+      name: 'Government of Madhya Pradesh (DoR)',
       code: 'GOVT-MP',
+    },
+  });
+
+  const orgNhai = await prisma.organization.upsert({
+    where: { code: 'NHAI' },
+    update: {},
+    create: {
+      name: 'National Highways Authority of India (NHAI)',
+      code: 'NHAI',
+    },
+  });
+
+  const orgDfccil = await prisma.organization.upsert({
+    where: { code: 'DFCCIL' },
+    update: {},
+    create: {
+      name: 'Dedicated Freight Corridor Corporation of India (Railways)',
+      code: 'DFCCIL',
+    },
+  });
+
+  const orgNvda = await prisma.organization.upsert({
+    where: { code: 'NVDA' },
+    update: {},
+    create: {
+      name: 'Narmada Valley Development Authority (NVDA)',
+      code: 'NVDA',
+    },
+  });
+
+  const orgPwd = await prisma.organization.upsert({
+    where: { code: 'MP-PWD' },
+    update: {},
+    create: {
+      name: 'Madhya Pradesh Public Works Department (MP PWD)',
+      code: 'MP-PWD',
+    },
+  });
+
+  const orgNtpc = await prisma.organization.upsert({
+    where: { code: 'NTPC' },
+    update: {},
+    create: {
+      name: 'National Thermal Power Corporation (NTPC Green Energy)',
+      code: 'NTPC',
     },
   });
 

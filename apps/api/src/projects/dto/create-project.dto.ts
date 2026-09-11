@@ -30,6 +30,5 @@ export class CreateProjectDto {
   districtId!: string;
 
   @IsOptional()
-  @IsString()
-  proposedArea?: string;
+  proposedArea?: string | number;
 }

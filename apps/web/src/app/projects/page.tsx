@@ -83,46 +83,15 @@ export default function ProjectsListPage() {
     }
   };
 
-  const canCreate = user && ['ADMIN', 'CENTRAL_OFFICER', 'STATE_OFFICER'].includes(user.role);
+  const canCreate =
+    user &&
+    ['ADMIN', 'CENTRAL_OFFICER', 'STATE_OFFICER', 'DISTRICT_OFFICER'].includes(
+      user.role,
+    );
 
   return (
     <>
       <Header />
-      <nav className="bg-[#122C4A] flex flex-wrap items-center px-8 py-2">
-        <ul className="flex flex-wrap flex-1 list-none m-0 p-0 text-xs font-semibold">
-          {[
-            { name: t('nav.home', 'Home'), href: '/' },
-            { name: t('nav.projects', 'Projects'), href: '/projects' },
-            { name: '🗺️ GIS Map', href: '/gis', highlight: true },
-            { name: 'Workflow', href: '/workflow' },
-            { name: 'Tasks', href: '/workflow/tasks' },
-            { name: '⚡ Field Work Management', href: '/dashboard/field', highlightAmber: true },
-            { name: 'Parcels', href: '/parcels' },
-            { name: 'Compensation', href: '/compensation' },
-            { name: 'Possession', href: '/possession' },
-            { name: 'R&R', href: '/r-and-r' },
-            { name: 'Documents', href: '/documents' },
-            { name: 'Reports', href: '/reports' },
-            { name: 'Dashboard', href: '/dashboard' },
-          ].map((item: any) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className={`px-3 py-2 block transition-colors ${
-                  item.highlight
-                    ? 'text-blue-300 font-bold hover:bg-[#1D5FA8] hover:text-white'
-                    : item.highlightAmber
-                    ? 'text-amber-300 font-bold hover:bg-[#B96E22] hover:text-white'
-                    : 'text-white hover:bg-[#1D5FA8]'
-                }`}
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
       <div className="min-h-screen bg-[#FBFAF6] p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -133,16 +102,16 @@ export default function ProjectsListPage() {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <Link
+                href="/organizations"
+                className="bg-white border border-[#DDD8C8] text-[#122C4A] hover:bg-gray-50 px-4 py-2 rounded-lg text-xs font-semibold transition shadow-sm"
+              >
+                🏢 Requiring Bodies
+              </Link>
+              <Link
                 href="/gis/projects"
                 className="bg-[#0B1F35] hover:bg-[#122C4A] text-white border border-[#1D5FA8] px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm"
               >
                 🗺️ GIS Spatial Corridors
-              </Link>
-              <Link
-                href="/dashboard/field"
-                className="bg-[#B96E22] hover:bg-[#965516] text-white px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
-              >
-                ⚡ Field Survey
               </Link>
               {canCreate && (
                 <Link href="/projects/new"
@@ -245,13 +214,15 @@ export default function ProjectsListPage() {
                         >
                           🗺️ GIS
                         </Link>
-                        <Link
-                          href="/dashboard/field"
-                          className="bg-[#B96E22]/10 hover:bg-[#B96E22] text-[#B96E22] hover:text-white px-2.5 py-1 rounded text-xs font-bold transition inline-flex items-center gap-1"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          ⚡ Survey
-                        </Link>
+                        {(user?.role === 'FIELD_OFFICER' || user?.role === 'DISTRICT_OFFICER') && (
+                          <Link
+                            href="/dashboard/field"
+                            className="bg-[#B96E22]/10 hover:bg-[#B96E22] text-[#B96E22] hover:text-white px-2.5 py-1 rounded text-xs font-bold transition inline-flex items-center gap-1"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            ⚡ Survey
+                          </Link>
+                        )}
                         <Link
                           href={`/projects/${p.id}/overview`}
                           className="text-[#1D5FA8] hover:underline text-xs font-semibold inline-block ml-1"

@@ -41,7 +41,12 @@ export class ProjectsController {
   }
 
   @Post()
-  @Roles(Role.ADMIN, Role.CENTRAL_OFFICER, Role.STATE_OFFICER)
+  @Roles(
+    Role.ADMIN,
+    Role.CENTRAL_OFFICER,
+    Role.STATE_OFFICER,
+    Role.DISTRICT_OFFICER,
+  )
   create(@Body() dto: CreateProjectDto, @CurrentUser() user: AuthUser) {
     return this.projectsService.create(dto, user);
   }

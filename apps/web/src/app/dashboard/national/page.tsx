@@ -169,13 +169,10 @@ Direct MoEFCC & DoLR joint review with PMO next Monday.`;
 
               <div className="flex flex-wrap items-center gap-2">
                 <Link
-                  href="/dashboard/field"
-                  className="flex items-center justify-center gap-1.5 bg-[#B96E22] text-white hover:bg-[#965516] font-bold py-2.5 px-3.5 rounded-lg transition-all shadow-md text-xs whitespace-nowrap"
+                  href="/organizations"
+                  className="flex items-center justify-center gap-1.5 bg-[#122C4A] text-white hover:bg-[#0B1F35] font-bold py-2.5 px-3.5 rounded-lg transition-all shadow-md text-xs whitespace-nowrap"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                  </svg>
-                  Field Officer Work Management
+                  🏢 Requiring Bodies
                 </Link>
 
                 <Link
@@ -277,12 +274,12 @@ Direct MoEFCC & DoLR joint review with PMO next Monday.`;
                   Cross-jurisdictional bottlenecks for national linear projects.
                 </p>
               </div>
-              <button
-                onClick={() => alert('Launching National GIS Masterplan Viewer (BISAG-N / Gati Shakti 500+ Layer Feed)...')}
-                className="text-sm font-bold text-[#1D5FA8] hover:underline bg-white px-4 py-2 rounded border border-gray-200 shadow-sm"
+              <Link
+                href="/gis"
+                className="text-sm font-bold text-[#1D5FA8] hover:underline bg-white px-4 py-2 rounded border border-gray-200 shadow-sm inline-block"
               >
-                Open National GIS Masterplan
-              </button>
+                Open National GIS Masterplan →
+              </Link>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-300">
@@ -358,12 +355,12 @@ Direct MoEFCC & DoLR joint review with PMO next Monday.`;
                       </span>
                     </td>
                     <td className="px-8 py-5 text-right">
-                      <button
-                        onClick={() => alert('Corridor bottleneck successfully routed to PMG (Project Monitoring Group), DPIIT.')}
-                        className="bg-[#122C4A] text-white px-4 py-1.5 rounded text-xs font-bold whitespace-nowrap shadow-sm hover:bg-[#0B1F35] transition"
+                      <Link
+                        href="/workflow/approvals"
+                        className="bg-[#122C4A] text-white px-4 py-1.5 rounded text-xs font-bold whitespace-nowrap shadow-sm hover:bg-[#0B1F35] transition inline-block"
                       >
-                        Route to PMG
-                      </button>
+                        Route to PMG →
+                      </Link>
                     </td>
                   </tr>
 
@@ -419,12 +416,12 @@ Direct MoEFCC & DoLR joint review with PMO next Monday.`;
                       </span>
                     </td>
                     <td className="px-8 py-5 text-right">
-                      <button
-                        onClick={() => alert('Freight Corridor Stage Dossier: Eastern DFC, Phase II details loaded.')}
-                        className="bg-white border border-gray-300 text-gray-700 px-4 py-1.5 rounded text-xs font-bold whitespace-nowrap shadow-sm hover:bg-gray-50 transition"
+                      <Link
+                        href="/projects"
+                        className="bg-white border border-gray-300 text-gray-700 px-4 py-1.5 rounded text-xs font-bold whitespace-nowrap shadow-sm hover:bg-gray-50 transition inline-block"
                       >
-                        {t('btn.view_details', 'View Details')}
-                      </button>
+                        {t('btn.view_details', 'View Details →')}
+                      </Link>
                     </td>
                   </tr>
                 </tbody>
@@ -459,12 +456,12 @@ Direct MoEFCC & DoLR joint review with PMO next Monday.`;
                     <p className="text-xs text-gray-600 mb-3">
                       Awaiting Stage-II Forest Clearance in Jhabua district. Stalled for 142 days.
                     </p>
-                    <button
-                      onClick={() => alert('Direct priority file dispatched to Cabinet Secretariat for inter-ministerial resolution.')}
-                      className="text-xs font-bold bg-[#1D5FA8] hover:bg-[#122C4A] text-white px-3 py-1.5 rounded transition"
+                    <Link
+                      href="/workflow/approvals"
+                      className="text-xs font-bold bg-[#1D5FA8] hover:bg-[#122C4A] text-white px-3 py-1.5 rounded transition inline-block"
                     >
-                      Push to Cabinet Secretariat
-                    </button>
+                      Push to Cabinet Secretariat →
+                    </Link>
                   </li>
                   <li className="p-4 hover:bg-gray-50 transition">
                     <div className="flex justify-between items-start mb-2">
@@ -476,12 +473,12 @@ Direct MoEFCC & DoLR joint review with PMO next Monday.`;
                     <p className="text-xs text-gray-600 mb-3">
                       Forest Rights Act (FRA) Gram Sabha resolution dispute in Tamil Nadu.
                     </p>
-                    <button
-                      onClick={() => alert('Reviewing MoTA clearance status: Gram Sabha consultation reconvened.')}
-                      className="text-xs font-bold bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded transition"
+                    <Link
+                      href="/reports"
+                      className="text-xs font-bold bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-3 py-1.5 rounded transition inline-block"
                     >
-                      Review MoTA Status
-                    </button>
+                      Review MoTA Status →
+                    </Link>
                   </li>
                 </ul>
               </div>

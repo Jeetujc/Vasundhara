@@ -209,13 +209,10 @@ CONFIDENTIAL - FOR ASSEMBLY & REVENUE REVIEW ONLY`;
               </div>
 
               <Link
-                href="/dashboard/field"
-                className="flex items-center justify-center gap-1.5 bg-[#B96E22] text-white hover:bg-[#965516] font-bold py-2.5 px-4 rounded-lg transition-all shadow-md text-xs whitespace-nowrap"
+                href="/organizations"
+                className="flex items-center justify-center gap-1.5 bg-[#122C4A] text-white hover:bg-[#0B1F35] font-bold py-2.5 px-4 rounded-lg transition-all shadow-md text-xs whitespace-nowrap"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                </svg>
-                Field Officer Work Management
+                🏢 Requiring Bodies
               </Link>
 
               <Link
@@ -424,12 +421,12 @@ CONFIDENTIAL - FOR ASSEMBLY & REVENUE REVIEW ONLY`;
                   <p className="text-xs text-gray-700 leading-relaxed">
                     <strong>+340% spike</strong> in grievances containing "boycott" and "unfair valuation" over 48 hours. Indicates organized protest against Sec 11 notification.
                   </p>
-                  <button
-                    onClick={() => alert('Dispatching Senior Revenue Negotiator team to Ujjain CALA')}
-                    className="mt-2 text-[10px] font-bold text-[#1D5FA8] hover:underline"
+                  <Link
+                    href="/grivence/citizen"
+                    className="mt-2 text-[10px] font-bold text-[#1D5FA8] hover:underline inline-block"
                   >
                     Deploy Policy Negotiators &rarr;
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -506,19 +503,19 @@ CONFIDENTIAL - FOR ASSEMBLY & REVENUE REVIEW ONLY`;
                         </td>
                         <td className="px-8 py-5 text-right">
                           {isBlocked ? (
-                            <button
-                              onClick={() => alert(`Escalation file generated for ${proj.name} to Chief Minister Secretariat.`)}
-                              className="bg-[#122C4A] hover:bg-[#0B1F35] text-white px-4 py-1.5 rounded text-xs font-bold whitespace-nowrap transition"
+                            <Link
+                              href="/workflow/pending"
+                              className="bg-[#122C4A] hover:bg-[#0B1F35] text-white px-4 py-1.5 rounded text-xs font-bold whitespace-nowrap transition inline-block"
                             >
-                              Escalate to CM
-                            </button>
+                              Escalate to CM →
+                            </Link>
                           ) : (
-                            <button
-                              onClick={() => alert(`Showing full dossier for ${proj.name}`)}
-                              className="text-[#1D5FA8] hover:text-[#122C4A] font-semibold text-sm"
+                            <Link
+                              href={`/projects/${proj.id}/overview`}
+                              className="text-[#1D5FA8] hover:text-[#122C4A] font-semibold text-sm hover:underline"
                             >
-                              View Details
-                            </button>
+                              View Details →
+                            </Link>
                           )}
                         </td>
                       </tr>
@@ -595,12 +592,12 @@ CONFIDENTIAL - FOR ASSEMBLY & REVENUE REVIEW ONLY`;
                   <span className="text-xs text-[#F2A71B] block mt-1">65% of Target (Lagging)</span>
                 </div>
               </div>
-              <button
-                onClick={() => alert('Generating State R&R Audit report...')}
-                className="mt-6 w-full sm:w-auto bg-[#F2A71B] hover:bg-[#D97706] text-[#0B1F35] font-bold py-2.5 px-6 rounded transition-colors text-sm shadow-sm self-start"
+              <Link
+                href="/reports"
+                className="mt-6 w-full sm:w-auto bg-[#F2A71B] hover:bg-[#D97706] text-[#0B1F35] font-bold py-2.5 px-6 rounded transition-colors text-sm shadow-sm self-start inline-block text-center"
               >
-                Generate R&R Audit Report
-              </button>
+                Generate R&R Audit Report →
+              </Link>
             </div>
           </div>
         </div>

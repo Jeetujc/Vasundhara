@@ -19,8 +19,11 @@ import { GrievancesModule } from './grievances/grievances.module.js';
 import { DocumentsModule } from './documents/documents.module.js';
 import { GisModule } from './gis/gis.module.js';
 import { AiModule } from './ai/ai.module.js';
+import { OrganizationsModule } from './organizations/organizations.module.js';
+import { AppController } from './app.controller.js';
 
 @Module({
+  controllers: [AppController],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
@@ -44,6 +47,7 @@ import { AiModule } from './ai/ai.module.js';
     DocumentsModule,
     GisModule,
     AiModule,
+    OrganizationsModule,
   ],
 })
 export class AppModule {

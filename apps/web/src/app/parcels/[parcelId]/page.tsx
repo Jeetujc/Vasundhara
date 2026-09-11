@@ -73,12 +73,14 @@ export default function ParcelDetailPage() {
                     View on GIS Map
                   </Link>
 
-                  <Link
-                    href="/dashboard/field"
-                    className="bg-[#B96E22] hover:bg-[#965516] text-white px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
-                  >
-                    ⚡ Field Officer Survey
-                  </Link>
+                  {(user?.role === 'FIELD_OFFICER' || user?.role === 'DISTRICT_OFFICER') && (
+                    <Link
+                      href="/dashboard/field"
+                      className="bg-[#B96E22] hover:bg-[#965516] text-white px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
+                    >
+                      ⚡ Field Officer Survey
+                    </Link>
+                  )}
 
                   {canEdit && !editing && (
                     <button onClick={() => setEditing(true)} className="border border-[#122C4A] text-[#122C4A] hover:bg-gray-50 px-3 py-2 rounded-lg text-xs font-bold">

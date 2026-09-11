@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import Header from '../../components/layout/header';
 import {
   gisService,
@@ -10,8 +11,23 @@ import {
   type GisLayerItem,
   type GisStatsData,
 } from '../../services/gis.service';
+import { authService, type AuthUser } from '../../services/auth.service';
+
+const InteractiveMap = dynamic(
+  () => import('../../components/gis/interactive-map'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100 text-gray-600 gap-3 min-h-[600px]">
+        <div className="w-10 h-10 border-4 border-[#DDD8C8] border-t-[#1D5FA8] rounded-full animate-spin" />
+        <span className="text-xs font-semibold">Initializing Cartographic Map Canvas (Leaflet / WGS 84)...</span>
+      </div>
+    ),
+  },
+);
 
 export default function GisMapPage() {
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [projects, setProjects] = useState<GisProjectItem[]>([]);
   const [selectedProjectId, setSelectedProjectId] = useState<string>('');
   const [parcels, setParcels] = useState<GisParcelFeature[]>([]);
@@ -29,12 +45,14 @@ export default function GisMapPage() {
     'forest-eco-zone': false,
   });
 
-  // Map viewport transform states (pan/zoom)
-  const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [cursorCoords, setCursorCoords] = useState({ lat: 23.1815, lng: 79.9864 });
+
+  useEffect(() => {
+    const session = authService.getSession();
+    if (session?.user) {
+      setUser(session.user);
+    }
+  }, []);
 
   useEffect(() => {
     loadGisData();
@@ -99,7 +117,6 @@ export default function GisMapPage() {
     document.body.removeChild(a);
   };
 
-  // Status color mapping for cadastral parcels
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'ACQUIRED':
@@ -114,16 +131,6 @@ export default function GisMapPage() {
         return { fill: '#94A3B8', stroke: '#475569', bg: 'bg-slate-100 text-slate-800' };
     }
   };
-
-  // Normalized coordinate bounds for the SVG viewport
-  // Centered around Jabalpur (79.98 to 80.02 Lng, 23.17 to 23.21 Lat)
-  const mapCenterLng = 79.9900;
-  const mapCenterLat = 23.1850;
-  const lngScale = 14000;
-  const latScale = 14000;
-
-  const projectLngToX = (lng: number) => 450 + (lng - mapCenterLng) * lngScale;
-  const projectLatToY = (lat: number) => 320 - (lat - mapCenterLat) * latScale;
 
   return (
     <div className="min-h-screen bg-[#FBFAF6] font-sans text-[#1B2430] flex flex-col">
@@ -167,12 +174,14 @@ export default function GisMapPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link
-            href="/dashboard/field"
-            className="bg-[#B96E22] hover:bg-[#965516] text-white px-3 py-1.5 rounded font-bold transition flex items-center gap-1"
-          >
-            ⚡ Field Officer Work Management
-          </Link>
+          {user?.role === 'FIELD_OFFICER' && (
+            <Link
+              href="/dashboard/field"
+              className="bg-[#B96E22] hover:bg-[#965516] text-white px-3 py-1.5 rounded font-bold transition flex items-center gap-1"
+            >
+              ⚡ Field Work Center
+            </Link>
+          )}
           <Link
             href="/projects"
             className="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded transition"
@@ -251,7 +260,7 @@ export default function GisMapPage() {
                   : 'text-gray-600 hover:bg-gray-200'
               }`}
             >
-              🗺️ Revenue Cadastral
+              🗺️ OpenStreetMap Cadastral
             </button>
             <button
               type="button"
@@ -262,19 +271,9 @@ export default function GisMapPage() {
                   : 'text-gray-600 hover:bg-gray-200'
               }`}
             >
-              🛰️ Satellite Imagery
+              🛰️ Esri Satellite Imagery
             </button>
           </div>
-
-          <button
-            onClick={() => {
-              setZoom(1);
-              setPan({ x: 0, y: 0 });
-            }}
-            className="text-xs font-semibold text-gray-600 hover:text-[#122C4A] px-2.5 py-1.5 border border-gray-300 rounded hover:bg-gray-50 transition"
-          >
-            Reset View
-          </button>
         </div>
       </div>
 
@@ -307,26 +306,6 @@ export default function GisMapPage() {
                 />
                 <span className="font-semibold text-gray-800">60m RoW Alignment Buffer</span>
               </label>
-
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={activeLayers['village-boundaries']}
-                  onChange={() => toggleLayer('village-boundaries')}
-                  className="rounded text-[#1D5FA8] focus:ring-0"
-                />
-                <span className="font-semibold text-gray-800">Village Revenue Boundaries</span>
-              </label>
-
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={activeLayers['forest-eco-zone']}
-                  onChange={() => toggleLayer('forest-eco-zone')}
-                  className="rounded text-[#1D5FA8] focus:ring-0"
-                />
-                <span className="font-semibold text-gray-800">Forest / Eco Sensitive Buffer</span>
-              </label>
             </div>
           </div>
 
@@ -354,10 +333,6 @@ export default function GisMapPage() {
                 <span className="w-3 h-3 rounded bg-red-500"></span>
                 <span>Objection / Claim Lodged</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded bg-slate-400"></span>
-                <span>Proposed for Survey</span>
-              </div>
             </div>
           </div>
 
@@ -378,196 +353,18 @@ export default function GisMapPage() {
           )}
         </div>
 
-        {/* MAP CANVAS / SVG VIEWPORT */}
-        <div
-          className={`flex-1 relative cursor-grab active:cursor-grabbing overflow-hidden ${
-            activeBasemap === 'satellite'
-              ? 'bg-[#152219]'
-              : 'bg-[#F4F1EA]'
-          }`}
-          onMouseDown={(e) => {
-            setIsDragging(true);
-            setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
-          }}
-          onMouseMove={(e) => {
-            if (isDragging) {
-              setPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
-            }
-            // Estimate live coordinates based on mouse position
-            const rect = e.currentTarget.getBoundingClientRect();
-            const relX = e.clientX - rect.left - pan.x;
-            const relY = e.clientY - rect.top - pan.y;
-            const lng = mapCenterLng + (relX - 450) / lngScale;
-            const lat = mapCenterLat - (relY - 320) / latScale;
-            setCursorCoords({ lat, lng });
-          }}
-          onMouseUp={() => setIsDragging(false)}
-          onMouseLeave={() => setIsDragging(false)}
-          onWheel={(e) => {
-            e.preventDefault();
-            const delta = e.deltaY < 0 ? 0.15 : -0.15;
-            setZoom((z) => Math.max(0.5, Math.min(3.5, z + delta)));
-          }}
-        >
-          {/* Background grid simulation */}
-          <div
-            className="absolute inset-0 opacity-20 pointer-events-none"
-            style={{
-              backgroundImage:
-                'radial-gradient(#122C4A 0.75px, transparent 0.75px), radial-gradient(#122C4A 0.75px, #F4F1EA 0.75px)',
-              backgroundSize: '30px 30px',
-            }}
+        {/* REAL LEAFLET INTERACTIVE MAP VIEWPORT */}
+        <div className="flex-1 relative overflow-hidden bg-slate-100 min-h-[600px]">
+          <InteractiveMap
+            parcels={filteredParcels}
+            projects={projects}
+            selectedProjectId={selectedProjectId}
+            selectedParcel={selectedParcel}
+            onSelectParcel={setSelectedParcel}
+            activeBasemap={activeBasemap}
+            activeLayers={activeLayers}
+            onCursorMove={(lat, lng) => setCursorCoords({ lat, lng })}
           />
-
-          <svg
-            className="w-full h-full"
-            style={{
-              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-              transformOrigin: 'center center',
-              transition: isDragging ? 'none' : 'transform 0.1s ease-out',
-            }}
-          >
-            <defs>
-              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#DDD8C8" strokeWidth="0.5" />
-              </pattern>
-            </defs>
-
-            {/* Village Boundaries Overlay */}
-            {activeLayers['village-boundaries'] && (
-              <g className="village-boundaries">
-                <path
-                  d="M 200 150 L 500 120 L 750 250 L 680 500 L 320 540 Z"
-                  fill="none"
-                  stroke="#94A3B8"
-                  strokeWidth="1.5"
-                  strokeDasharray="6 4"
-                />
-                <text x="350" y="160" fill="#64748B" fontSize="11" fontWeight="bold" opacity="0.8">
-                  Revenue Village: Rau (Code 452)
-                </text>
-                <text x="600" y="320" fill="#64748B" fontSize="11" fontWeight="bold" opacity="0.8">
-                  Revenue Village: Panagar (Code 453)
-                </text>
-              </g>
-            )}
-
-            {/* Project Alignment Corridor Buffer (60m RoW) */}
-            {activeLayers['project-alignment'] && (
-              <g className="alignment-corridor">
-                {/* Ribbon buffer */}
-                <path
-                  d="M 100 390 L 380 290 L 600 230 L 850 160"
-                  fill="none"
-                  stroke="#F59E0B"
-                  strokeWidth="48"
-                  strokeOpacity="0.25"
-                  strokeLinecap="round"
-                />
-                {/* Centerline */}
-                <path
-                  d="M 100 390 L 380 290 L 600 230 L 850 160"
-                  fill="none"
-                  stroke="#B96E22"
-                  strokeWidth="2.5"
-                  strokeDasharray="8 4"
-                />
-                <text x="220" y="320" fill="#B96E22" fontSize="10" fontWeight="bold">
-                  NH-44 Corridor (6-Lane Alignment Centerline)
-                </text>
-              </g>
-            )}
-
-            {/* Forest / Eco Zone */}
-            {activeLayers['forest-eco-zone'] && (
-              <path
-                d="M 680 80 L 850 60 L 880 220 L 720 200 Z"
-                fill="#059669"
-                fillOpacity="0.2"
-                stroke="#059669"
-                strokeWidth="1"
-                strokeDasharray="4 2"
-              />
-            )}
-
-            {/* Cadastral Parcels Layer */}
-            {activeLayers['cadastral-parcels'] &&
-              filteredParcels.map((parcel) => {
-                const ring = parcel.geometry.coordinates[0];
-                if (!ring || ring.length === 0) return null;
-
-                const pathData = ring
-                  .map((pt, i) => `${i === 0 ? 'M' : 'L'} ${projectLngToX(pt[0])} ${projectLatToY(pt[1])}`)
-                  .join(' ') + ' Z';
-
-                const isSelected = selectedParcel?.id === parcel.id;
-                const colors = getStatusColor(parcel.properties.status);
-                const centroidX = projectLngToX(parcel.properties.centroid.lng);
-                const centroidY = projectLatToY(parcel.properties.centroid.lat);
-
-                return (
-                  <g
-                    key={parcel.id}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedParcel(parcel);
-                    }}
-                    className="cursor-pointer group"
-                  >
-                    <path
-                      d={pathData}
-                      fill={colors.fill}
-                      fillOpacity={isSelected ? 0.75 : 0.45}
-                      stroke={isSelected ? '#122C4A' : colors.stroke}
-                      strokeWidth={isSelected ? 3 : 1.5}
-                      className="transition-colors group-hover:fill-opacity-70"
-                    />
-
-                    {/* Parcel Number Label */}
-                    <text
-                      x={centroidX}
-                      y={centroidY}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      fill="#122C4A"
-                      fontSize="11"
-                      fontWeight="bold"
-                      className="pointer-events-none select-none drop-shadow-sm"
-                    >
-                      K-{parcel.properties.parcelNumber}
-                    </text>
-
-                    {/* Area sub-label */}
-                    <text
-                      x={centroidX}
-                      y={centroidY + 12}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      fill="#334155"
-                      fontSize="9"
-                      fontWeight="600"
-                      className="pointer-events-none select-none"
-                    >
-                      {parcel.properties.areaHa} Ha
-                    </text>
-
-                    {/* Corner Peg Markers */}
-                    {isSelected &&
-                      ring.slice(0, ring.length - 1).map((pt, pegIdx) => (
-                        <circle
-                          key={pegIdx}
-                          cx={projectLngToX(pt[0])}
-                          cy={projectLatToY(pt[1])}
-                          r={4}
-                          fill="#EF4444"
-                          stroke="#FFFFFF"
-                          strokeWidth="1.5"
-                        />
-                      ))}
-                  </g>
-                );
-              })}
-          </svg>
 
           {/* Live Coordinates and Scale Indicator */}
           <div className="absolute bottom-4 left-4 z-20 bg-white/90 backdrop-blur-sm border border-gray-300 rounded px-3 py-1.5 text-[11px] font-mono text-gray-700 shadow-sm flex items-center gap-4">
@@ -576,30 +373,10 @@ export default function GisMapPage() {
               Lng: <strong className="text-[#122C4A]">{cursorCoords.lng.toFixed(5)}°E</strong>
             </div>
             <div className="text-gray-400">|</div>
-            <div>Zoom: {(zoom * 100).toFixed(0)}%</div>
-            <div className="text-gray-400">|</div>
             <div className="flex items-center gap-1.5">
               <span className="w-12 h-1 bg-[#122C4A] inline-block"></span>
-              <span>100 m</span>
+              <span>WGS 84 Projection</span>
             </div>
-          </div>
-
-          {/* Zoom Buttons Controls */}
-          <div className="absolute bottom-4 right-4 z-20 flex flex-col gap-1 bg-white border border-gray-300 rounded shadow-md overflow-hidden">
-            <button
-              onClick={() => setZoom((z) => Math.min(3.5, z + 0.25))}
-              className="w-8 h-8 flex items-center justify-center font-bold text-gray-700 hover:bg-gray-100 transition"
-              title="Zoom In"
-            >
-              +
-            </button>
-            <button
-              onClick={() => setZoom((z) => Math.max(0.5, z - 0.25))}
-              className="w-8 h-8 flex items-center justify-center font-bold text-gray-700 hover:bg-gray-100 border-t border-gray-200 transition"
-              title="Zoom Out"
-            >
-              −
-            </button>
           </div>
         </div>
 
@@ -718,12 +495,14 @@ export default function GisMapPage() {
               >
                 View Full Parcel Detail
               </Link>
-              <Link
-                href="/dashboard/field"
-                className="w-full bg-[#B96E22] hover:bg-[#965516] text-white text-xs font-bold py-2 px-4 rounded text-center block transition shadow-sm"
-              >
-                ⚡ Field Officer Survey Workspace
-              </Link>
+              {(user?.role === 'FIELD_OFFICER' || user?.role === 'DISTRICT_OFFICER') && (
+                <Link
+                  href="/dashboard/field"
+                  className="w-full bg-[#B96E22] hover:bg-[#965516] text-white text-xs font-bold py-2 px-4 rounded text-center block transition shadow-sm"
+                >
+                  ⚡ Field Officer Survey Workspace
+                </Link>
+              )}
               <div className="grid grid-cols-2 gap-2">
                 <Link
                   href={`/projects/${selectedParcel.properties.projectId}/overview`}

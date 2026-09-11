@@ -120,19 +120,39 @@ export class ProjectsService {
       throw new ForbiddenException('Cannot create project outside your assigned state');
     }
 
+    if (user?.role === Role.DISTRICT_OFFICER && user.districtId && dto.districtId !== user.districtId) {
+      throw new ForbiddenException('Cannot create project outside your assigned district');
+    }
+
     await this.ensureStateAndDistrict(dto.stateId, dto.districtId);
 
+    const proposedAreaDecimal =
+      dto.proposedArea !== undefined && dto.proposedArea !== null && String(dto.proposedArea).trim() !== ''
+        ? String(dto.proposedArea)
+        : undefined;
+
     try {
-      return await this.prisma.project.create({
+      const project = await this.prisma.project.create({
         data: {
           name: dto.name.trim(),
           code: dto.code.trim().toUpperCase(),
           description: dto.description?.trim(),
           stateId: dto.stateId,
           districtId: dto.districtId,
-          proposedArea: dto.proposedArea,
+          proposedArea: proposedAreaDecimal,
         },
       });
+
+      // Automatically initialize the Section 11 workflow instance
+      await this.prisma.workflowInstance.create({
+        data: {
+          projectId: project.id,
+          currentStage: 'SECTION_11_NOTIFICATION',
+          status: 'IN_PROGRESS',
+        },
+      }).catch(() => {});
+
+      return project;
     } catch (error) {
       this.handleProjectConflict(error);
       throw error;

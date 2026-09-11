@@ -124,13 +124,15 @@ export default function ProjectOverviewPage() {
             GIS Corridor Map
           </Link>
 
-          {/* Field Officer Workspace */}
-          <Link
-            href="/dashboard/field"
-            className="bg-[#B96E22] hover:bg-[#965516] text-white px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
-          >
-            Field Survey
-          </Link>
+          {/* Field Officer Workspace - Only visible to field/district officers */}
+          {(user?.role === 'FIELD_OFFICER' || user?.role === 'DISTRICT_OFFICER') && (
+            <Link
+              href="/dashboard/field"
+              className="bg-[#B96E22] hover:bg-[#965516] text-white px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
+            >
+              Field Survey
+            </Link>
+          )}
 
           {canStartWorkflow && project._count?.workflowInstances === 0 && (
             <button onClick={handleStartWorkflow} disabled={startingWorkflow}

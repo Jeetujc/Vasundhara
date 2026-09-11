@@ -28,7 +28,6 @@ export default function ProjectLayout({ children }: { children: React.ReactNode 
         <ul className="flex flex-wrap items-center list-none m-0 p-0 font-semibold">
           <li><Link href="/projects" className="text-white px-3.5 py-2 block hover:bg-[#1D5FA8]">← Projects</Link></li>
           <li><Link href={`/gis?projectId=${projectId}`} className="text-blue-300 px-3.5 py-2 block hover:bg-[#1D5FA8] hover:text-white font-bold">🗺️ Project GIS Map</Link></li>
-          <li><Link href="/dashboard/field" className="text-amber-300 px-3.5 py-2 block hover:bg-[#B96E22] hover:text-white font-bold">⚡ Field Officer Work Management</Link></li>
           <li><Link href="/workflow/tasks" className="text-white px-3.5 py-2 block hover:bg-[#1D5FA8]">Tasks</Link></li>
         </ul>
         <div className="text-gray-300 font-mono text-[11px]">

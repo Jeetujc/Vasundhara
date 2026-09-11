@@ -31,17 +31,6 @@ export default function ParcelsListPage() {
   return (
     <>
       <Header />
-      <nav className="bg-[#122C4A] flex flex-wrap items-center px-8 py-2">
-        <ul className="flex flex-wrap flex-1 list-none m-0 p-0 text-xs font-semibold">
-          <li><Link href="/" className="text-white px-3.5 py-2.5 block hover:bg-[#1D5FA8]">Home</Link></li>
-          <li><Link href="/projects" className="text-white px-3.5 py-2.5 block hover:bg-[#1D5FA8]">Projects</Link></li>
-          <li><Link href="/parcels" className="text-white px-3.5 py-2.5 block bg-[#1D5FA8]">Parcels</Link></li>
-          <li><Link href="/gis" className="text-blue-300 px-3.5 py-2.5 block hover:bg-[#1D5FA8] hover:text-white font-bold">🗺️ GIS Map Portal</Link></li>
-          <li><Link href="/workflow" className="text-white px-3.5 py-2.5 block hover:bg-[#1D5FA8]">Workflow</Link></li>
-          <li><Link href="/dashboard/field" className="text-amber-300 px-3.5 py-2.5 block hover:bg-[#B96E22] hover:text-white font-bold">⚡ Field Officer Work Management</Link></li>
-          <li><Link href="/dashboard" className="text-white px-3.5 py-2.5 block hover:bg-[#1D5FA8]">Dashboard</Link></li>
-        </ul>
-      </nav>
       <div className="min-h-screen bg-[#FBFAF6] p-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
@@ -56,12 +45,14 @@ export default function ParcelsListPage() {
               >
                 🗺️ GIS Cadastral Map
               </Link>
-              <Link
-                href="/dashboard/field"
-                className="bg-[#B96E22] hover:bg-[#965516] text-white px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
-              >
-                ⚡ Field Officer Work Management
-              </Link>
+              {(user?.role === 'FIELD_OFFICER' || user?.role === 'DISTRICT_OFFICER') && (
+                <Link
+                  href="/dashboard/field"
+                  className="bg-[#B96E22] hover:bg-[#965516] text-white px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
+                >
+                  ⚡ Field Work Management
+                </Link>
+              )}
               <Link
                 href="/compensation"
                 className="bg-white border border-[#DDD8C8] text-[#122C4A] hover:bg-gray-50 px-3.5 py-2 rounded-lg text-xs font-semibold transition shadow-sm"
@@ -111,12 +102,14 @@ export default function ParcelsListPage() {
                     >
                       🗺️ Map
                     </Link>
-                    <Link
-                      href="/dashboard/field"
-                      className="bg-[#B96E22]/10 hover:bg-[#B96E22] text-[#B96E22] hover:text-white px-2 py-1 rounded text-xs font-bold transition inline-flex items-center gap-1"
-                    >
-                      ⚡ Survey
-                    </Link>
+                    {(user?.role === 'FIELD_OFFICER' || user?.role === 'DISTRICT_OFFICER') && (
+                      <Link
+                        href="/dashboard/field"
+                        className="bg-[#B96E22]/10 hover:bg-[#B96E22] text-[#B96E22] hover:text-white px-2 py-1 rounded text-xs font-bold transition inline-flex items-center gap-1"
+                      >
+                        ⚡ Survey
+                      </Link>
+                    )}
                     <Link href={`/parcels/${p.id}`} className="text-xs font-bold text-[#122C4A] hover:underline inline-block ml-1">
                       Detail →
                     </Link>

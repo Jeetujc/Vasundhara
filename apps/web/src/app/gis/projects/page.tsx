@@ -53,8 +53,8 @@ export default function GisProjectsPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link href="/dashboard/field" className="bg-[#B96E22] hover:bg-[#965516] text-white px-3 py-1.5 rounded font-bold transition flex items-center gap-1">
-            ⚡ Field Officer Work Management
+          <Link href="/projects" className="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded transition">
+            Projects Directory →
           </Link>
         </div>
       </nav>
