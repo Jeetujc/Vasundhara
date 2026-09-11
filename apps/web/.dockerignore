@@ -1,8 +1,0 @@
-node_modules
-.next
-.git
-.gitignore
-*.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
